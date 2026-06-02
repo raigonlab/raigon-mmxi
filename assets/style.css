@@ -1,0 +1,14 @@
+/* ============================================================
+   style.css — raigon-mmxi
+   Main stylesheet. All visual styles live here.
+   Sections: Reset → Variables → Base → Nav → Home →
+             Gallery → Modal → Vault → Arquive → Utilities
+============================================================ */
+
+
+/* ── RESET ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
