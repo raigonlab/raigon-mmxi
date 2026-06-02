@@ -244,3 +244,4 @@ nav {
     cursor: grab;
   }
    
+  .home-scene:active { cursor: grabbing; }
