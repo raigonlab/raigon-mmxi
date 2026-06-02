@@ -245,3 +245,18 @@ nav {
   }
    
   .home-scene:active { cursor: grabbing; }
+
+  /* Subtle accent dot at the centre of the scene */
+.home-center-mark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 40px 15px rgba(200, 169, 110, 0.06);
+  }
+   
