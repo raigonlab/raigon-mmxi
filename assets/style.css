@@ -96,3 +96,17 @@ nav {
     letter-spacing: 2px;
     opacity: 0.5;
   }
+
+  /* Frosted glass pill container */
+.nav-pills {
+    display: flex;
+    gap: 4px;
+    background: rgba(13, 21, 32, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    padding: 5px;
+    pointer-events: all;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
