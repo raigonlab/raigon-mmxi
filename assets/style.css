@@ -195,3 +195,10 @@ nav {
     height: 120px;
     flex-shrink: 0;
   }
+
+  /* Rotating SVG ring — animation defined in @keyframes rotateSlow */
+.logo-ring-svg {
+    position: absolute;
+    inset: 0;
+    animation: rotateSlow 18s linear infinite;
+  }
