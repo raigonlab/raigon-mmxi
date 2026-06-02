@@ -10,7 +10,30 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <h1> Raigon, Hello World! :D</h1>
+   <!-- ============================================================
+    HOME SECTION
+    Parallax gallery with animated logo and floating artwork cards
+  ============================================================ -->
+  <div class="page active" id="home">
+
+    <!-- Page header: animated logo + year label -->
+    <div class="home-header">
+
+      <!-- Animated logo wrapper -->
+      <div class="home-logo">
+        <div class="logo-ring-wrap">
+
+          <!-- Rotating text ring — SVG must stay inline to animate textPath via CSS -->
+          <svg class="logo-ring-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <!-- Circular guide path that the text follows -->
+              <path id="text-ring" d="M130,130 m-108,0 a108,108 0 1,1 216,0 a108,108 0 1,1 -216,0"/>
+            </defs>
+            <text class="logo-ring-text">
+              <textPath href="#text-ring">RAIGON LAB · TM · MMXXVI · RAIGON LAB · TM · MMXXVI · </textPath>
+            </text>
+          </svg>
+          
 <!-- JavaScrip link -->
 <script src="assets/js/script.js"></script>
 </body>
