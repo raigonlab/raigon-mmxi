@@ -234,3 +234,13 @@ nav {
     color: var(--muted);
     letter-spacing: 2px;
   }
+
+  /* Gallery canvas area — parallax layers injected here by script.js */
+.home-scene {
+    position: relative;
+    width: 100%;
+    height: calc(100dvh - 60px);
+    overflow: hidden;
+    cursor: grab;
+  }
+   
