@@ -36,3 +36,8 @@ body {
   font-family: 'Syne', sans-serif;
   overflow: hidden;
 }
+
+/* Custom scrollbar — thin and minimal */
+::-webkit-scrollbar        { width: 2px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 2px; }
