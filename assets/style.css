@@ -202,3 +202,12 @@ nav {
     inset: 0;
     animation: rotateSlow 18s linear infinite;
   }
+
+  /* Text styling applied inside the SVG (SVG presentation attributes moved to CSS) */
+.logo-ring-text {
+    fill: rgba(232, 228, 220, 0.75);
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+  }
