@@ -187,3 +187,11 @@ nav {
     color: var(--text);
     opacity: 0.55;
   }
+
+  /* Square wrapper that holds both the rotating ring and the centre icon */
+.logo-ring-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+  }
