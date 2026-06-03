@@ -502,3 +502,11 @@ nav {
     background: rgba(232, 228, 220, 0.15);
     margin-bottom: 24px;
   }
+
+  .modal-description {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(232, 228, 220, 0.5);
+    font-style: italic;
+  }
