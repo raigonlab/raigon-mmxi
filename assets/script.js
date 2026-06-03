@@ -32,4 +32,22 @@ const artworks = [
     { src: "assets/images/hero/digital-charcoal-00018.jpg", title: "Strike",    series: "carvão digital", year: "2023" },
     { src: "assets/images/hero/digital-charcoal-00019.jpg", title: "Torsion",   series: "carvão digital", year: "2023" },
   ];
+
+  
+/* ============================================================
+   HOME GALLERY — PARALLAX BUILD
+   Builds two infinite-scroll rows of artwork cards.
+   Handles drag, wheel, mouse-edge scroll, and auto-scroll.
+   Applies a depth-of-field focus effect on each frame.
+============================================================ */
+window.addEventListener('load', () => {
+    const scene = document.querySelector('.home-scene');
    
+    // Clear any placeholder content before building the real gallery
+    scene.innerHTML = '';
+   
+    // Split artworks into two rows for the parallax layers
+    const rows = [
+      artworks.slice(0, 10),
+      artworks.slice(9, 19),
+    ];
