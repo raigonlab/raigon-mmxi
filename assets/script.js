@@ -74,7 +74,7 @@ window.addEventListener('load', () => {
     const layers        = [];
     const offsets       = [0, -285];
     const targetOffsets = [0, -285];
-    const parallaxSpeeds = [0.08, 0.03];
+    const parallaxSpeeds = [0.08, 0.05];
   
     let mouseX = 0;
     const W       = window.innerWidth;
@@ -167,7 +167,7 @@ window.addEventListener('load', () => {
   function animate() {
 
     layers.forEach((_, i) => {
-      targetOffsets[i] -= 0.4 * (1 - i * 0.15);
+      targetOffsets[i] -= 0.2 * (1 - i * 0.5);
     });
 
     const deadZone = 0.2;
@@ -214,7 +214,7 @@ function wrapOffset(val, layerEl) {
   function animate() {
 
     layers.forEach((_, i) => {
-      targetOffsets[i] -= 0.4 * (1 - i * 0.15);
+      targetOffsets[i] -= 0.3 * (1 - i * 0.15);
     });
 
     const deadZone = 0.2;
