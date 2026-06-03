@@ -370,3 +370,19 @@ nav {
     border-radius: 8px;
     pointer-events: none;
   }
+
+  /* Drag-to-scroll hint label */
+.scroll-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Syne', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(232, 228, 220, 0.25);
+    pointer-events: none;
+    opacity: 0;
+    animation: hintFade 3s ease 2s forwards;
+  }
