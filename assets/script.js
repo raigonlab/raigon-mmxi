@@ -60,4 +60,9 @@ window.addEventListener('load', () => {
   let mouseX = 0;
   const W       = window.innerWidth;
   const centerX = W / 2;
+
+   /* --- Build each layer --- */
+   rows.forEach((row, ri) => {
+    const layer = document.createElement('div');
+    layer.className = `layer layer-${ri + 1}`;
  
