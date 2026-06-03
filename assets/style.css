@@ -290,3 +290,13 @@ nav {
     position: relative;
     overflow: hidden;
   }
+
+  /* Individual placeholder sizes and positions */
+.float-1 { width: 110px; height: 140px; top: 8%;    left: 5%;    animation: fl1 7s   ease-in-out infinite; }
+.float-2 { width: 85px;  height: 110px; top: 5%;    left: 35%;   animation: fl2 9s   ease-in-out infinite; }
+.float-3 { width: 130px; height: 100px; top: 3%;    right: 8%;   animation: fl3 8s   ease-in-out infinite; }
+.float-4 { width: 95px;  height: 120px; top: 38%;   left: 2%;    animation: fl1 11s  ease-in-out infinite reverse; }
+.float-5 { width: 150px; height: 120px; top: 30%;   left: 28%;   animation: fl2 10s  ease-in-out infinite; }
+.float-6 { width: 80px;  height: 105px; top: 35%;   right: 3%;   animation: fl3 8.5s ease-in-out infinite; }
+.float-7 { width: 100px; height: 130px; bottom: 15%; left: 12%;  animation: fl1 9s   ease-in-out infinite; }
+.float-8 { width: 120px; height: 90px;  bottom: 12%; right: 15%; animation: fl2 7.5s ease-in-out infinite reverse; }
