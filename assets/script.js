@@ -63,24 +63,22 @@ pills.forEach(pill => {
 ============================================================ */
 window.addEventListener('load', () => {
     const scene = document.querySelector('.home-scene');
-   
-    // Clear any placeholder content before building the real gallery
+  
     scene.innerHTML = '';
-   
-    // Split artworks into two rows for the parallax layers
+  
     const rows = [
       artworks.slice(0, 10),
       artworks.slice(9, 19),
     ];
-
-    const layers       = [];
-  const offsets      = [0, -285];      // current rendered X offset per layer
-  const targetOffsets = [0, -285];     // target X offset (lerped toward each frame)
-  const parallaxSpeeds = [0.08, 0.03]; // mouse parallax depth per layer
- 
-  let mouseX = 0;
-  const W       = window.innerWidth;
-  const centerX = W / 2;
+  
+    const layers        = [];
+    const offsets       = [0, -285];
+    const targetOffsets = [0, -285];
+    const parallaxSpeeds = [0.08, 0.03];
+  
+    let mouseX = 0;
+    const W       = window.innerWidth;
+    const centerX = W / 2;
 
    /* --- Build each layer --- */
    rows.forEach((row, ri) => {
