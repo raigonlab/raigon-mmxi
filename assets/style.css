@@ -386,3 +386,15 @@ nav {
     opacity: 0;
     animation: hintFade 3s ease 2s forwards;
   }
+
+  /* Scroll position indicator bar */
+.scroll-bar {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: rgba(232, 228, 220, 0.12);
+    border-radius: 2px;
+  }
