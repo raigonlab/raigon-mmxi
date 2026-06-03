@@ -80,7 +80,48 @@ window.addEventListener('load', () => {
     const W       = window.innerWidth;
     const centerX = W / 2;
 
-   /* --- Build each layer --- */
+    rows.forEach((row, ri) => {
+        const layer = document.createElement('div');
+        layer.className = `layer layer-${ri + 1}`;
+    
+        [...row, ...row, ...row].forEach((art, i) => {
+          const card = document.createElement('div');
+          card.className = 'artwork-card';
+    
+          if (i < row.length) {
+            card.style.animation = `fadeIn 0.8s ease ${(ri * 0.2 + i * 0.08).toFixed(2)}s both`;
+          }
+          card.style.opacity = '0.85';
+    
+          const img = document.createElement('img');
+          img.src     = art.src;
+          img.alt     = art.title;
+          img.loading = 'lazy';
+    
+          card.appendChild(img);
+          card.addEventListener('click', () => openArtwork(art));
+          layer.appendChild(card);
+        });
+    
+        scene.appendChild(layer);
+        layers.push(layer);
+      });
+    
+      const hint = document.createElement('div');
+      hint.className   = 'scroll-hint';
+      hint.textContent = '← arrasta para explorar →';
+      scene.appendChild(hint);
+    
+      const scrollBar   = document.createElement('div');
+      scrollBar.className = 'scroll-bar';
+    
+      const scrollThumb = document.createElement('div');
+      scrollThumb.className = 'scroll-thumb';
+    
+      scrollBar.appendChild(scrollThumb);
+      scene.appendChild(scrollBar);
+
+   /* --- Build each layer --- 
    rows.forEach((row, ri) => {
     const layer = document.createElement('div');
     layer.className = `layer layer-${ri + 1}`;
@@ -88,4 +129,4 @@ window.addEventListener('load', () => {
  // Triple the row so infinite wrapping works without visible gaps
  [...row, ...row, ...row].forEach((art, i) => {
     const card = document.createElement('div');
-    card.className = 'artwork-card';
+    card.className = 'artwork-card';*/
