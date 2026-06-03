@@ -409,3 +409,24 @@ nav {
     background: rgba(232, 228, 220, 0.45);
     border-radius: 2px;
   }
+
+  /* ============================================================
+   MODAL — full-screen artwork viewer
+============================================================ */
+ 
+/* Modal backdrop — injected into body by script.js */
+.artwork-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(4, 3, 10, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding: 60px 60px 100px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
