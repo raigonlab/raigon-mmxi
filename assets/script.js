@@ -156,6 +156,100 @@ window.addEventListener('load', () => {
         });
       }, { passive: false });
 
+
+      function wrapOffset(val, layerEl) {
+    const period = layerEl.scrollWidth / 3;
+    if (val < -(period * 2)) { return val + period; }
+    if (val > 0)              { return val - period; }
+    return val;
+  }
+
+  function animate() {
+
+    layers.forEach((_, i) => {
+      targetOffsets[i] -= 0.4 * (1 - i * 0.15);
+    });
+
+    const deadZone = 0.2;
+    const absX     = Math.abs(mouseX);
+
+    if (absX > deadZone) {
+      const dir       = mouseX > 0 ? -1 : 1;
+      const intensity = (absX - deadZone) / (1 - deadZone);
+      const speed     = intensity * intensity * 12;
+
+      layers.forEach((_, i) => {
+        targetOffsets[i] += dir * speed * (1 - i * 0.15);
+      });
+    }
+
+    layers.forEach((layer, i) => {
+      targetOffsets[i] = wrapOffset(targetOffsets[i], layer);
+      offsets[i] += (targetOffsets[i] - offsets[i]) * 0.08;
+
+      const px = mouseX * 120 * parallaxSpeeds[i] * 10;
+      layer.style.transform = `translateX(${offsets[i] + px}px)`;
+    });
+
+    if (layers[0] && layers[0].scrollWidth > 0) {
+      const period = layers[0].scrollWidth / 3;
+      const pos    = ((-offsets[0] % period) + period) % period;
+      scrollThumb.style.left = ((pos / period) * 160).toFixed(1) + 'px';
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
+// Parallax animation loop with infinite scroll 
+
+function wrapOffset(val, layerEl) {
+    const period = layerEl.scrollWidth / 3;
+    if (val < -(period * 2)) { return val + period; }
+    if (val > 0)              { return val - period; }
+    return val;
+  }
+
+  function animate() {
+
+    layers.forEach((_, i) => {
+      targetOffsets[i] -= 0.4 * (1 - i * 0.15);
+    });
+
+    const deadZone = 0.2;
+    const absX     = Math.abs(mouseX);
+
+    if (absX > deadZone) {
+      const dir       = mouseX > 0 ? -1 : 1;
+      const intensity = (absX - deadZone) / (1 - deadZone);
+      const speed     = intensity * intensity * 12;
+
+      layers.forEach((_, i) => {
+        targetOffsets[i] += dir * speed * (1 - i * 0.15);
+      });
+    }
+
+    layers.forEach((layer, i) => {
+      targetOffsets[i] = wrapOffset(targetOffsets[i], layer);
+      offsets[i] += (targetOffsets[i] - offsets[i]) * 0.08;
+
+      const px = mouseX * 120 * parallaxSpeeds[i] * 10;
+      layer.style.transform = `translateX(${offsets[i] + px}px)`;
+    });
+
+    if (layers[0] && layers[0].scrollWidth > 0) {
+      const period = layers[0].scrollWidth / 3;
+      const pos    = ((-offsets[0] % period) + period) % period;
+      scrollThumb.style.left = ((pos / period) * 160).toFixed(1) + 'px';
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
+
    /* --- Build each layer --- 
    rows.forEach((row, ri) => {
     const layer = document.createElement('div');
