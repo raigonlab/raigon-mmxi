@@ -510,3 +510,11 @@ nav {
     color: rgba(232, 228, 220, 0.5);
     font-style: italic;
   }
+
+  .modal-counter {
+    margin-top: 32px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(232, 228, 220, 0.18);
+    text-transform: uppercase;
+  }
