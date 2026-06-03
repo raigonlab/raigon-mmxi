@@ -274,7 +274,7 @@ function wrapOffset(val, layerEl) {
 
   // Open artwork modal with navigation and info panel
 
-  let activeModal = null;
+let activeModal = null;
 
 function openArtwork(art) {
   showModal(artworks.findIndex(a => a.src === art.src));
@@ -329,6 +329,92 @@ function showModal(idx) {
     img.style.transform = 'scale(1)';
   });
 }
+
+
+// Artwork modal navigation and controls
+
+
+function showModal(idx) {
+
+    if (activeModal) {
+      activeModal.style.opacity = '0';
+      setTimeout(() => { if (activeModal) { activeModal.remove(); } }, 300);
+    }
+  
+    const art   = artworks[idx];
+    const modal = document.createElement('div');
+    modal.className = 'artwork-modal';
+    activeModal = modal;
+  
+    const arrowL = document.createElement('button');
+    arrowL.className   = 'modal-arrow';
+    arrowL.innerHTML   = '&#8592;';
+    arrowL.setAttribute('aria-label', 'Previous artwork');
+    arrowL.addEventListener('click', e => {
+      e.stopPropagation();
+      showModal((idx - 1 + artworks.length) % artworks.length);
+    });
+  
+    const img = document.createElement('img');
+    img.src       = art.src;
+    img.alt       = art.title;
+    img.className = 'modal-image';
+  
+    const arrowR = document.createElement('button');
+    arrowR.className   = 'modal-arrow';
+    arrowR.innerHTML   = '&#8594;';
+    arrowR.setAttribute('aria-label', 'Next artwork');
+    arrowR.addEventListener('click', e => {
+      e.stopPropagation();
+      showModal((idx + 1) % artworks.length);
+    });
+  
+    const info = document.createElement('div');
+    info.className = 'modal-info';
+    info.innerHTML = `
+      <div class="modal-series">${art.series}</div>
+      <div class="modal-title">${art.title}</div>
+      <div class="modal-year">${art.year}</div>
+      <div class="modal-divider"></div>
+      <div class="modal-description">Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.</div>
+      <div class="modal-counter">${idx + 1} / ${artworks.length}</div>
+    `;
+  
+    modal.addEventListener('click', e => {
+      if (e.target === modal) {
+        closeModal(modal, onKey);
+      }
+    });
+  
+    function onKey(e) {
+      if (e.key === 'ArrowLeft')  { showModal((idx - 1 + artworks.length) % artworks.length); }
+      if (e.key === 'ArrowRight') { showModal((idx + 1) % artworks.length); }
+      if (e.key === 'Escape')     { closeModal(modal, onKey); }
+    }
+    document.addEventListener('keydown', onKey);
+  
+    modal.appendChild(arrowL);
+    modal.appendChild(img);
+    modal.appendChild(arrowR);
+    modal.appendChild(info);
+    document.body.appendChild(modal);
+  
+    requestAnimationFrame(() => {
+      modal.style.opacity = '1';
+      img.style.transform = 'scale(1)';
+    });
+  }
+  
+  function closeModal(modal, onKey) {
+    modal.style.opacity = '0';
+    setTimeout(() => {
+      modal.remove();
+      activeModal = null;
+    }, 400);
+    document.removeEventListener('keydown', onKey);
+  }
+
+
 
 
 
