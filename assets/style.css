@@ -489,3 +489,9 @@ nav {
     line-height: 1.2;
   }
 
+  .modal-year {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(232, 228, 220, 0.3);
+    margin-bottom: 24px;
+  }
