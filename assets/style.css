@@ -325,3 +325,20 @@ nav {
  
 .ap-8 { background: linear-gradient(125deg, #101614, #182420, #0c1210); }
 .ap-8::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 40% 60%, rgba(90,180,150,.2), transparent 55%); }
+
+/* ============================================================
+   GALLERY — parallax layers (injected by script.js)
+============================================================ */
+ 
+/* Each row of artwork cards */
+.layer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 380px;
+    padding: 0 100px;
+    will-change: transform;
+  }
+   
+  .layer-1 { top: 8%;  height: 20%; }
+  .layer-2 { top: 51%; height: 14%; }
