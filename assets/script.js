@@ -420,12 +420,4 @@ function showModal(idx) {
 
 
 
-   /* --- Build each layer --- 
-   rows.forEach((row, ri) => {
-    const layer = document.createElement('div');
-    layer.className = `layer layer-${ri + 1}`;
-    
- // Triple the row so infinite wrapping works without visible gaps
- [...row, ...row, ...row].forEach((art, i) => {
-    const card = document.createElement('div');
-    card.className = 'artwork-card';*/
+  
