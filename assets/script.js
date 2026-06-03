@@ -248,7 +248,30 @@ function wrapOffset(val, layerEl) {
   }
 
   animate();
-});
+
+  // Apply parallax movement, transforms, and depth-of-field focus effect to gallery layers and cards
+
+  layers.forEach((layer, i) => {
+    targetOffsets[i] = wrapOffset(targetOffsets[i], layer);
+    offsets[i] += (targetOffsets[i] - offsets[i]) * 0.08;
+
+    const px = mouseX * 120 * parallaxSpeeds[i] * 10;
+    layer.style.transform = `translateX(${offsets[i] + px}px)`;
+
+    layer.querySelectorAll('.artwork-card').forEach(card => {
+      const rect  = card.getBoundingClientRect();
+      const cx    = rect.left + rect.width / 2;
+      const dist  = Math.abs(cx - centerX);
+      const maxDist = W * 0.55;
+      const t     = Math.min(1, dist / maxDist);
+
+      card.style.opacity   = (1 - t * 0.55).toFixed(2);
+      card.style.filter    = `blur(${(t * 2.5).toFixed(1)}px)`;
+      card.style.transform = `scale(${(1 + (1 - t) * 0.12).toFixed(3)})`;
+      card.style.zIndex    = Math.round((1 - t) * 10);
+    });
+  });
+
 
    /* --- Build each layer --- 
    rows.forEach((row, ri) => {
