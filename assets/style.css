@@ -552,4 +552,15 @@ canvas#topo {
     height: 100%;
   }
 
-  
+  /* Section title — sits above the canvas */
+.vault-title-overlay {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    pointer-events: none;
+  }
+
+
+
