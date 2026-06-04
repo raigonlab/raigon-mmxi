@@ -613,5 +613,8 @@ canvas#topo {
     opacity: 0.85;
   }
 
-
+  .sym-btn:hover .sym-img {
+    opacity: 1;
+    transform: scale(1.04);
+  }
 
