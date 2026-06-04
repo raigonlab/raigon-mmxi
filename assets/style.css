@@ -562,5 +562,14 @@ canvas#topo {
     pointer-events: none;
   }
 
+  .vault-title-overlay span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(232, 228, 220, 0.2);
+  }
+
+
 
 
