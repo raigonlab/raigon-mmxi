@@ -602,7 +602,16 @@ canvas#topo {
 
 .sym-btn:hover { transform: translateY(-8px) scale(1.05); }
 
-
+/* Collection symbol image */
+.sym-img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 0.85;
+  }
 
 
 
