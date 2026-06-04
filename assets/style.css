@@ -618,3 +618,12 @@ canvas#topo {
     transform: scale(1.04);
   }
 
+/* Collection name label */
+.sym-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(232, 228, 220, 0.3);
+    font-family: 'Syne', sans-serif;
+    transition: color 0.3s;
+  }
