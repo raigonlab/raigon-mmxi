@@ -627,3 +627,5 @@ canvas#topo {
     font-family: 'Syne', sans-serif;
     transition: color 0.3s;
   }
+
+  .sym-btn:hover .sym-label { color: rgba(232, 228, 220, 0.8); }
