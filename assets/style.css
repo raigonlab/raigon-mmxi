@@ -646,3 +646,19 @@ canvas#topo {
   }
 
   .sym-btn:hover .sym-glow { opacity: 1; }
+
+  /* Feedback message area — shown on collection load or error */
+.vault-feedback {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(232, 228, 220, 0.4);
+    text-align: center;
+    pointer-events: none;
+  }
+   
