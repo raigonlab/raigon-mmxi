@@ -629,3 +629,18 @@ canvas#topo {
   }
 
   .sym-btn:hover .sym-label { color: rgba(232, 228, 220, 0.8); }
+
+  /* Glow halo behind the symbol image on hover */
+.sym-glow {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200, 169, 110, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
