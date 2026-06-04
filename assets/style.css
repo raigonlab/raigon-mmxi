@@ -520,13 +520,6 @@ nav {
     text-transform: uppercase;
   }
 
-  /* logo animation */
-
-@keyframes rotateSlow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
 /* ============================================================
    VAULT SECTION
 ============================================================ */
@@ -661,4 +654,14 @@ canvas#topo {
     text-align: center;
     pointer-events: none;
   }
-   
+
+  /* ============================================================
+   KEYFRAME ANIMATIONS
+============================================================ */
+  
+/* logo animation */
+
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
