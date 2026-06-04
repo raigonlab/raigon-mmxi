@@ -665,3 +665,11 @@ canvas#topo {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
   }
+
+  /* Floating artwork tile animations — three variants for natural variation */
+@keyframes fl1 {
+    0%, 100% { transform: translateY(0px)   rotate(-1deg); }
+    50%       { transform: translateY(-12px) rotate(0.5deg); }
+  }
+
+
