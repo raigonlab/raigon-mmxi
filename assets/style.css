@@ -596,6 +596,10 @@ canvas#topo {
     animation: symFloat 6s ease-in-out infinite;
   }
 
+  /* Staggered float delays for a natural feel */
+.sym-btn:nth-child(2) { animation-delay: -2s;  animation-duration: 7s; }
+.sym-btn:nth-child(3) { animation-delay: -4s;  animation-duration: 5.5s; }
+
 
 
 
