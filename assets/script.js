@@ -459,9 +459,20 @@ function initTopo() {
       topoTargetY  = (e.clientY - rect.top)  / rect.height;
     });
    
+    let t = 0; // time counter for animation
+ 
+    /* Layered sine/cosine noise — produces organic wave patterns */
+    function noise(x, y, time) {
+      return (
+        Math.sin(x * 2.1 + time * 0.4) * Math.cos(y * 1.8 - time * 0.3) +
+        Math.sin(x * 3.7 - time * 0.2) * Math.cos(y * 2.9 + time * 0.5) +
+        Math.sin((x + y) * 1.5 + time * 0.35) +
+        Math.cos((x - y) * 2.3 - time * 0.25)
+      ) / 4;
+    }
  
 
-  });
+
 
 
 
