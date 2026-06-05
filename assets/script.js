@@ -449,6 +449,10 @@ function initTopo() {
      canvas.height = canvas.offsetHeight;
    }
 
+   resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+ 
+
   });
 
 
