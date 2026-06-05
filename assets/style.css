@@ -588,7 +588,7 @@ nav {
     font-size: 9px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.2);
+    color: rgba(232, 228, 220, 0.6);
     cursor: pointer;
     background: none;
     border: none;
@@ -596,7 +596,7 @@ nav {
     transition: color 0.2s ease;
     text-align: left;
   }
-  .modal-inquire-link:hover { color: rgba(232, 228, 220, 0.6); }
+  .modal-inquire-link:hover { color: #7aa8d0; }
 
   /* Inquire panel — back button */
 .modal-inquire-back {
