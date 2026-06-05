@@ -243,6 +243,54 @@
 
 
 
+  <!-- Artwork modal overlay — content populated by script.js -->
+  <div class="artwork-modal" id="artwork-modal" aria-hidden="true">
+    <button class="modal-close" id="modal-close" aria-label="Close">&#x2715;</button>
+    <button class="modal-chevron modal-chevron--left" id="modal-prev" aria-label="Previous artwork">&#8249;</button>
+
+    <img class="modal-image" id="modal-image" src="" alt="" />
+
+    <div class="modal-side" id="modal-side">
+      <div class="modal-panels">
+
+        <div class="modal-info-panel">
+          <div class="modal-series"  id="modal-series"></div>
+          <div class="modal-title"   id="modal-title"></div>
+          <div class="modal-year"    id="modal-year"></div>
+          <div class="modal-divider"></div>
+          <div class="modal-description" id="modal-description"></div>
+          <div class="modal-counter" id="modal-counter"></div>
+          <button class="modal-inquire-link" id="modal-inquire-link">Inquire</button>
+        </div>
+
+        <div class="modal-inquire-panel">
+          <button class="modal-inquire-back" id="modal-inquire-back">&#8592; back</button>
+          <div class="modal-inquire-heading">Inquire</div>
+          <div class="modal-inquire-artwork-name" id="modal-inquire-name"></div>
+          <form class="modal-inquire-form" id="modal-inquire-form">
+            <div class="modal-inquire-field">
+              <label class="modal-inquire-label" for="inquire-name-input">Name</label>
+              <input class="modal-inquire-input" id="inquire-name-input" type="text" placeholder="Your name" />
+            </div>
+            <div class="modal-inquire-field">
+              <label class="modal-inquire-label" for="inquire-email-input">Email</label>
+              <input class="modal-inquire-input" id="inquire-email-input" type="email" placeholder="your@email.com" />
+            </div>
+            <div class="modal-inquire-field">
+              <label class="modal-inquire-label" for="inquire-message-input">Message</label>
+              <textarea class="modal-inquire-textarea" id="inquire-message-input" rows="4"></textarea>
+            </div>
+            <button class="modal-inquire-submit" type="submit">Send inquiry</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <button class="modal-chevron modal-chevron--right" id="modal-next" aria-label="Next artwork">&#8250;</button>
+  </div>
+  <!-- End artwork modal -->
+
   <!-- JavaScrip link -->
   <script src="assets/script.js"></script>
 </body>

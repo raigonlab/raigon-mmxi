@@ -235,47 +235,107 @@ function showModal(idx) {
     const modal = document.createElement('div');
     modal.className = 'artwork-modal';
     activeModal = modal;
-  
-    const arrowL = document.createElement('button');
-    arrowL.className   = 'modal-arrow';
-    arrowL.innerHTML   = '&#8592;';
-    arrowL.setAttribute('aria-label', 'Previous artwork');
-    arrowL.addEventListener('click', e => {
+
+    // Close button — top-right corner
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'modal-close';
+    closeBtn.innerHTML = '&#x2715;';
+    closeBtn.setAttribute('aria-label', 'Close');
+    closeBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      closeModal(modal, onKey);
+    });
+
+    // Edge chevron — left
+    const chevronL = document.createElement('button');
+    chevronL.className = 'modal-chevron modal-chevron--left';
+    chevronL.innerHTML = '&#8249;';
+    chevronL.setAttribute('aria-label', 'Previous artwork');
+    chevronL.addEventListener('click', e => {
       e.stopPropagation();
       showModal((idx - 1 + artworks.length) % artworks.length);
     });
-  
+
+    // Artwork image
     const img = document.createElement('img');
     img.src       = art.src;
     img.alt       = art.title;
     img.className = 'modal-image';
-  
-    const arrowR = document.createElement('button');
-    arrowR.className   = 'modal-arrow';
-    arrowR.innerHTML   = '&#8594;';
-    arrowR.setAttribute('aria-label', 'Next artwork');
-    arrowR.addEventListener('click', e => {
+
+    // Edge chevron — right
+    const chevronR = document.createElement('button');
+    chevronR.className = 'modal-chevron modal-chevron--right';
+    chevronR.innerHTML = '&#8250;';
+    chevronR.setAttribute('aria-label', 'Next artwork');
+    chevronR.addEventListener('click', e => {
       e.stopPropagation();
       showModal((idx + 1) % artworks.length);
     });
-  
-    const info = document.createElement('div');
-    info.className = 'modal-info';
-    info.innerHTML = `
+
+    // Side panel container
+    const side = document.createElement('div');
+    side.className = 'modal-side';
+
+    const panels = document.createElement('div');
+    panels.className = 'modal-panels';
+
+    // Info panel
+    const infoPanel = document.createElement('div');
+    infoPanel.className = 'modal-info-panel';
+    infoPanel.innerHTML = `
       <div class="modal-series">${art.series}</div>
       <div class="modal-title">${art.title}</div>
       <div class="modal-year">${art.year}</div>
       <div class="modal-divider"></div>
       <div class="modal-description">Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.</div>
       <div class="modal-counter">${idx + 1} / ${artworks.length}</div>
+      <button class="modal-inquire-link">Inquire</button>
     `;
-  
+
+    // Inquire panel
+    const inquirePanel = document.createElement('div');
+    inquirePanel.className = 'modal-inquire-panel';
+    inquirePanel.innerHTML = `
+      <button class="modal-inquire-back">&#8592; back</button>
+      <div class="modal-inquire-heading">Inquire</div>
+      <div class="modal-inquire-artwork-name">${art.title}</div>
+      <form class="modal-inquire-form" onsubmit="return false">
+        <div class="modal-inquire-field">
+          <label class="modal-inquire-label">Name</label>
+          <input class="modal-inquire-input" type="text" placeholder="Your name" />
+        </div>
+        <div class="modal-inquire-field">
+          <label class="modal-inquire-label">Email</label>
+          <input class="modal-inquire-input" type="email" placeholder="your@email.com" />
+        </div>
+        <div class="modal-inquire-field">
+          <label class="modal-inquire-label">Message</label>
+          <textarea class="modal-inquire-textarea" rows="4">Hello, I'm interested in "${art.title}" (${art.year}) from the ${art.series} series. Could you please provide more information about this work, including availability and pricing?</textarea>
+        </div>
+        <button class="modal-inquire-submit" type="submit">Send inquiry</button>
+      </form>
+    `;
+
+    inquirePanel.querySelector('.modal-inquire-back').addEventListener('click', e => {
+      e.stopPropagation();
+      side.classList.remove('inquire-open');
+    });
+
+    infoPanel.querySelector('.modal-inquire-link').addEventListener('click', e => {
+      e.stopPropagation();
+      side.classList.add('inquire-open');
+    });
+
+    panels.appendChild(infoPanel);
+    panels.appendChild(inquirePanel);
+    side.appendChild(panels);
+
     modal.addEventListener('click', e => {
       if (e.target === modal) {
         closeModal(modal, onKey);
       }
     });
-  
+
     function onKey(e) {
       if (e.key === 'ArrowLeft')  { showModal((idx - 1 + artworks.length) % artworks.length); }
       if (e.key === 'ArrowRight') { showModal((idx + 1) % artworks.length); }
@@ -284,10 +344,11 @@ function showModal(idx) {
     activeOnKey = onKey;
     document.addEventListener('keydown', onKey);
 
-    modal.appendChild(arrowL);
+    modal.appendChild(closeBtn);
+    modal.appendChild(chevronL);
     modal.appendChild(img);
-    modal.appendChild(arrowR);
-    modal.appendChild(info);
+    modal.appendChild(side);
+    modal.appendChild(chevronR);
     document.body.appendChild(modal);
 
     requestAnimationFrame(() => {
