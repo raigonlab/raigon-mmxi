@@ -676,3 +676,8 @@ canvas#topo {
     0%, 100% { transform: translateY(0px)  rotate(1deg); }
     50%       { transform: translateY(-8px) rotate(-0.5deg); }
   }
+  
+  @keyframes fl3 {
+    0%, 100% { transform: translateY(-4px) rotate(0deg); }
+    50%       { transform: translateY(8px)  rotate(-1deg); }
+  }
