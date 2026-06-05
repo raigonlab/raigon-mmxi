@@ -184,8 +184,8 @@ nav {
     opacity: 0.55;
     pointer-events: none;
     border-radius: 50%;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   /* Square wrapper that holds both the rotating ring and the centre icon */
