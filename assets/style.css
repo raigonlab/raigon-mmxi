@@ -672,4 +672,7 @@ canvas#topo {
     50%       { transform: translateY(-12px) rotate(0.5deg); }
   }
 
-
+  @keyframes fl2 {
+    0%, 100% { transform: translateY(0px)  rotate(1deg); }
+    50%       { transform: translateY(-8px) rotate(-0.5deg); }
+  }
