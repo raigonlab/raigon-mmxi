@@ -68,13 +68,14 @@ window.addEventListener('load', () => {
   
     const rows = [
       artworks.slice(0, 10),
+      artworks.slice(5, 15),
       artworks.slice(9, 19),
     ];
-  
-    const layers        = [];
-    const offsets       = [0, -285];
-    const targetOffsets = [0, -285];
-    const parallaxSpeeds = [0.08, 0.05];
+
+    const layers         = [];
+    const offsets        = [0, -285, -140];
+    const targetOffsets  = [0, -285, -140];
+    const parallaxSpeeds = [0.08, 0.05, 0.03];
   
     let mouseX = 0;
     const W       = window.innerWidth;
@@ -167,7 +168,7 @@ window.addEventListener('load', () => {
   function animate() {
 
     layers.forEach((_, i) => {
-      targetOffsets[i] -= 0.2 * (1 - i * 0.5);
+      targetOffsets[i] -= 0.4;
     });
 
     const deadZone = 0.2;
