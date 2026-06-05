@@ -175,17 +175,14 @@ nav {
     align-items: center;
   }
 
-  /* Logo container — flex row, holds the ring+icon unit */
-.home-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    color: var(--text);
+  /* Fixed global logo stamp — visible on all pages */
+.global-logo {
+    position: fixed;
+    top: 28px;
+    left: 28px;
+    z-index: 200;
     opacity: 0.55;
+    pointer-events: none;
   }
 
   /* Square wrapper that holds both the rotating ring and the centre icon */
@@ -670,16 +667,6 @@ canvas#topo {
   padding: 44px 32px 120px;
 }
 
-.arquive-logo {
-  margin-bottom: 40px;
-}
-
-.arquive-logo-circle {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 1px solid rgba(232, 228, 220, 0.15);
-}
 
 .arquive-grid {
   display: grid;
