@@ -211,7 +211,8 @@ window.addEventListener('load', () => {
    Opens a full-screen overlay showing one artwork at a time.
    Supports prev/next navigation and keyboard control.
 ============================================================ */
-let activeModal = null;
+let activeModal  = null;
+let activeOnKey  = null;
 
 function openArtwork(art) {
   showModal(artworks.findIndex(a => a.src === art.src));
@@ -219,11 +220,17 @@ function openArtwork(art) {
 
 function showModal(idx) {
 
-    if (activeModal) {
-      activeModal.style.opacity = '0';
-      setTimeout(() => { if (activeModal) { activeModal.remove(); } }, 300);
+    if (activeOnKey) {
+      document.removeEventListener('keydown', activeOnKey);
+      activeOnKey = null;
     }
-  
+
+    const prevModal = activeModal;
+    if (prevModal) {
+      prevModal.style.opacity = '0';
+      setTimeout(() => prevModal.remove(), 300);
+    }
+
     const art   = artworks[idx];
     const modal = document.createElement('div');
     modal.className = 'artwork-modal';
@@ -274,17 +281,20 @@ function showModal(idx) {
       if (e.key === 'ArrowRight') { showModal((idx + 1) % artworks.length); }
       if (e.key === 'Escape')     { closeModal(modal, onKey); }
     }
+    activeOnKey = onKey;
     document.addEventListener('keydown', onKey);
-  
+
     modal.appendChild(arrowL);
     modal.appendChild(img);
     modal.appendChild(arrowR);
     modal.appendChild(info);
     document.body.appendChild(modal);
-  
+
     requestAnimationFrame(() => {
-      modal.style.opacity = '1';
-      img.style.transform = 'scale(1)';
+      requestAnimationFrame(() => {
+        modal.style.opacity = '1';
+        img.style.transform = 'scale(1)';
+      });
     });
   }
   
@@ -295,6 +305,7 @@ function showModal(idx) {
       activeModal = null;
     }, 400);
     document.removeEventListener('keydown', onKey);
+    activeOnKey = null;
   }
   
 /* ============================================================
