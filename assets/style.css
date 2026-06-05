@@ -182,8 +182,10 @@ nav {
     left: 28px;
     z-index: 200;
     opacity: 0.75;
-    pointer-events: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
   }
+  .global-logo:hover { opacity: 1; }
 
 .global-logo::before {
     content: '';

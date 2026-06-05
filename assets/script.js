@@ -54,6 +54,10 @@ pills.forEach(pill => {
   });
 });
 
+const globalLogo = document.querySelector('.global-logo');
+globalLogo.addEventListener('click', () => document.querySelector('.pill[data-page="home"]').click());
+globalLogo.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') document.querySelector('.pill[data-page="home"]').click(); });
+
   
 /* ============================================================
    HOME GALLERY — PARALLAX BUILD
