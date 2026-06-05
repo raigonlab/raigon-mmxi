@@ -177,7 +177,7 @@ window.addEventListener('load', () => {
     if (absX > deadZone) {
       const dir       = mouseX > 0 ? -1 : 1;
       const intensity = (absX - deadZone) / (1 - deadZone);
-      const speed     = intensity * intensity * 12;
+      const speed     = intensity * intensity * 6;
 
       layers.forEach((_, i) => {
         targetOffsets[i] += dir * speed * (1 - i * 0.15);
