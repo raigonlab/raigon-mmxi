@@ -19,82 +19,72 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0;
       text-align: center;
+      gap: 0;
     }
 
-    .not-found-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(120px, 20vw, 240px);
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(232, 228, 220, 0.08);
-      line-height: 1;
-      user-select: none;
-      letter-spacing: -4px;
+    /* Gallery row: three frames + plant side by side */
+    .gallery-wall {
+      display: flex;
+      align-items: flex-end;
+      gap: 28px;
+      margin-bottom: 44px;
     }
 
+    /* Individual frame wrapper — carries the tilt */
+    .frame-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .frame-wrap:nth-child(1) { transform: rotate(-2deg)   translateY(-14px); }
+    .frame-wrap:nth-child(2) { transform: rotate( 0.8deg) translateY(0px);   }
+    .frame-wrap:nth-child(3) { transform: rotate(-1deg)   translateY(-8px);  }
+
+    /* Plant wrapper */
+    .plant-wrap {
+      transform: rotate(1.5deg) translateY(4px);
+      margin-left: 8px;
+    }
+
+    /* Frame SVG sizing */
+    .frame-svg  { width: 128px; color: rgba(232, 228, 220, 0.28); display: block; }
+    .plant-svg  { width: 68px;  color: rgba(232, 228, 220, 0.25); display: block; }
+
+    /* Label + button */
     .not-found-label {
       font-family: 'Syne', sans-serif;
-      font-size: 9px;
+      font-size: 8px;
       letter-spacing: 5px;
       text-transform: uppercase;
-      color: rgba(232, 228, 220, 0.3);
-      margin-top: -8px;
-      margin-bottom: 48px;
+      color: rgba(232, 228, 220, 0.25);
+      margin-bottom: 28px;
     }
 
     .not-found-home {
       font-family: 'Syne', sans-serif;
-      font-size: 10px;
+      font-size: 9px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: rgba(232, 228, 220, 0.4);
-      background: rgba(232, 228, 220, 0.06);
+      background: rgba(232, 228, 220, 0.05);
       border: 1px solid rgba(232, 228, 220, 0.1);
       border-radius: 100px;
-      padding: 12px 28px;
+      padding: 11px 26px;
       text-decoration: none;
       transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
-
     .not-found-home:hover {
       color: #7aa8d0;
-      border-color: rgba(122, 168, 208, 0.3);
-      background: rgba(122, 168, 208, 0.06);
-    }
-
-    /* Subtle orbs */
-    .not-found::before,
-    .not-found::after {
-      content: '';
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(80px);
-    }
-
-    .not-found::before {
-      width: 400px;
-      height: 400px;
-      background: rgba(122, 168, 208, 0.04);
-      top: 10%;
-      right: 15%;
-    }
-
-    .not-found::after {
-      width: 300px;
-      height: 300px;
-      background: rgba(200, 169, 110, 0.04);
-      bottom: 15%;
-      left: 10%;
+      border-color: rgba(122, 168, 208, 0.28);
+      background: rgba(122, 168, 208, 0.05);
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Logo links back to home -->
+  <!-- Logo — links back to home -->
   <a href="index.html" class="global-logo" aria-label="Go to Home" style="text-decoration:none;">
     <div class="logo-ring-wrap">
       <svg class="logo-ring-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -108,17 +98,108 @@
       <div class="logo-icon-wrap">
         <svg class="logo-icon-svg" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg"
           aria-label="Raigon logo mark">
-          <path
-            d="M168.9,837.6h145.7c9.8,0,17.8-5.5,17.8-13.8v-98.5l199.6-101.2,171.6,203.2c5.3,6.3,13.9,10,23,10h153.4c18.1,0,48.6.7,18.1-29.9l-216.2-255.4,271-137.3h0s0,0,0,0l-31-51.6h0c-.3-.6-39.5-68.7-48-76.5,0,0,0,0,0,0-.2-.2-3.2-3.4-8.5-7.9-8.8-7.3-23.8-17.9-42.9-23.9-.8-.3-1.7-.6-2.6-.8,0,0-.2,0-.3,0-4-1.1-8.2-2-12.5-2.7,0,0,0,0,0,0-30.1-5.8-65-8.8-104.9-8.8H168.9c-9.8,0-17.8,6.8-17.8,15.1v560.7c0,8.4,8,19.4,17.8,19.4ZM332.5,382c0-8.4,8-15.1,17.8-15.1h317c32.9-.5,47.7,8.4,47.7,8.4l-382.5,186.8v-180.1Z" />
+          <path d="M168.9,837.6h145.7c9.8,0,17.8-5.5,17.8-13.8v-98.5l199.6-101.2,171.6,203.2c5.3,6.3,13.9,10,23,10h153.4c18.1,0,48.6.7,18.1-29.9l-216.2-255.4,271-137.3h0s0,0,0,0l-31-51.6h0c-.3-.6-39.5-68.7-48-76.5,0,0,0,0,0,0-.2-.2-3.2-3.4-8.5-7.9-8.8-7.3-23.8-17.9-42.9-23.9-.8-.3-1.7-.6-2.6-.8,0,0-.2,0-.3,0-4-1.1-8.2-2-12.5-2.7,0,0,0,0,0,0-30.1-5.8-65-8.8-104.9-8.8H168.9c-9.8,0-17.8,6.8-17.8,15.1v560.7c0,8.4,8,19.4,17.8,19.4ZM332.5,382c0-8.4,8-15.1,17.8-15.1h317c32.9-.5,47.7,8.4,47.7,8.4l-382.5,186.8v-180.1Z" />
         </svg>
       </div>
     </div>
   </a>
 
   <div class="not-found">
-    <div class="not-found-number">404</div>
+
+    <div class="gallery-wall">
+
+      <!-- Frame — digit 4 -->
+      <div class="frame-wrap">
+        <svg class="frame-svg" viewBox="0 0 160 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Nail -->
+          <circle cx="80" cy="5" r="2.5" stroke="currentColor" stroke-width="1"/>
+          <!-- Hanging wire -->
+          <line x1="80" y1="5"  x2="18" y2="28" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+          <line x1="80" y1="5"  x2="142" y2="28" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+          <!-- Outer frame -->
+          <rect x="10" y="22" width="140" height="190" stroke="currentColor" stroke-width="1.4"/>
+          <!-- Inner mat -->
+          <rect x="20" y="32" width="120" height="170" stroke="currentColor" stroke-width="0.6" stroke-dasharray="0"/>
+          <!-- Digit -->
+          <text x="80" y="130"
+                text-anchor="middle" dominant-baseline="middle"
+                font-family="Cormorant Garamond, serif"
+                font-style="italic" font-weight="300"
+                font-size="108" fill="currentColor">4</text>
+        </svg>
+      </div>
+
+      <!-- Frame — digit 0 -->
+      <div class="frame-wrap">
+        <svg class="frame-svg" viewBox="0 0 160 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="80" cy="5" r="2.5" stroke="currentColor" stroke-width="1"/>
+          <line x1="80" y1="5"  x2="18" y2="28" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+          <line x1="80" y1="5"  x2="142" y2="28" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+          <rect x="10" y="22" width="140" height="190" stroke="currentColor" stroke-width="1.4"/>
+          <rect x="20" y="32" width="120" height="170" stroke="currentColor" stroke-width="0.6"/>
+          <text x="80" y="130"
+                text-anchor="middle" dominant-baseline="middle"
+                font-family="Cormorant Garamond, serif"
+                font-style="italic" font-weight="300"
+                font-size="108" fill="currentColor">0</text>
+        </svg>
+      </div>
+
+      <!-- Frame — digit 4 -->
+      <div class="frame-wrap">
+        <svg class="frame-svg" viewBox="0 0 160 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="80" cy="5" r="2.5" stroke="currentColor" stroke-width="1"/>
+          <line x1="80" y1="5"  x2="18" y2="28" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+          <line x1="80" y1="5"  x2="142" y2="28" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+          <rect x="10" y="22" width="140" height="190" stroke="currentColor" stroke-width="1.4"/>
+          <rect x="20" y="32" width="120" height="170" stroke="currentColor" stroke-width="0.6"/>
+          <text x="80" y="130"
+                text-anchor="middle" dominant-baseline="middle"
+                font-family="Cormorant Garamond, serif"
+                font-style="italic" font-weight="300"
+                font-size="108" fill="currentColor">4</text>
+        </svg>
+      </div>
+
+      <!-- Plant in vase — outline -->
+      <div class="plant-wrap">
+        <svg class="plant-svg" viewBox="0 0 80 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stem center -->
+          <path d="M40 78 C40 65 39 54 37 42" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          <!-- Stem right -->
+          <path d="M40 78 C42 65 47 56 54 46" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          <!-- Left leaf -->
+          <path d="M37 42 C26 33 17 20 21 9 C31 16 37 32 37 42Z"
+                stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+          <!-- Left leaf midrib -->
+          <path d="M21 9 C27 20 34 34 37 42" stroke="currentColor" stroke-width="0.4" opacity="0.5"/>
+          <!-- Right leaf -->
+          <path d="M54 46 C64 35 70 22 65 12 C55 20 50 36 54 46Z"
+                stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+          <!-- Right leaf midrib -->
+          <path d="M65 12 C59 24 54 38 54 46" stroke="currentColor" stroke-width="0.4" opacity="0.5"/>
+          <!-- Top small leaf -->
+          <path d="M37 42 C33 30 34 18 38 10 C43 18 43 30 37 42Z"
+                stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+          <!-- Top leaf midrib -->
+          <path d="M38 10 C39 22 38 34 37 42" stroke="currentColor" stroke-width="0.4" opacity="0.5"/>
+          <!-- Vase body -->
+          <path d="M22 80 L16 108 Q40 118 64 108 L58 80Z"
+                stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+          <!-- Vase rim (top ellipse) -->
+          <ellipse cx="40" cy="80" rx="19" ry="4.5" stroke="currentColor" stroke-width="1.1"/>
+          <!-- Vase inner rim shadow line -->
+          <ellipse cx="40" cy="81.5" rx="14" ry="2.8" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+          <!-- Vase base -->
+          <ellipse cx="40" cy="108" rx="24" ry="5" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+        </svg>
+      </div>
+
+    </div>
+
     <div class="not-found-label">Page not found</div>
     <a class="not-found-home" href="index.html">Return home</a>
+
   </div>
 
 </body>
