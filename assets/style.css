@@ -1422,4 +1422,125 @@ canvas#topo {
   line-height: 2.2;
   color: rgba(232, 228, 220, 0.28);
 }
-   
+
+/* ============================================================
+   COLLECTION OVERLAY
+   Full-screen image grid opened by the Vault collection buttons.
+   HTML is built dynamically by script.js (not in index.html).
+============================================================ */
+
+/* Backdrop */
+.collection-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(6, 8, 16, 0.97);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  overflow: hidden;
+}
+
+.collection-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Header bar */
+.collection-overlay-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 36px 48px 24px;
+  border-bottom: 1px solid rgba(232, 228, 220, 0.06);
+  flex-shrink: 0;
+}
+
+.collection-overlay-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(232, 228, 220, 0.92);
+}
+
+.collection-overlay-count {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(232, 228, 220, 0.25);
+}
+
+.collection-overlay-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  color: rgba(232, 228, 220, 0.22);
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+}
+.collection-overlay-close:hover { color: rgba(232, 228, 220, 0.7); }
+
+/* Scrollable grid */
+.collection-overlay-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2px;
+  overflow-y: auto;
+  flex: 1;
+  padding: 2px;
+}
+
+/* Individual card */
+.collection-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #060810;
+  cursor: pointer;
+}
+
+.collection-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.collection-card:hover .collection-card-img {
+  transform: scale(1.04);
+  opacity: 0.65;
+}
+
+/* Artwork title label — slides up on hover */
+.collection-card-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 16px 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(232, 228, 220, 0.9);
+  background: linear-gradient(to top, rgba(6, 8, 16, 0.88), transparent);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.collection-card:hover .collection-card-title {
+  opacity: 1;
+  transform: translateY(0);
+}

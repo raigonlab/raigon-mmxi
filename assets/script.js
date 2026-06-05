@@ -299,6 +299,86 @@ function showVaultFeedback(message, isError = false) {
     : 'rgba(232, 228, 220, 0.4)';
 }
 
+/* ============================================================
+   COLLECTION OVERLAY
+   Builds and opens a full-screen grid when a collection is
+   selected in the Vault. All DOM is created here at runtime;
+   nothing is added to index.html for this feature.
+============================================================ */
+
+/* Build the overlay DOM for one collection and return the root element. */
+function buildCollectionOverlay(collection) {
+  const overlay = document.createElement('div');
+  overlay.className = 'collection-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', collection.title);
+
+  // Header: title · count · close button
+  const header  = document.createElement('div');
+  header.className = 'collection-overlay-header';
+
+  const titleEl = document.createElement('span');
+  titleEl.className   = 'collection-overlay-title';
+  titleEl.textContent = collection.title;
+
+  const countEl = document.createElement('span');
+  countEl.className   = 'collection-overlay-count';
+  countEl.textContent = `${collection.works.length} works`;
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'collection-overlay-close';
+  closeBtn.setAttribute('aria-label', 'Close collection');
+  closeBtn.textContent = '×';
+
+  header.appendChild(titleEl);
+  header.appendChild(countEl);
+  header.appendChild(closeBtn);
+
+  // Grid: one card per work
+  const grid = document.createElement('div');
+  grid.className = 'collection-overlay-grid';
+
+  collection.works.forEach(work => {
+    const card = document.createElement('div');
+    card.className = 'collection-card';
+
+    const img = document.createElement('img');
+    img.className = 'collection-card-img';
+    img.src       = work.src;
+    img.alt       = work.title;
+    img.loading   = 'lazy';
+
+    const label = document.createElement('div');
+    label.className   = 'collection-card-title';
+    label.textContent = work.title;
+
+    card.appendChild(img);
+    card.appendChild(label);
+    grid.appendChild(card);
+  });
+
+  overlay.appendChild(header);
+  overlay.appendChild(grid);
+
+  // Close handlers: button, backdrop click, Escape key
+  function closeOverlay() {
+    overlay.classList.remove('open');
+    overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+    document.removeEventListener('keydown', onKey);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') closeOverlay();
+  }
+
+  closeBtn.addEventListener('click', closeOverlay);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeOverlay(); });
+  document.addEventListener('keydown', onKey);
+
+  return overlay;
+}
+
 async function loadCollection(collectionName) {
   showVaultFeedback('loading...');
 
@@ -316,11 +396,19 @@ async function loadCollection(collectionName) {
       throw new Error(`Collection "${collectionName}" not found`);
     }
 
-    showVaultFeedback(`${collection.title} — ${collection.count} works`);
+    const overlay = buildCollectionOverlay(collection);
+    document.body.appendChild(overlay);
+
+    // Double rAF ensures the browser paints before the open class triggers the transition
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => overlay.classList.add('open'));
+    });
 
   } catch (error) {
     showVaultFeedback('unable to load collection. please try again.', true);
     console.error('Collection fetch failed:', error);
+  } finally {
+    showVaultFeedback('');
   }
 }
 

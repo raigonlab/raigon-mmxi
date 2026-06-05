@@ -1,10 +1,41 @@
 {
   "digital-charcoal": {
     "title": "Digital Charcoal",
-    "count": 19
+    "count": 19,
+    "works": [
+      { "src": "assets/images/hero/digital-charcoal-00001.jpg", "title": "Triforce"  },
+      { "src": "assets/images/hero/digital-charcoal-00002.jpg", "title": "Bloom"     },
+      { "src": "assets/images/hero/digital-charcoal-00003.jpg", "title": "Intersect" },
+      { "src": "assets/images/hero/digital-charcoal-00004.jpg", "title": "Serpent"   },
+      { "src": "assets/images/hero/digital-charcoal-00005.jpg", "title": "Dissolve"  },
+      { "src": "assets/images/hero/digital-charcoal-00006.jpg", "title": "Collapse"  },
+      { "src": "assets/images/hero/digital-charcoal-00007.jpg", "title": "Drift"     },
+      { "src": "assets/images/hero/digital-charcoal-00008.jpg", "title": "Coil"      },
+      { "src": "assets/images/hero/digital-charcoal-00009.jpg", "title": "Monolith"  },
+      { "src": "assets/images/hero/digital-charcoal-00010.jpg", "title": "Knot"      },
+      { "src": "assets/images/hero/digital-charcoal-00011.jpg", "title": "Vessel"    },
+      { "src": "assets/images/hero/digital-charcoal-00012.jpg", "title": "Scale"     },
+      { "src": "assets/images/hero/digital-charcoal-00013.jpg", "title": "Presence"  },
+      { "src": "assets/images/hero/digital-charcoal-00014.jpg", "title": "Threshold" },
+      { "src": "assets/images/hero/digital-charcoal-00015.jpg", "title": "Mass"      },
+      { "src": "assets/images/hero/digital-charcoal-00016.jpg", "title": "Void"      },
+      { "src": "assets/images/hero/digital-charcoal-00017.jpg", "title": "Loop"      },
+      { "src": "assets/images/hero/digital-charcoal-00018.jpg", "title": "Strike"    },
+      { "src": "assets/images/hero/digital-charcoal-00019.jpg", "title": "Torsion"   }
+    ]
   },
   "form-and-void": {
     "title": "Form and Void",
-    "count": 12
+    "count": 8,
+    "works": [
+      { "src": "assets/images/hero/digital-charcoal-00001.jpg", "title": "Anchor"   },
+      { "src": "assets/images/hero/digital-charcoal-00002.jpg", "title": "Membrane" },
+      { "src": "assets/images/hero/digital-charcoal-00003.jpg", "title": "Fracture" },
+      { "src": "assets/images/hero/digital-charcoal-00004.jpg", "title": "Tension"  },
+      { "src": "assets/images/hero/digital-charcoal-00005.jpg", "title": "Residue"  },
+      { "src": "assets/images/hero/digital-charcoal-00006.jpg", "title": "Hollow"   },
+      { "src": "assets/images/hero/digital-charcoal-00007.jpg", "title": "Current"  },
+      { "src": "assets/images/hero/digital-charcoal-00008.jpg", "title": "Shard"    }
+    ]
   }
 }
