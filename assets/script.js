@@ -363,7 +363,58 @@ function showModal(idx) {
     document.removeEventListener('keydown', onKey);
   }
   
-  // vault section 
+/* ============================================================
+   VAULT — COLLECTION SYMBOLS
+   Loads symbol images and handles collection button clicks.
+   Uses async/await to fetch collection data from JSON.
+   Shows user feedback instead of alert().
+============================================================ */
+
+window.addEventListener('load', () => {
+  document.getElementById('img-pyramid').src = 'assets/images/piramede-raigon.png';
+  document.getElementById('img-shell').src   = 'assets/images/Untitled_Artwork_29.png';
+  document.getElementById('img-lake').src    = 'assets/images/montanha_raigon.png';
+});
+
+function showVaultFeedback(message, isError = false) {
+  const feedback = document.getElementById('vault-feedback');
+  if (!feedback) { return; }
+  feedback.textContent = message;
+  feedback.style.color = isError
+    ? 'rgba(220, 100, 80, 0.7)'
+    : 'rgba(232, 228, 220, 0.4)';
+}
+
+async function loadCollection(collectionName) {
+  showVaultFeedback('loading...');
+
+  try {
+    const response = await fetch('data/collections.json');
+
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
+    }
+
+    const data       = await response.json();
+    const collection = data[collectionName];
+
+    if (!collection) {
+      throw new Error(`Collection "${collectionName}" not found`);
+    }
+
+    showVaultFeedback(`${collection.title} — ${collection.count} works`);
+
+  } catch (error) {
+    showVaultFeedback('unable to load collection. please try again.', true);
+    console.error('Collection fetch failed:', error);
+  }
+}
+
+document.querySelectorAll('.sym-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    loadCollection(btn.dataset.collection);
+  });
+});
 
   /* ============================================================
    TOPOGRAPHIC CANVAS ANIMATION
