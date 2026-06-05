@@ -701,6 +701,19 @@ canvas#topo {
 
 /* Gallery card entrance (applied via JS on build) */
 @keyframes fadeIn {
-    from { opacity: 0; }
+    from { opacity: 5; }
     to   { opacity: 0.85; }
   }
+
+  /* Scroll hint label fade in and out */
+@keyframes hintFade {
+    0%, 100% { opacity: 0; }
+    20%, 80%  { opacity: 1; }
+  }
+
+  /* Vault symbol buttons gentle float */
+@keyframes symFloat {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-14px); }
+  }
+   
