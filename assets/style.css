@@ -661,40 +661,149 @@ canvas#topo {
 
 #arquive {
   background: var(--bg);
+  overflow-y: auto;
 }
 
-.contact-wrap {
-  max-width: 480px;
+.arquive-wrap {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 60px 28px 120px;
+  padding: 44px 32px 120px;
 }
 
-.contact-section-label {
+.arquive-logo {
+  margin-bottom: 40px;
+}
+
+.arquive-logo-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 228, 220, 0.15);
+}
+
+.arquive-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.arquive-col-label {
   font-size: 9px;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
-.contact-section-label--spaced {
-  margin-top: 48px;
-}
-
-.bio-block {
+.arquive-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0;
 }
 
+/* Contact rows inside get-in-touch card */
+.ar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: opacity 0.2s;
+}
+
+.ar-row:last-of-type { border-bottom: none; }
+.ar-row:hover { opacity: 0.6; }
+
+.ar-row-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ar-row-value {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: rgba(232, 228, 220, 0.7);
+}
+
+.arquive-address {
+  margin-top: 20px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: rgba(232, 228, 220, 0.35);
+  letter-spacing: 0.5px;
+}
+
+.arquive-address-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.arquive-address-sep {
+  height: 12px;
+}
+
+/* Event blocks */
+.event-block {
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.event-title {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(232, 228, 220, 0.5);
+  margin-bottom: 4px;
+}
+
+.event-meta {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.arquive-socials {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.social-link {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.social-link:hover { color: var(--text); }
+
+/* Bio column */
 .bio-photo {
-  flex-shrink: 0;
-  width: 72px;
-  height: 72px;
-  border-radius: 4px;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
+  margin-bottom: 20px;
 }
 
 .bio-photo-placeholder {
@@ -704,21 +813,16 @@ canvas#topo {
   align-items: center;
   justify-content: center;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  color: rgba(232, 228, 220, 0.2);
+  font-size: 40px;
+  color: rgba(232, 228, 220, 0.1);
 }
 
-.bio-body {
-  flex: 1;
-}
-
-.bio-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
+.bio-text {
+  font-size: 12px;
   font-weight: 300;
-  letter-spacing: 3px;
-  color: var(--text);
-  margin-bottom: 4px;
+  line-height: 1.85;
+  color: rgba(232, 228, 220, 0.55);
+  margin-bottom: 20px;
 }
 
 .bio-role {
@@ -726,46 +830,8 @@ canvas#topo {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 14px;
-}
-
-.bio-text {
-  font-size: 13px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: rgba(232, 228, 220, 0.55);
-}
-
-.contact-block {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.contact-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-  text-decoration: none;
-  color: var(--text);
-  transition: opacity 0.2s;
-}
-
-.contact-row:hover { opacity: 0.6; }
-
-.cr-label {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.cr-value {
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: rgba(232, 228, 220, 0.7);
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
   /* ============================================================
