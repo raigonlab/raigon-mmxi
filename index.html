@@ -14,9 +14,6 @@
 
 <body>
 
-  <!-- Dot-grid background canvas — managed by dot-grid.js, visible through Vault's transparent background -->
-  <canvas id="dot-grid"></canvas>
-
   <!-- Global fixed logo stamp — visible on all pages, acts as home button -->
   <div class="global-logo" role="button" aria-label="Go to Home" tabindex="0">
     <div class="logo-ring-wrap">
@@ -58,6 +55,10 @@
     VAULT SECTION
   ============================================================ -->
   <div class="page" id="vault">
+
+    <!-- Dot-grid background canvas — sits behind vault-scene, managed by dot-grid.js -->
+    <canvas id="dot-grid"></canvas>
+
     <div class="vault-scene">
 
       <canvas id="topo"></canvas>
