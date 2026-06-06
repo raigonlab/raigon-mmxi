@@ -48,7 +48,6 @@ pills.forEach(pill => {
 
     document.getElementById(target).scrollTop = 0;
 
-    if (target === 'vault')   { initTopo(); }
     if (target === 'arquive') { loadEvents(); }
   });
 });
@@ -416,120 +415,6 @@ document.querySelectorAll('.sym-btn').forEach(btn => {
   });
 });
 
-  /* ============================================================
-   TOPOGRAPHIC CANVAS ANIMATION
-   Draws animated sinusoidal noise curves on the Vault canvas.
-   Reacts to mouse position — curves deform toward the cursor.
-   Initialised lazily on first visit to the Vault section.
-============================================================ */
-let topoInit = false;
- 
-// Separate mouse tracking variables for the canvas
-// (avoid conflict with gallery mouseX which is scoped inside the load event)
-let topoMouseX = 0.5;
-let topoMouseY = 0.5;
-let topoTargetX = 0.5;
-let topoTargetY = 0.5;
- 
-function initTopo() {
-
-  // Guard — run only once
-  if (topoInit) { return; }
-  topoInit = true;
-
-  const canvas = document.getElementById('topo');
-  const ctx    = canvas.getContext('2d');
-
-  /* Resize canvas to match its CSS display size */
-  function resizeCanvas() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  /* Track mouse position inside the vault section */
-  document.getElementById('vault').addEventListener('mousemove', e => {
-    const rect  = canvas.getBoundingClientRect();
-    topoTargetX = (e.clientX - rect.left) / rect.width;
-    topoTargetY = (e.clientY - rect.top)  / rect.height;
-  });
-
-  let t = 0;
-
-  /* Layered sine/cosine noise — produces organic wave patterns */
-  function noise(x, y, time) {
-    return (
-      Math.sin(x * 2.1 + time * 0.4) * Math.cos(y * 1.8 - time * 0.3) +
-      Math.sin(x * 3.7 - time * 0.2) * Math.cos(y * 2.9 + time * 0.5) +
-      Math.sin((x + y) * 1.5 + time * 0.35) +
-      Math.cos((x - y) * 2.3 - time * 0.25)
-    ) / 4;
-  }
-
-  /* Draw one frame of the topographic animation */
-  function draw() {
-
-    topoMouseX += (topoTargetX - topoMouseX) * 0.04;
-    topoMouseY += (topoTargetY - topoMouseY) * 0.04;
-
-    const W = canvas.width;
-    const H = canvas.height;
-
-    ctx.clearRect(0, 0, W, H);
-
-    // Draw 38 horizontal noise curves
-    for (let i = 0; i < 38; i++) {
-      const baseY = (i / 38) * H;
-
-      ctx.beginPath();
-
-      for (let j = 0; j <= 80; j++) {
-        const x  = (j / 80) * W;
-        const nx = j / 80;
-        const ny = i / 38;
-
-        // Distance from this point to the cursor — used to amplify nearby curves
-        const dx   = nx - topoMouseX;
-        const dy   = ny - topoMouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        const n = noise(nx * 4, ny * 3, t) +
-                  Math.max(0, 1 - dist * 2.2) * 0.35 * Math.sin(t * 2 + dist * 8);
-
-        if (j === 0) {
-          ctx.moveTo(x, baseY + n * H * 0.055);
-        } else {
-          ctx.lineTo(x, baseY + n * H * 0.055);
-        }
-      }
-
-      // Line colour — brighter near the cursor, blue-shifted by mouse X position
-      const distFromMouse = Math.abs((i / 38) - topoMouseY);
-      const brightness    = Math.max(0.12, 0.55 - distFromMouse * 0.6);
-      const blueShift     = 0.3 + topoMouseX * 0.4;
-
-      ctx.strokeStyle = `rgba(
-        ${Math.floor(160 + 80 * blueShift)},
-        ${Math.floor(180 + 60 * blueShift)},
-        255,
-        ${brightness}
-      )`;
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-    }
-
-    t += 0.006;
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-}
-
-/* Auto-init if Vault is somehow already active on page load */
-if (document.getElementById('vault').classList.contains('active')) {
-  initTopo();
-}
 
 /* ============================================================
    ARQUIVE — EVENTS
