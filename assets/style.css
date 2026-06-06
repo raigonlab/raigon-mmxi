@@ -6,6 +6,19 @@
 ============================================================ */
 
 
+/* ── DOT-GRID CANVAS ── */
+/* Fixed behind all pages — visible only through Vault's transparent background */
+#dot-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
+
 /* ── RESET ── */
 *, *::before, *::after {
   margin: 0;
@@ -716,7 +729,7 @@ nav {
 ============================================================ */
  
 #vault {
-    background: #060810;
+    background: transparent;
     padding: 0;
     overflow: hidden;
   }

@@ -478,16 +478,6 @@ function initTopo() {
 
     ctx.clearRect(0, 0, W, H);
 
-    // Radial gradient background — shifts toward the cursor
-    const gradient = ctx.createRadialGradient(
-      W * topoMouseX, H * topoMouseY, 0,
-      W * 0.5,        H * 0.5,        W * 0.8
-    );
-    gradient.addColorStop(0, 'rgba(20, 30, 48, 1)');
-    gradient.addColorStop(1, 'rgba(4, 6, 12, 1)');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, W, H);
-
     // Draw 38 horizontal noise curves
     for (let i = 0; i < 38; i++) {
       const baseY = (i / 38) * H;
