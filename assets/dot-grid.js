@@ -48,8 +48,8 @@
   }
 
   function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width  = vault.clientWidth  || window.innerWidth;
+    canvas.height = vault.clientHeight || window.innerHeight;
     buildDots();
   }
 
