@@ -2,38 +2,44 @@
    script.js — raigon-mmxi
    All JavaScript for the site lives here.
    Sections: Data → Navigation → Home Gallery →
-             Artwork Modal → Vault Symbols → Topographic Canvas
+             Artwork Modal → Vault Symbols → Collection Overlay →
+             Events → Form Validation → Bio Modal
 ============================================================ */
- 
- 
+
+
 /* ============================================================
    ARTWORK DATA
    Array of all artworks in the Carvão Digital series.
    Each entry: image path, title, series name, year.
 ============================================================ */
 const artworks = [
-    { src: "assets/images/hero/digital-charcoal-00001.jpg", title: "Triforce",  series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00002.jpg", title: "Bloom",     series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00003.jpg", title: "Intersect", series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00004.jpg", title: "Serpent",   series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00005.jpg", title: "Dissolve",  series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00006.jpg", title: "Collapse",  series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00007.jpg", title: "Drift",     series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00008.jpg", title: "Coil",      series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00009.jpg", title: "Monolith",  series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00010.jpg", title: "Knot",      series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00011.jpg", title: "Vessel",    series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00012.jpg", title: "Scale",     series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00013.jpg", title: "Presence",  series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00014.jpg", title: "Threshold", series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00015.jpg", title: "Mass",      series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00016.jpg", title: "Void",      series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00017.jpg", title: "Loop",      series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00018.jpg", title: "Strike",    series: "carvão digital", year: "2023" },
-    { src: "assets/images/hero/digital-charcoal-00019.jpg", title: "Torsion",   series: "carvão digital", year: "2023" },
-  ];
+  { src: "assets/images/hero/digital-charcoal-00001.jpg", title: "Triforce",  series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00002.jpg", title: "Bloom",     series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00003.jpg", title: "Intersect", series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00004.jpg", title: "Serpent",   series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00005.jpg", title: "Dissolve",  series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00006.jpg", title: "Collapse",  series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00007.jpg", title: "Drift",     series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00008.jpg", title: "Coil",      series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00009.jpg", title: "Monolith",  series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00010.jpg", title: "Knot",      series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00011.jpg", title: "Vessel",    series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00012.jpg", title: "Scale",     series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00013.jpg", title: "Presence",  series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00014.jpg", title: "Threshold", series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00015.jpg", title: "Mass",      series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00016.jpg", title: "Void",      series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00017.jpg", title: "Loop",      series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00018.jpg", title: "Strike",    series: "carvão digital", year: "2023" },
+  { src: "assets/images/hero/digital-charcoal-00019.jpg", title: "Torsion",   series: "carvão digital", year: "2023" },
+];
 
-  const pills = document.querySelectorAll('.pill');
+
+/* ============================================================
+   NAVIGATION
+   Switches active page section and triggers data loads.
+============================================================ */
+const pills = document.querySelectorAll('.pill');
 const pages = document.querySelectorAll('.page');
 
 pills.forEach(pill => {
@@ -54,121 +60,124 @@ pills.forEach(pill => {
 
 const globalLogo = document.querySelector('.global-logo');
 globalLogo.addEventListener('click', () => document.querySelector('.pill[data-page="home"]').click());
-globalLogo.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') document.querySelector('.pill[data-page="home"]').click(); });
+globalLogo.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    document.querySelector('.pill[data-page="home"]').click();
+  }
+});
 
-  
+
 /* ============================================================
    HOME GALLERY — PARALLAX BUILD
-   Builds two infinite-scroll rows of artwork cards.
+   Builds three infinite-scroll rows of artwork cards.
    Handles drag, wheel, mouse-edge scroll, and auto-scroll.
    Applies a depth-of-field focus effect on each frame.
 ============================================================ */
 window.addEventListener('load', () => {
-    const scene = document.querySelector('.home-scene');
-  
-    scene.innerHTML = '';
-  
-    const rows = [
-      artworks.slice(0, 10),
-      artworks.slice(5, 15),
-      artworks.slice(9, 19),
-    ];
+  const scene = document.querySelector('.home-scene');
 
-    const layers         = [];
-    const offsets        = [0, -285, -140];
-    const targetOffsets  = [0, -285, -140];
-    const parallaxSpeeds = [0.08, 0.05, 0.03];
-  
-    let mouseX = 0;
-    const W       = window.innerWidth;
-    const centerX = W / 2;
+  scene.innerHTML = '';
 
-    rows.forEach((row, ri) => {
-        const layer = document.createElement('div');
-        layer.className = `layer layer-${ri + 1}`;
-    
-        [...row, ...row, ...row].forEach((art, i) => {
-          const card = document.createElement('div');
-          card.className = 'artwork-card';
-    
-          if (i < row.length) {
-            card.style.animation = `fadeIn 0.8s ease ${(ri * 0.2 + i * 0.08).toFixed(2)}s both`;
-          }
-          card.style.opacity = '0.85';
-    
-          const img = document.createElement('img');
-          img.src     = art.src;
-          img.alt     = art.title;
-          img.loading = 'lazy';
-    
-          card.appendChild(img);
-          card.addEventListener('click', () => openArtwork(art));
-          layer.appendChild(card);
-        });
-    
-        scene.appendChild(layer);
-        layers.push(layer);
-      });
-    
-      const hint = document.createElement('div');
-      hint.className   = 'scroll-hint';
-      hint.textContent = '← arrasta para explorar →';
-      scene.appendChild(hint);
-    
-      const scrollBar   = document.createElement('div');
-      scrollBar.className = 'scroll-bar';
-    
-      const scrollThumb = document.createElement('div');
-      scrollThumb.className = 'scroll-thumb';
-    
-      scrollBar.appendChild(scrollThumb);
-      scene.appendChild(scrollBar);
+  const rows = [
+    artworks.slice(0, 10),
+    artworks.slice(5, 15),
+    artworks.slice(9, 19),
+  ];
 
-      // Mouse and drag controls for parallax gallery interaction
+  const layers         = [];
+  const offsets        = [0, -285, -140];
+  const targetOffsets  = [0, -285, -140];
+  const parallaxSpeeds = [0.08, 0.05, 0.03];
 
-      scene.addEventListener('mousemove', e => {
-        mouseX = (e.clientX - W / 2) / (W / 2);
-      });
-      scene.addEventListener('mouseleave', () => { mouseX = 0; });
-    
-      let isDragging  = false;
-      let dragStartX  = 0;
-      let dragOffsets = [0, -285];
-    
-      scene.addEventListener('mousedown', e => {
-        isDragging  = true;
-        dragStartX  = e.clientX;
-        dragOffsets = [...offsets];
-      });
-    
-      window.addEventListener('mouseup', () => { isDragging = false; });
-    
-      window.addEventListener('mousemove', e => {
-        if (!isDragging) { return; }
-        const dx = e.clientX - dragStartX;
-        layers.forEach((_, i) => {
-          targetOffsets[i] = dragOffsets[i] + dx * (1 - i * 0.15);
-        });
-      });
-    
-      scene.addEventListener('wheel', e => {
-        e.preventDefault();
-        const delta = e.deltaY || e.deltaX;
-        layers.forEach((_, i) => {
-          targetOffsets[i] -= delta * (1 - i * 0.15);
-        });
-      }, { passive: false });
+  let mouseX = 0;
+  const W = window.innerWidth;
 
+  rows.forEach((row, ri) => {
+    const layer = document.createElement('div');
+    layer.className = `layer layer-${ri + 1}`;
 
-      function wrapOffset(val, layerEl) {
+    [...row, ...row, ...row].forEach((art, i) => {
+      const card = document.createElement('div');
+      card.className = 'artwork-card';
+
+      if (i < row.length) {
+        card.style.animation = `fadeIn 0.8s ease ${(ri * 0.2 + i * 0.08).toFixed(2)}s both`;
+      }
+      card.style.opacity = '0.85';
+
+      const img = document.createElement('img');
+      img.src     = art.src;
+      img.alt     = art.title;
+      img.loading = 'lazy';
+
+      card.appendChild(img);
+      card.addEventListener('click', () => openArtwork(art));
+      layer.appendChild(card);
+    });
+
+    scene.appendChild(layer);
+    layers.push(layer);
+  });
+
+  const hint = document.createElement('div');
+  hint.className   = 'scroll-hint';
+  hint.textContent = '← arrasta para explorar →';
+  scene.appendChild(hint);
+
+  const scrollBar   = document.createElement('div');
+  scrollBar.className = 'scroll-bar';
+
+  const scrollThumb = document.createElement('div');
+  scrollThumb.className = 'scroll-thumb';
+
+  scrollBar.appendChild(scrollThumb);
+  scene.appendChild(scrollBar);
+
+  /* Mouse and drag controls for parallax gallery interaction */
+
+  scene.addEventListener('mousemove', e => {
+    mouseX = (e.clientX - W / 2) / (W / 2);
+  });
+  scene.addEventListener('mouseleave', () => { mouseX = 0; });
+
+  let isDragging  = false;
+  let dragStartX  = 0;
+  let dragOffsets = [0, -285];
+
+  scene.addEventListener('mousedown', e => {
+    isDragging  = true;
+    dragStartX  = e.clientX;
+    dragOffsets = [...offsets];
+  });
+
+  window.addEventListener('mouseup', () => { isDragging = false; });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) { return; }
+    const dx = e.clientX - dragStartX;
+    layers.forEach((_, i) => {
+      targetOffsets[i] = dragOffsets[i] + dx * (1 - i * 0.15);
+    });
+  });
+
+  scene.addEventListener('wheel', e => {
+    e.preventDefault();
+    const delta = e.deltaY || e.deltaX;
+    layers.forEach((_, i) => {
+      targetOffsets[i] -= delta * (1 - i * 0.15);
+    });
+  }, { passive: false });
+
+  /* Wrap offset to keep infinite scroll seamless */
+  function wrapOffset(val, layerEl) {
     const period = layerEl.scrollWidth / 3;
     if (val < -(period * 2)) { return val + period; }
     if (val > 0)              { return val - period; }
     return val;
   }
 
+  /* Main animation loop — auto-scroll, edge-scroll, and parallax */
   function animate() {
-
     layers.forEach((_, i) => {
       targetOffsets[i] -= 0.4;
     });
@@ -208,6 +217,7 @@ window.addEventListener('load', () => {
   animate();
 });
 
+
 /* ============================================================
    ARTWORK MODAL
    Structure lives in index.html. This section only handles
@@ -227,23 +237,25 @@ const modalInquireName = document.getElementById('modal-inquire-name');
 const modalInquireMsg  = document.getElementById('inquire-message-input');
 const modalInquireForm = document.getElementById('modal-inquire-form');
 
+/* Open the modal for the artwork that matches the given object */
 function openArtwork(art) {
   showModal(artworks.findIndex(a => a.src === art.src));
 }
 
+/* Populate and reveal the modal for the artwork at index idx */
 function showModal(idx) {
   currentIdx = idx;
   const art  = artworks[idx];
 
-  modalImage.src             = art.src;
-  modalImage.alt             = art.title;
-  modalSeriesEl.textContent  = art.series;
-  modalTitleEl.textContent   = art.title;
-  modalYearEl.textContent    = art.year;
-  modalDescEl.textContent    = 'Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.';
-  modalCounterEl.textContent = `${idx + 1} / ${artworks.length}`;
+  modalImage.src               = art.src;
+  modalImage.alt               = art.title;
+  modalSeriesEl.textContent    = art.series;
+  modalTitleEl.textContent     = art.title;
+  modalYearEl.textContent      = art.year;
+  modalDescEl.textContent      = 'Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.';
+  modalCounterEl.textContent   = `${idx + 1} / ${artworks.length}`;
   modalInquireName.textContent = art.title;
-  modalInquireMsg.value = `Hello, I'm interested in "${art.title}" (${art.year}) from the ${art.series} series. Could you please provide more information about this work, including availability and pricing?`;
+  modalInquireMsg.value        = `Hello, I'm interested in "${art.title}" (${art.year}) from the ${art.series} series. Could you please provide more information about this work, including availability and pricing?`;
 
   modalSide.classList.remove('inquire-open');
   resetInquirePanel();
@@ -251,42 +263,39 @@ function showModal(idx) {
   artworkModal.setAttribute('aria-hidden', 'false');
 }
 
+/* Hide the artwork modal */
 function closeModal() {
   artworkModal.classList.remove('open');
   artworkModal.setAttribute('aria-hidden', 'true');
 }
 
+/* Keyboard navigation: arrows to browse, Escape to close */
 function onModalKey(e) {
-  if (!artworkModal.classList.contains('open')) return;
-  if (e.key === 'ArrowLeft')  showModal((currentIdx - 1 + artworks.length) % artworks.length);
-  if (e.key === 'ArrowRight') showModal((currentIdx + 1) % artworks.length);
-  if (e.key === 'Escape')     closeModal();
+  if (!artworkModal.classList.contains('open')) { return; }
+  if (e.key === 'ArrowLeft')  { showModal((currentIdx - 1 + artworks.length) % artworks.length); }
+  if (e.key === 'ArrowRight') { showModal((currentIdx + 1) % artworks.length); }
+  if (e.key === 'Escape')     { closeModal(); }
 }
 
 document.getElementById('modal-close').addEventListener('click', closeModal);
 document.getElementById('modal-prev').addEventListener('click', () => showModal((currentIdx - 1 + artworks.length) % artworks.length));
 document.getElementById('modal-next').addEventListener('click', () => showModal((currentIdx + 1) % artworks.length));
-artworkModal.addEventListener('click', e => { if (e.target === artworkModal) closeModal(); });
+artworkModal.addEventListener('click', e => { if (e.target === artworkModal) { closeModal(); } });
 document.getElementById('modal-inquire-link').addEventListener('click', () => modalSide.classList.add('inquire-open'));
 document.getElementById('modal-inquire-back').addEventListener('click', () => {
   modalSide.classList.remove('inquire-open');
   resetInquirePanel();
 });
-/* submit handled by the FORM VALIDATION section below */
 document.addEventListener('keydown', onModalKey);
-  
+
+
 /* ============================================================
    VAULT — COLLECTION SYMBOLS
-   Loads symbol images and handles collection button clicks.
-   Uses async/await to fetch collection data from JSON.
-   Shows user feedback instead of alert().
+   Shows user-facing feedback while collection data loads.
 ============================================================ */
 
-window.addEventListener('load', () => {
-  document.getElementById('img-pyramid').src = 'assets/images/hero/digital-charcoal-00011.jpg';
-  document.getElementById('img-emotion').src = 'assets/images/e-motion/e-motion-00002.jpg';
-});
-
+/* Display a status message in the vault feedback region.
+   Pass isError = true to render in the error colour. */
 function showVaultFeedback(message, isError = false) {
   const feedback = document.getElementById('vault-feedback');
   if (!feedback) { return; }
@@ -295,6 +304,7 @@ function showVaultFeedback(message, isError = false) {
     ? 'rgba(220, 100, 80, 0.7)'
     : 'rgba(232, 228, 220, 0.4)';
 }
+
 
 /* ============================================================
    COLLECTION OVERLAY
@@ -311,7 +321,7 @@ function buildCollectionOverlay(collection) {
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-label', collection.title);
 
-  // Header: title · count · close button
+  /* Header: title · work count · close button */
   const header  = document.createElement('div');
   header.className = 'collection-overlay-header';
 
@@ -332,13 +342,16 @@ function buildCollectionOverlay(collection) {
   header.appendChild(countEl);
   header.appendChild(closeBtn);
 
-  // Grid: one card per work
+  /* Grid: one card per work */
   const grid = document.createElement('div');
   grid.className = 'collection-overlay-grid';
 
   collection.works.forEach(work => {
     const card = document.createElement('div');
     card.className = 'collection-card';
+
+    /* Mark sold works with a CSS class for styling */
+    if (work.sold) { card.classList.add('collection-card--sold'); }
 
     const img = document.createElement('img');
     img.className = 'collection-card-img';
@@ -350,6 +363,14 @@ function buildCollectionOverlay(collection) {
     label.className   = 'collection-card-title';
     label.textContent = work.title;
 
+    /* Sold badge — only rendered when the work.sold flag is true */
+    if (work.sold) {
+      const badge = document.createElement('div');
+      badge.className   = 'collection-card-sold';
+      badge.textContent = 'Sold';
+      card.appendChild(badge);
+    }
+
     card.appendChild(img);
     card.appendChild(label);
     grid.appendChild(card);
@@ -358,7 +379,7 @@ function buildCollectionOverlay(collection) {
   overlay.appendChild(header);
   overlay.appendChild(grid);
 
-  // Close handlers: button, backdrop click, Escape key
+  /* Close handlers: button, backdrop click, Escape key */
   function closeOverlay() {
     overlay.classList.remove('open');
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
@@ -366,16 +387,20 @@ function buildCollectionOverlay(collection) {
   }
 
   function onKey(e) {
-    if (e.key === 'Escape') closeOverlay();
+    if (e.key === 'Escape') { closeOverlay(); }
   }
 
   closeBtn.addEventListener('click', closeOverlay);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeOverlay(); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) { closeOverlay(); } });
   document.addEventListener('keydown', onKey);
 
   return overlay;
 }
 
+/* Fetch collection data from JSON, build overlay, and open it.
+   Shows "loading..." while the request is in flight.
+   On success: clears feedback and opens the overlay.
+   On error: shows an error message that stays visible for the user to read. */
 async function loadCollection(collectionName) {
   showVaultFeedback('loading...');
 
@@ -396,19 +421,22 @@ async function loadCollection(collectionName) {
     const overlay = buildCollectionOverlay(collection);
     document.body.appendChild(overlay);
 
-    // Double rAF ensures the browser paints before the open class triggers the transition
+    /* Double rAF ensures the browser paints before the open class triggers the transition */
     requestAnimationFrame(() => {
       requestAnimationFrame(() => overlay.classList.add('open'));
     });
 
+    /* Clear the "loading..." message only after a successful open */
+    showVaultFeedback('');
+
   } catch (error) {
+    /* Error message stays visible — no finally block clears it */
     showVaultFeedback('unable to load collection. please try again.', true);
     console.error('Collection fetch failed:', error);
-  } finally {
-    showVaultFeedback('');
   }
 }
 
+/* Wire each collection button to its fetch call */
 document.querySelectorAll('.sym-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     loadCollection(btn.dataset.collection);
@@ -476,16 +504,17 @@ function buildEventBlock(event) {
   return block;
 }
 
-/* Guard — events are loaded once per session. */
+/* Guard — events are loaded once per session */
 let eventsLoaded = false;
 
+/* Fetch events, render each block, and handle loading/error states. */
 async function loadEvents() {
   if (eventsLoaded) { return; }
 
   const list = document.getElementById('events-list');
   if (!list)  { return; }
 
-  // Show loading indicator
+  /* Show loading indicator while the request is in flight */
   list.innerHTML = '';
   list.appendChild(cloneTpl('events-loading-tpl'));
 
@@ -512,11 +541,12 @@ async function loadEvents() {
     console.error('Events fetch failed:', error);
 
   } finally {
-    // Remove any residual loading indicator
+    /* Remove any residual loading indicator left after an error */
     const residual = list.querySelector('.events-loading');
     if (residual) { residual.remove(); }
   }
 }
+
 
 /* ============================================================
    FORM VALIDATION
@@ -528,7 +558,8 @@ async function loadEvents() {
    Design:
    - validateField()        — runs rules against one field, renders/clears error
    - attachLiveValidation() — wires input events so errors clear as user types
-   - showSuccess()          — injects a confirmation message, resets the form
+   - showContactSuccess()   — opens confirmation overlay and resets the form
+   - showInquireSuccess()   — transitions the inquire panel to its success state
    No alert(), no console.log(), no external libraries.
 ============================================================ */
 
@@ -608,7 +639,7 @@ function resetInquirePanel() {
   document.getElementById('modal-inquire-success').setAttribute('aria-hidden', 'true');
 }
 
-/* ── Arquive contact form ───────────────────────────────────────────── */
+/* ── Arquive contact form ─────────────────────────────────────────── */
 (function () {
   const form = document.querySelector('.contact-form');
   if (!form) { return; }
@@ -622,8 +653,8 @@ function resetInquirePanel() {
     { test: v => v.length > 0, message: 'Name is required.' },
   ];
   const emailRules = [
-    { test: v => v.length > 0,           message: 'Email is required.' },
-    { test: v => EMAIL_REGEX.test(v),     message: 'Please enter a valid email address.' },
+    { test: v => v.length > 0,       message: 'Email is required.' },
+    { test: v => EMAIL_REGEX.test(v), message: 'Please enter a valid email address.' },
   ];
   const phoneRules = [
     { test: v => v.length > 0, message: 'Phone number is required.' },
@@ -632,7 +663,7 @@ function resetInquirePanel() {
     { test: v => v.length > 0, message: 'Message is required.' },
   ];
 
-  // Clear errors as the user corrects each field
+  /* Clear errors as the user corrects each field */
   attachLiveValidation(cfName,    nameRules);
   attachLiveValidation(cfEmail,   emailRules);
   attachLiveValidation(cfPhone,   phoneRules);
@@ -641,7 +672,7 @@ function resetInquirePanel() {
   form.addEventListener('submit', e => {
     e.preventDefault();
 
-    // Validate all fields; collect results so every field is checked
+    /* Validate all fields — collect results so every field is checked at once */
     const isValid = [
       validateField(cfName,    nameRules),
       validateField(cfEmail,   emailRules),
@@ -649,12 +680,10 @@ function resetInquirePanel() {
       validateField(cfMessage, messageRules),
     ].every(Boolean);
 
-    if (isValid) {
-      showContactSuccess(form);
-    }
+    if (isValid) { showContactSuccess(form); }
   });
 
-  // Close overlay: × button, backdrop click, or Escape key
+  /* Close overlay: × button, backdrop click, or Escape key */
   const overlay  = document.getElementById('contact-success-overlay');
   const closeBtn = document.getElementById('contact-success-close');
 
@@ -664,13 +693,13 @@ function resetInquirePanel() {
   }
 
   closeBtn.addEventListener('click', closeContactSuccess);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closeContactSuccess(); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) { closeContactSuccess(); } });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) closeContactSuccess();
+    if (e.key === 'Escape' && overlay.classList.contains('open')) { closeContactSuccess(); }
   });
 })();
 
-/* ── Artwork modal inquire form ─────────────────────────────────────── */
+/* ── Artwork modal inquire form ───────────────────────────────────── */
 (function () {
   const form = document.getElementById('modal-inquire-form');
   if (!form) { return; }
@@ -683,8 +712,8 @@ function resetInquirePanel() {
     { test: v => v.length > 0, message: 'Name is required.' },
   ];
   const emailRules = [
-    { test: v => v.length > 0,           message: 'Email is required.' },
-    { test: v => EMAIL_REGEX.test(v),     message: 'Please enter a valid email address.' },
+    { test: v => v.length > 0,       message: 'Email is required.' },
+    { test: v => EMAIL_REGEX.test(v), message: 'Please enter a valid email address.' },
   ];
   const messageRules = [
     { test: v => v.length > 0, message: 'Message is required.' },
@@ -703,14 +732,14 @@ function resetInquirePanel() {
       validateField(inquireMsg,   messageRules),
     ].every(Boolean);
 
-    if (isValid) {
-      showInquireSuccess(form);
-    }
+    if (isValid) { showInquireSuccess(form); }
   });
 })();
 
+
 /* ============================================================
    BIO MODAL
+   Opens and closes the full bio overlay from the Arquive column.
 ============================================================ */
 (function () {
   const overlay  = document.getElementById('bio-modal-overlay');
@@ -732,21 +761,11 @@ function resetInquirePanel() {
   openBtn.addEventListener('click', openBioModal);
   closeBtn.addEventListener('click', closeBioModal);
 
-  overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) closeBioModal();
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) { closeBioModal(); }
   });
 
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) closeBioModal();
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) { closeBioModal(); }
   });
 })();
-
-
-
-
-
-
-
-
-
-  
