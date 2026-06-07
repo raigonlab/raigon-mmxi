@@ -1531,10 +1531,11 @@ nav {
 .collection-overlay-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
+  gap: 10px;
   overflow-y: auto;
   flex: 1;
   padding: 24px 6px;
+  padding-bottom: 40px;
 }
 
 /* Individual card */
