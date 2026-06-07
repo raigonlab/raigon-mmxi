@@ -38,44 +38,32 @@ const artworks = [
 /* ============================================================
    NAVIGATION
    Switches active page section and triggers data loads.
-   Hash routing: URL updates on nav so back/forward work natively.
 ============================================================ */
 const pills = document.querySelectorAll('.pill');
 const pages = document.querySelectorAll('.page');
 
-const VALID_PAGES = ['home', 'vault', 'arquive'];
-
-function switchSection(page) {
-  pages.forEach(p => p.classList.remove('active'));
-  pills.forEach(p => p.classList.remove('active'));
-
-  document.getElementById(page).classList.add('active');
-  document.querySelector(`.pill[data-page="${page}"]`).classList.add('active');
-  document.getElementById(page).scrollTop = 0;
-
-  if (page === 'arquive') { loadEvents(); }
-}
-
-function navigateTo(page) {
-  location.hash = page;
-}
-
 pills.forEach(pill => {
-  pill.addEventListener('click', () => navigateTo(pill.dataset.page));
-});
+  pill.addEventListener('click', () => {
+    const target = pill.dataset.page;
 
-window.addEventListener('hashchange', () => {
-  const page = location.hash.slice(1);
-  if (VALID_PAGES.includes(page)) { switchSection(page); }
-});
+    pages.forEach(p => p.classList.remove('active'));
+    pills.forEach(p => p.classList.remove('active'));
 
-const initialPage = location.hash.slice(1);
-switchSection(VALID_PAGES.includes(initialPage) ? initialPage : 'home');
+    document.getElementById(target).classList.add('active');
+    pill.classList.add('active');
+
+    document.getElementById(target).scrollTop = 0;
+
+    if (target === 'arquive') { loadEvents(); }
+  });
+});
 
 const globalLogo = document.querySelector('.global-logo');
-globalLogo.addEventListener('click', () => navigateTo('home'));
+globalLogo.addEventListener('click', () => document.querySelector('.pill[data-page="home"]').click());
 globalLogo.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') { navigateTo('home'); }
+  if (e.key === 'Enter' || e.key === ' ') {
+    document.querySelector('.pill[data-page="home"]').click();
+  }
 });
 
 
