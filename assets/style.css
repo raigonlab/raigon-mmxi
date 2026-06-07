@@ -1586,6 +1586,21 @@ nav {
 }
 
 /* ============================================================
+   COLLECTION GRID — RESPONSIVE BREAKPOINTS
+============================================================ */
+@media (max-width: 1024px) {
+  .collection-overlay-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .collection-overlay-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================================
    ARQUIVE — EVENTS
    Styles for dynamically rendered event blocks, type badge,
    "Add to Calendar" button, and loading / error states.
