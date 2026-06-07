@@ -1534,6 +1534,7 @@ nav {
   gap: 10px;
   overflow-y: auto;
   flex: 1;
+  align-content: start;
   padding: 24px;
   padding-bottom: 40px;
 }
