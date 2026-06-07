@@ -1530,20 +1530,21 @@ nav {
 /* Scrollable grid */
 .collection-overlay-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
   overflow-y: auto;
   flex: 1;
-  padding: 2px;
+  padding: 6px;
 }
 
 /* Individual card */
 .collection-card {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #060810;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .collection-card-img {
