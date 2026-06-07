@@ -1546,7 +1546,7 @@ nav {
   aspect-ratio: 1 / 1;
   background: #060810;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 20px;
 }
 
 .collection-card-img {
