@@ -420,10 +420,6 @@ function buildCollectionOverlay(collection) {
     img.alt       = work.title;
     img.loading   = 'lazy';
 
-    const label = document.createElement('div');
-    label.className   = 'collection-card-title';
-    label.textContent = work.title;
-
     /* Sold badge — only rendered when the work.sold flag is true */
     if (work.sold) {
       const badge = document.createElement('div');
@@ -433,7 +429,6 @@ function buildCollectionOverlay(collection) {
     }
 
     card.appendChild(img);
-    card.appendChild(label);
     grid.appendChild(card);
   });
 
