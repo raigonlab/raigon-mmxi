@@ -141,6 +141,8 @@ nav {
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
   }
 
   /* Active and hover states for navigation pills */
