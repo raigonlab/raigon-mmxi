@@ -542,7 +542,7 @@ async function loadCollection(collectionName) {
 }
 
 /* Wire each collection button to its fetch call */
-document.querySelectorAll('.sym-btn').forEach(btn => {
+document.querySelectorAll('.collection-card').forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.dataset.collection === 'e-motion') {
       openAccessGate();
