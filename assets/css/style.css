@@ -1559,6 +1559,7 @@ nav {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 30px;
   transition: transform 0.5s ease, opacity 0.3s ease;
 }
 
