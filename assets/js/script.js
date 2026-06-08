@@ -73,6 +73,12 @@ window.addEventListener('hashchange', () => {
     return;
   }
 
+  if (page.startsWith('vault/collection/modal/')) {
+    const idx = parseInt(page.split('/')[3], 10);
+    if (!isNaN(idx) && idx >= 0 && idx < modalWorks.length) { showModal(idx); }
+    return;
+  }
+
   if (page === 'home' && artworkModal.classList.contains('open')) {
     artworkModal.classList.remove('open');
     artworkModal.setAttribute('aria-hidden', 'true');
