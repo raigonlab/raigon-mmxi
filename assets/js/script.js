@@ -66,6 +66,22 @@ pills.forEach(pill => {
 
 window.addEventListener('hashchange', () => {
   const page = location.hash.slice(1);
+
+  if (page === 'home' && artworkModal.classList.contains('open')) {
+    artworkModal.classList.remove('open');
+    artworkModal.setAttribute('aria-hidden', 'true');
+    return;
+  }
+
+  if (page === 'vault') {
+    const openOverlay = document.querySelector('.collection-overlay.open');
+    if (openOverlay) {
+      openOverlay.classList.remove('open');
+      openOverlay.addEventListener('transitionend', () => openOverlay.remove(), { once: true });
+      return;
+    }
+  }
+
   if (VALID_PAGES.includes(page)) { switchSection(page); }
 });
 
@@ -273,12 +289,14 @@ function showModal(idx) {
   resetInquirePanel();
   artworkModal.classList.add('open');
   artworkModal.setAttribute('aria-hidden', 'false');
+  if (location.hash !== '#home/modal') { location.hash = 'home/modal'; }
 }
 
 /* Hide the artwork modal */
 function closeModal() {
   artworkModal.classList.remove('open');
   artworkModal.setAttribute('aria-hidden', 'true');
+  if (location.hash === '#home/modal') { location.hash = 'home'; }
 }
 
 /* Keyboard navigation: arrows to browse, Escape to close */
@@ -396,6 +414,7 @@ function buildCollectionOverlay(collection) {
     overlay.classList.remove('open');
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
     document.removeEventListener('keydown', onKey);
+    if (location.hash === '#vault/collection') { location.hash = 'vault'; }
   }
 
   function onKey(e) {
@@ -435,7 +454,10 @@ async function loadCollection(collectionName) {
 
     /* Double rAF ensures the browser paints before the open class triggers the transition */
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => overlay.classList.add('open'));
+      requestAnimationFrame(() => {
+        overlay.classList.add('open');
+        location.hash = 'vault/collection';
+      });
     });
 
     /* Clear the "loading..." message only after a successful open */
