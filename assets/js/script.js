@@ -54,6 +54,13 @@ function switchSection(page) {
   document.getElementById(page).scrollTop = 0;
 
   if (page === 'arquive') { loadEvents(); }
+
+  /* Close any open overlays and reset modal state when switching sections */
+  artworkModal.classList.remove('open');
+  artworkModal.setAttribute('aria-hidden', 'true');
+  modalWorks   = artworks;
+  modalContext = 'home';
+  document.querySelectorAll('.collection-overlay').forEach(o => o.remove());
 }
 
 function navigateTo(page) {
