@@ -1094,6 +1094,20 @@ nav {
   margin-bottom: 20px;
 }
 
+.bio-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bio-modal-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .bio-photo-placeholder {
   width: 100%;
   height: 100%;
