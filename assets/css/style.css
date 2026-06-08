@@ -402,7 +402,7 @@ nav {
   /* Drag-to-scroll hint label */
 .scroll-hint {
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Syne', sans-serif;
@@ -412,7 +412,7 @@ nav {
     color: rgba(232, 228, 220, 0.25);
     pointer-events: none;
     opacity: 0;
-    animation: hintFade 6s ease 2s forwards;
+    animation: hintFade 6s ease 1s forwards;
   }
 
   /* Scroll position indicator bar — draggable, pushes the gallery when scrubbed */
@@ -1663,7 +1663,7 @@ nav {
 
   .pill {
     padding: 12px 12px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 2.2px;
   }
