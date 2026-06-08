@@ -510,8 +510,75 @@ async function loadCollection(collectionName) {
 /* Wire each collection button to its fetch call */
 document.querySelectorAll('.sym-btn').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (btn.dataset.collection === 'e-motion') {
+      openAccessGate();
+      return;
+    }
     loadCollection(btn.dataset.collection);
   });
+});
+
+/* ============================================================
+   E-MOTION ACCESS GATE
+============================================================ */
+const ACCESS_CODE          = 'MMXXVI';
+const accessGate           = document.getElementById('access-gate');
+const accessGateInput      = document.getElementById('access-gate-input');
+const accessGateSubmit     = document.getElementById('access-gate-submit');
+const accessGateClose      = document.getElementById('access-gate-close');
+const accessGateError      = document.getElementById('access-gate-error');
+const accessGateInputState = document.getElementById('access-gate-input-state');
+const accessGateSuccess    = document.getElementById('access-gate-success');
+const accessGateEnter      = document.getElementById('access-gate-enter');
+
+function openAccessGate() {
+  accessGate.classList.add('open');
+  accessGate.setAttribute('aria-hidden', 'false');
+  accessGateInputState.classList.remove('hidden');
+  accessGateSuccess.classList.add('hidden');
+  accessGateSuccess.setAttribute('aria-hidden', 'true');
+  accessGateInput.value = '';
+  accessGateError.textContent = '';
+  setTimeout(() => accessGateInput.focus(), 50);
+}
+
+function closeAccessGate() {
+  accessGate.classList.remove('open');
+  accessGate.setAttribute('aria-hidden', 'true');
+}
+
+function submitAccessCode() {
+  const code = accessGateInput.value.trim().toUpperCase();
+  if (!code) {
+    accessGateError.textContent = 'please enter your access code';
+    return;
+  }
+  if (code !== ACCESS_CODE) {
+    accessGateError.textContent = 'access denied — invalid code';
+    accessGateInput.select();
+    return;
+  }
+  accessGateInputState.classList.add('hidden');
+  accessGateSuccess.classList.remove('hidden');
+  accessGateSuccess.setAttribute('aria-hidden', 'false');
+}
+
+accessGateSubmit.addEventListener('click', submitAccessCode);
+
+accessGateInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { submitAccessCode(); return; }
+  if (accessGateError.textContent) { accessGateError.textContent = ''; }
+});
+
+accessGateClose.addEventListener('click', closeAccessGate);
+
+accessGate.addEventListener('click', e => {
+  if (e.target === accessGate) { closeAccessGate(); }
+});
+
+accessGateEnter.addEventListener('click', () => {
+  closeAccessGate();
+  loadCollection('e-motion');
 });
 
 

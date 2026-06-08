@@ -98,6 +98,28 @@
   </div>
   <!-- End vault section -->
 
+  <!-- E-Motion access gate -->
+  <div class="access-gate" id="access-gate" aria-hidden="true" role="dialog" aria-modal="true" aria-label="E-Motion access">
+    <div class="access-gate-box">
+      <button class="access-gate-close" id="access-gate-close" aria-label="Close">&#x2715;</button>
+      <div class="access-gate-label">By invitation only</div>
+      <div class="access-gate-title">e-motion</div>
+
+      <div class="access-gate-input-state" id="access-gate-input-state">
+        <input class="access-gate-input" id="access-gate-input" type="text" placeholder="enter your access code" maxlength="20" autocomplete="off" spellcheck="false">
+        <div class="access-gate-error" id="access-gate-error" aria-live="polite"></div>
+        <button class="access-gate-submit" id="access-gate-submit">enter</button>
+      </div>
+
+      <div class="access-gate-success" id="access-gate-success" aria-hidden="true">
+        <p class="access-gate-msg">As above, so below.<br>As within, so without.</p>
+        <p class="access-gate-msg">Energy does not travel — it resonates.<br>These works are not depictions of motion.<br>They are the impression it leaves behind.</p>
+        <p class="access-gate-welcome">The hermit was always right.</p>
+        <button class="access-gate-enter" id="access-gate-enter">Enter the collection</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ============================================================
     ARQUIVE SECTION
     Three-column layout: contact · events · bio
