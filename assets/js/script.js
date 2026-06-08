@@ -65,7 +65,13 @@ pills.forEach(pill => {
 });
 
 window.addEventListener('hashchange', () => {
-  const page = location.hash.slice(1);
+  const page = location.hash.slice(1) || 'home';
+
+  if (page.startsWith('home/modal/')) {
+    const idx = parseInt(page.split('/')[2], 10);
+    if (!isNaN(idx) && idx >= 0 && idx < artworks.length) { showModal(idx); }
+    return;
+  }
 
   if (page === 'home' && artworkModal.classList.contains('open')) {
     artworkModal.classList.remove('open');
@@ -289,14 +295,15 @@ function showModal(idx) {
   resetInquirePanel();
   artworkModal.classList.add('open');
   artworkModal.setAttribute('aria-hidden', 'false');
-  if (location.hash !== '#home/modal') { location.hash = 'home/modal'; }
+  const expectedHash = `home/modal/${idx}`;
+  if (location.hash !== `#${expectedHash}`) { location.hash = expectedHash; }
 }
 
 /* Hide the artwork modal */
 function closeModal() {
   artworkModal.classList.remove('open');
   artworkModal.setAttribute('aria-hidden', 'true');
-  if (location.hash === '#home/modal') { location.hash = 'home'; }
+  if (location.hash.startsWith('#home/modal')) { location.hash = 'home'; }
 }
 
 /* Keyboard navigation: arrows to browse, Escape to close */
