@@ -9,80 +9,9 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syne:wght@400;500;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    body { overflow: hidden; }
-
-    .not-found {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 0;
-    }
-
-    /* Gallery row: three frames + plant side by side */
-    .gallery-wall {
-      display: flex;
-      align-items: flex-end;
-      gap: 28px;
-      margin-bottom: 44px;
-    }
-
-    /* Individual frame wrapper — carries the tilt */
-    .frame-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .frame-wrap:nth-child(1) { transform: rotate(-2deg)   translateY(-14px); }
-    .frame-wrap:nth-child(2) { transform: rotate( 0.8deg) translateY(0px);   }
-    .frame-wrap:nth-child(3) { transform: rotate(-1deg)   translateY(-8px);  }
-
-    /* Plant wrapper */
-    .plant-wrap {
-      transform: rotate(1.5deg) translateY(4px);
-      margin-left: 8px;
-    }
-
-    /* Frame SVG sizing */
-    .frame-svg  { width: 128px; color: rgba(232, 228, 220, 0.28); display: block; }
-    .plant-svg  { width: 68px;  color: rgba(232, 228, 220, 0.25); display: block; }
-
-    /* Label + button */
-    .not-found-label {
-      font-family: 'Syne', sans-serif;
-      font-size: 8px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: rgba(232, 228, 220, 0.25);
-      margin-bottom: 28px;
-    }
-
-    .not-found-home {
-      font-family: 'Syne', sans-serif;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(232, 228, 220, 0.4);
-      background: rgba(232, 228, 220, 0.05);
-      border: 1px solid rgba(232, 228, 220, 0.1);
-      border-radius: 100px;
-      padding: 11px 26px;
-      text-decoration: none;
-      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    }
-    .not-found-home:hover {
-      color: #7aa8d0;
-      border-color: rgba(122, 168, 208, 0.28);
-      background: rgba(122, 168, 208, 0.05);
-    }
-  </style>
 </head>
 
-<body>
+<body class="page-404">
 
   <!-- Logo — links back to home -->
   <a href="index.html" class="global-logo" aria-label="Go to Home">
