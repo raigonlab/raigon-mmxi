@@ -197,6 +197,11 @@ window.addEventListener('load', () => {
     barLastX    = e.clientX;
     scrollBar.classList.add('scroll-bar--dragging');
     scrollBar.setPointerCapture(e.pointerId);
+    e.stopPropagation();
+  });
+
+  scrollBar.addEventListener('mousedown', e => {
+    e.stopPropagation();
   });
 
   scrollBar.addEventListener('pointermove', e => {
