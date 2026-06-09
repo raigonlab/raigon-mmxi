@@ -1677,7 +1677,9 @@ nav {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 28px;
-  overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   flex: 1;
   min-height: 0;
   align-content: start;
