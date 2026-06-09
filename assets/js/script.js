@@ -324,6 +324,7 @@ const modalTitleEl     = document.getElementById('modal-title');
 const modalYearEl      = document.getElementById('modal-year');
 const modalDescEl      = document.getElementById('modal-description');
 const modalCounterEl   = document.getElementById('modal-counter');
+const modalCounterImg  = document.getElementById('modal-counter-img');
 const modalInquireName = document.getElementById('modal-inquire-name');
 const modalInquireMsg  = document.getElementById('inquire-message-input');
 const modalInquireForm = document.getElementById('modal-inquire-form');
@@ -345,6 +346,7 @@ function showModal(idx) {
   modalYearEl.textContent      = art.year    || '';
   modalDescEl.textContent      = 'Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.';
   modalCounterEl.textContent   = `${idx + 1} / ${modalWorks.length}`;
+  modalCounterImg.textContent  = `${idx + 1} / ${modalWorks.length}`;
   modalInquireName.textContent = art.title;
   modalInquireMsg.value        = `Hello, I'm interested in "${art.title}"${art.year ? ` (${art.year})` : ''}${art.series ? ` from the ${art.series} series` : ''}. Could you please provide more information about this work, including availability and pricing?`;
 
@@ -391,6 +393,17 @@ document.getElementById('modal-inquire-back').addEventListener('click', () => {
   resetInquirePanel();
 });
 document.addEventListener('keydown', onModalKey);
+
+/* Swipe navigation on the modal image (mobile) */
+let swipeStartX = 0;
+artworkModal.addEventListener('pointerdown', e => { swipeStartX = e.clientX; });
+artworkModal.addEventListener('pointerup', e => {
+  if (e.target.closest('input, textarea, button, form')) { return; }
+  const dx = e.clientX - swipeStartX;
+  if (Math.abs(dx) < 50) { return; }
+  if (dx < 0) { showModal((currentIdx + 1) % modalWorks.length); }
+  else        { showModal((currentIdx - 1 + modalWorks.length) % modalWorks.length); }
+});
 
 
 /* ============================================================
