@@ -637,12 +637,20 @@ nav {
     font-family: 'Syne', sans-serif;
   }
 
-  .modal-series {
+  .modal-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 10px;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: rgba(196, 98, 45, 0.65);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+  }
+
+  .modal-meta-sep {
+    opacity: 0.4;
+    letter-spacing: 0;
   }
 
   .modal-title {
@@ -656,10 +664,9 @@ nav {
   }
 
   .modal-year {
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: rgba(196, 98, 45, 0.5);
-    margin-bottom: 24px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(196, 98, 45, 0.65);
   }
 
   .modal-divider {
