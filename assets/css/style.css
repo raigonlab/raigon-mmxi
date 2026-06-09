@@ -1830,6 +1830,7 @@ nav {
 
   .modal-side {
     width: 100%;
+    overflow: visible;
   }
 
   /* Hide back button on mobile — X button handles going back */
@@ -1842,20 +1843,22 @@ nav {
     transform: none;
   }
 
-  /* Overlay both panels — info sits in normal flow, inquire is absolute on top */
+  /* Grid overlap — both panels share one cell, container sizes to the taller one */
   .modal-panels {
-    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
   }
 
   .modal-info-panel {
+    grid-area: 1 / 1;
     width: 100%;
     transition: opacity 0.35s ease;
   }
 
   .modal-inquire-panel {
-    position: absolute;
-    top: 0;
-    left: 0;
+    grid-area: 1 / 1;
+    position: static;
     width: 100%;
     opacity: 0;
     pointer-events: none;
