@@ -595,6 +595,7 @@ nav {
     transform: scale(1);
   }
 
+
   /* Side panel container — clips the sliding panels */
 .modal-side {
     width: 220px;
@@ -1757,14 +1758,54 @@ nav {
   .artwork-modal {
     flex-direction: column;
     justify-content: flex-start;
-    gap: 20px;
-    padding: 56px 20px 80px;
+    align-items: center;
+    gap: 14px;
+    padding: 110px 20px 80px;
     overflow-y: auto;
   }
 
+  /* Close button — full opacity and larger tap target on mobile */
+  .modal-close {
+    opacity: 1;
+    color: rgba(232, 228, 220, 0.85);
+    font-size: 20px;
+    top: 20px;
+    right: 24px;
+  }
+
+  /* Hide left/right arrows — replaced by dots */
+  .modal-chevron {
+    display: none;
+  }
+
+  /* Image: square-ish format to avoid tall portrait eating all the screen */
   .modal-image {
+    width: 85vw;
     max-width: 85vw;
-    max-height: 42vh;
+    height: 85vw;
+    max-height: 85vw;
+    object-fit: contain;
+  }
+
+  /* Counter — larger and centred on mobile */
+  .modal-counter {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(232, 228, 220, 0.5);
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  /* INQUIRE as a real button on mobile */
+  .modal-inquire-link {
+    margin-top: 20px;
+    border: 1px solid rgba(232, 228, 220, 0.28);
+    border-radius: 100px;
+    padding: 14px 0;
+    width: 100%;
+    text-align: center;
+    color: rgba(232, 228, 220, 0.85);
+    font-size: 9px;
   }
 
   .modal-side {
