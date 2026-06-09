@@ -1560,6 +1560,8 @@ nav {
   display: none;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
 .modal-inquire-panel.inquiry-sent .modal-inquire-heading,
@@ -1868,6 +1870,7 @@ nav {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s ease;
+    justify-content: flex-start;
   }
 
   .modal-side.inquire-open .modal-info-panel {
