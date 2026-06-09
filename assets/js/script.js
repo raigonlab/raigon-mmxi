@@ -383,7 +383,14 @@ function onModalKey(e) {
   if (e.key === 'Escape')     { closeModal(); }
 }
 
-document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-close').addEventListener('click', () => {
+  if (modalSide.classList.contains('inquire-open')) {
+    modalSide.classList.remove('inquire-open');
+    resetInquirePanel();
+  } else {
+    closeModal();
+  }
+});
 document.getElementById('modal-prev').addEventListener('click', () => showModal((currentIdx - 1 + modalWorks.length) % modalWorks.length));
 document.getElementById('modal-next').addEventListener('click', () => showModal((currentIdx + 1) % modalWorks.length));
 artworkModal.addEventListener('click', e => { if (e.target === artworkModal) { closeModal(); } });

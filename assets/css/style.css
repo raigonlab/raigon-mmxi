@@ -624,6 +624,7 @@ nav {
     flex-direction: column;
     justify-content: center;
     font-family: 'Syne', sans-serif;
+    padding-top: 6px
   }
 
   /* Inquire panel */
@@ -1762,7 +1763,7 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     padding: 110px 20px 80px;
     overflow-y: auto;
   }
@@ -1820,28 +1821,34 @@ nav {
     width: 100%;
   }
 
+  /* Hide back button on mobile — X button handles going back */
+  .modal-inquire-back {
+    display: none;
+  }
+
   /* Cancel the desktop horizontal slide on mobile */
   .modal-side.inquire-open .modal-panels {
     transform: none;
   }
 
-  /* Overlay both panels in the same grid cell — cross-fade between them */
+  /* Overlay both panels — info sits in normal flow, inquire is absolute on top */
   .modal-panels {
-    display: grid;
-    grid-template-columns: 1fr;
+    position: relative;
   }
 
-  .modal-info-panel,
-  .modal-inquire-panel {
-    grid-row: 1;
-    grid-column: 1;
+  .modal-info-panel {
     width: 100%;
     transition: opacity 0.35s ease;
   }
 
   .modal-inquire-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.35s ease;
   }
 
   .modal-side.inquire-open .modal-info-panel {
