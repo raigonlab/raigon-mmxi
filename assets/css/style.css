@@ -1759,6 +1759,10 @@ nav {
     grid-template-columns: 1fr;
   }
 
+  .home-scene {
+    touch-action: none;
+  }
+
   .artwork-modal {
     flex-direction: column;
     justify-content: flex-start;

@@ -161,7 +161,7 @@ window.addEventListener('load', () => {
       img.loading = 'lazy';
 
       card.appendChild(img);
-      card.addEventListener('click', () => openArtwork(art));
+      card.addEventListener('click', () => { if (!dragMoved) { openArtwork(art); } });
       layer.appendChild(card);
     });
 
@@ -222,28 +222,33 @@ window.addEventListener('load', () => {
   scrollBar.addEventListener('pointerup', endBarDrag);
   scrollBar.addEventListener('pointercancel', endBarDrag);
 
-  /* Mouse and drag controls for parallax gallery interaction */
-
+  /* Mouse edge-scroll (desktop only) */
   scene.addEventListener('mousemove', e => {
     mouseX = (e.clientX - W / 2) / (W / 2);
   });
   scene.addEventListener('mouseleave', () => { mouseX = 0; });
 
+  /* Drag-to-scroll — pointer events work for both mouse and touch */
   let isDragging  = false;
   let dragStartX  = 0;
   let dragOffsets = [0, -285];
+  let dragMoved   = false;
 
-  scene.addEventListener('mousedown', e => {
+  scene.addEventListener('pointerdown', e => {
+    if (e.target.closest('.scroll-bar')) { return; }
     isDragging  = true;
+    dragMoved   = false;
     dragStartX  = e.clientX;
     dragOffsets = [...offsets];
   });
 
-  window.addEventListener('mouseup', () => { isDragging = false; });
+  window.addEventListener('pointerup', () => { isDragging = false; });
 
-  window.addEventListener('mousemove', e => {
+  window.addEventListener('pointermove', e => {
     if (!isDragging) { return; }
     const dx = e.clientX - dragStartX;
+    if (Math.abs(dx) < 8) { return; }
+    dragMoved = true;
     layers.forEach((_, i) => {
       targetOffsets[i] = dragOffsets[i] + dx * (1 - i * 0.15);
     });
