@@ -6,6 +6,38 @@
 ============================================================ */
 
 
+/* ── GLOBAL DRIFTING BACKGROUND ── */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+.site-bg-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.46;
+  animation: bgDrift 50s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes bgDrift {
+  0%   { transform: translate(-50%, -50%) scale(1.0)  translate(0%,   0%);   }
+  20%  { transform: translate(-50%, -50%) scale(1.06) translate(-6%,  -3%);  }
+  40%  { transform: translate(-50%, -50%) scale(1.04) translate(4%,   -5%);  }
+  60%  { transform: translate(-50%, -50%) scale(1.08) translate(6%,   2%);   }
+  80%  { transform: translate(-50%, -50%) scale(1.03) translate(-3%,  5%);   }
+  100% { transform: translate(-50%, -50%) scale(1.0)  translate(0%,   0%);   }
+}
+
 /* ── DOT-GRID CANVAS ── */
 /* Absolute inside #vault, behind vault-scene (which holds the topo canvas) */
 #dot-grid {
@@ -43,7 +75,7 @@
 html,
 body {
   height: 100%;
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   font-family: 'Syne', sans-serif;
   overflow: hidden;
@@ -177,7 +209,7 @@ nav {
 ============================================================ */
  
 #home {
-    background: #05040a url('../images/Untitled_Artwork_244.jpg') center center / cover no-repeat;
+    background: transparent;
     overflow: hidden;
   }
 
