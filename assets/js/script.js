@@ -197,6 +197,7 @@ window.addEventListener('load', () => {
 
   scrollBar.addEventListener('mousedown', e => {
     e.stopPropagation();
+    dragMoved = true;
   });
 
   scrollBar.addEventListener('pointermove', e => {
@@ -231,7 +232,7 @@ window.addEventListener('load', () => {
   /* Drag-to-scroll — pointer events work for both mouse and touch */
   let isDragging  = false;
   let dragStartX  = 0;
-  let dragOffsets = [0, -285];
+  let dragOffsets = [0, -285, -140];
   let dragMoved   = false;
 
   scene.addEventListener('pointerdown', e => {
