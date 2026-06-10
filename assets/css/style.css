@@ -880,6 +880,7 @@ nav {
     flex-direction: column;
     width: 100%;
     max-width: 360px;
+    aspect-ratio: 3 / 4;
     cursor: pointer;
     background: rgba(232, 228, 220, 0.03);
     border: 1px solid rgba(232, 228, 220, 0.1);
@@ -900,6 +901,7 @@ nav {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
+    flex-shrink: 0;
     background: rgba(0, 0, 0, 0.5);
   }
 
@@ -930,6 +932,7 @@ nav {
   /* Footer — solid block, meta on the left, action pill on the right */
 .collection-card-footer {
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
@@ -1927,6 +1930,14 @@ nav {
 
   .vault-symbols {
     padding: 160px 24px 120px;
+  }
+
+  .collection-card-footer {
+    padding: 14px 18px;
+  }
+
+  .collection-card-title {
+    margin-bottom: 4px;
   }
 
   .collection-card-open {
