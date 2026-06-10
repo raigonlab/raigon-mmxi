@@ -836,7 +836,7 @@ nav {
   .vault-scene {
     position: relative;
     width: 100%;
-    height: 100dvh;
+    height: calc(100dvh - 60px);
     overflow: hidden;
   }
 
@@ -899,15 +899,17 @@ nav {
     background: rgba(232, 228, 220, 0.05);
   }
 
-  /* Image frame */
+  /* Image frame — padding-bottom hack forces a square regardless of flex sizing */
 .collection-card-frame {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1;
+    padding-bottom: 100%;
     background: rgba(0, 0, 0, 0.5);
   }
 
 .collection-card-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -925,7 +927,7 @@ nav {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 22px;
+    font-size: 18px;
     line-height: 1.2;
     color: rgba(232, 228, 220, 0.95);
     margin-bottom: 6px;
@@ -1933,8 +1935,13 @@ nav {
     padding: 160px 24px 120px;
   }
 
+  .collection-card {
+    width: 85%;
+  }
+
   .collection-card-footer {
     padding: 14px 18px;
+    gap: 12px;
   }
 
   .collection-card-title {
@@ -1943,6 +1950,7 @@ nav {
 
   .collection-card-open {
     font-size: 12px;
+    padding: 10px 20px;
   }
 
   .collection-overlay-grid {

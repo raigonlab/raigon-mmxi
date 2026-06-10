@@ -591,6 +591,60 @@ document.querySelectorAll('.collection-card').forEach(btn => {
   });
 });
 
+/* Scroll bar — same draggable indicator style as the home gallery,
+   scrubbing it scrolls the horizontal collection row directly */
+const vaultSymbols   = document.querySelector('.vault-symbols');
+const vaultScrollBar = document.getElementById('vault-scroll-bar');
+const vaultThumb     = vaultScrollBar?.querySelector('.scroll-thumb');
+
+if (vaultSymbols && vaultScrollBar && vaultThumb) {
+  const VAULT_TRACK_WIDTH = 200;
+
+  function updateVaultThumb() {
+    const maxScroll = vaultSymbols.scrollWidth - vaultSymbols.clientWidth;
+    const ratio     = Math.min(1, vaultSymbols.clientWidth / vaultSymbols.scrollWidth);
+    const thumbW    = Math.max(VAULT_TRACK_WIDTH * ratio, 30);
+    const progress  = maxScroll > 0 ? vaultSymbols.scrollLeft / maxScroll : 0;
+
+    vaultThumb.style.width = thumbW.toFixed(1) + 'px';
+    vaultThumb.style.left  = (progress * (VAULT_TRACK_WIDTH - thumbW)).toFixed(1) + 'px';
+  }
+
+  vaultSymbols.addEventListener('scroll', () => requestAnimationFrame(updateVaultThumb));
+  window.addEventListener('resize', updateVaultThumb);
+  updateVaultThumb();
+
+  /* Drag the bar to scrub the collection row left/right */
+  let vaultBarDragging = false;
+  let vaultBarLastX    = 0;
+
+  vaultScrollBar.addEventListener('pointerdown', e => {
+    vaultBarDragging = true;
+    vaultBarLastX    = e.clientX;
+    vaultScrollBar.classList.add('scroll-bar--dragging');
+    vaultScrollBar.setPointerCapture(e.pointerId);
+  });
+
+  vaultScrollBar.addEventListener('pointermove', e => {
+    if (!vaultBarDragging) { return; }
+    const dx = e.clientX - vaultBarLastX;
+    vaultBarLastX = e.clientX;
+
+    const maxScroll = vaultSymbols.scrollWidth - vaultSymbols.clientWidth;
+    vaultSymbols.scrollLeft += dx * (maxScroll / VAULT_TRACK_WIDTH);
+  });
+
+  function endVaultBarDrag(e) {
+    if (!vaultBarDragging) { return; }
+    vaultBarDragging = false;
+    vaultScrollBar.classList.remove('scroll-bar--dragging');
+    vaultScrollBar.releasePointerCapture(e.pointerId);
+  }
+
+  vaultScrollBar.addEventListener('pointerup', endVaultBarDrag);
+  vaultScrollBar.addEventListener('pointercancel', endVaultBarDrag);
+}
+
 /* ============================================================
    E-MOTION ACCESS GATE
 ============================================================ */
