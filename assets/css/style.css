@@ -873,6 +873,12 @@ nav {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+.vault-symbols::-webkit-scrollbar {
+    display: none;
   }
 
   /* Outer rounded card — image frame + footer info */
