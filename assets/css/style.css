@@ -672,7 +672,7 @@ nav {
   .modal-divider {
     width: 32px;
     height: 1px;
-    background: rgba(196, 98, 45, 0.25);
+    background: rgba(196, 98, 45, 0.8);
     margin-bottom: 24px;
   }
 
@@ -1834,14 +1834,14 @@ nav {
     font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.45);
+    color: rgba(232, 228, 220, 0.9);
     text-align: center;
   }
 
   /* INQUIRE as a real button on mobile */
   .modal-inquire-link {
     margin-top: 20px;
-    border: 1px solid rgba(232, 228, 220, 0.28);
+    border: 1px solid rgba(232, 228, 220, 0.8);
     border-radius: 100px;
     padding: 14px 0;
     width: 100%;

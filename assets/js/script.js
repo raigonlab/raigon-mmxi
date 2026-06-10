@@ -353,7 +353,7 @@ function showModal(idx) {
   modalYearEl.textContent      = art.year    || '';
   modalDescEl.textContent      = 'Carvão digital sobre superfície. Exploração da forma através da sobreposição e dissolução do traço.';
   modalCounterEl.textContent   = `${idx + 1} / ${modalWorks.length}`;
-  modalCounterImg.textContent  = `${idx + 1} / ${modalWorks.length}`;
+  modalCounterImg.textContent  = `‹ ${idx + 1} / ${modalWorks.length} ›`;
   modalInquireName.textContent = art.title;
   modalInquireMsg.value        = `Hello, I'm interested in "${art.title}"${art.year ? ` (${art.year})` : ''}${art.series ? ` from the ${art.series} series` : ''}. Could you please provide more information about this work, including availability and pricing?`;
 
