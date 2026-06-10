@@ -479,15 +479,15 @@ function buildCollectionOverlay(collection) {
 
   collection.works.forEach((work, workIdx) => {
     const card = document.createElement('div');
-    card.className = 'collection-card';
+    card.className = 'collection-overlay-card';
 
     /* Mark sold works with a CSS class for styling */
-    if (work.sold) { card.classList.add('collection-card--sold'); }
+    if (work.sold) { card.classList.add('collection-overlay-card--sold'); }
 
     card.addEventListener('click', () => openCollectionWork(collection.works, workIdx));
 
     const img = document.createElement('img');
-    img.className = 'collection-card-img';
+    img.className = 'collection-overlay-card-img';
     img.alt       = work.title;
     img.loading   = 'lazy';
 
@@ -497,7 +497,7 @@ function buildCollectionOverlay(collection) {
        the load listener attaches, so check both. */
     function applyZoomIfSquare() {
       if (img.naturalWidth === img.naturalHeight) {
-        img.classList.add('collection-card-img--zoom');
+        img.classList.add('collection-overlay-card-img--zoom');
       }
     }
     img.addEventListener('load', applyZoomIfSquare);

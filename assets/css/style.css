@@ -884,8 +884,7 @@ nav {
     background: rgba(232, 228, 220, 0.03);
     border: 1px solid rgba(232, 228, 220, 0.1);
     border-radius: 24px;
-    padding: 10px;
-    gap: 16px;
+    overflow: hidden;
     text-align: left;
     transition: transform 0.4s ease, border-color 0.3s ease, background 0.3s ease;
   }
@@ -896,16 +895,13 @@ nav {
     background: rgba(232, 228, 220, 0.05);
   }
 
-  /* Rounded image frame with the collection title overlaid */
+  /* Image frame */
 .collection-card-frame {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 5;
-    border-radius: 16px;
-    overflow: hidden;
+    aspect-ratio: 1 / 1;
     background: rgba(0, 0, 0, 0.5);
   }
-
 
 .collection-card-img {
     width: 100%;
@@ -920,33 +916,30 @@ nav {
     transform: scale(1.04);
   }
 
+  /* Title — sits in the footer above the meta lines */
 .collection-card-title {
-    position: absolute;
-    top: 22px;
-    left: 24px;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 26px;
-    line-height: 1.15;
-    color: rgba(232, 228, 220, 0.92);
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
-    max-width: 60%;
+    font-size: 22px;
+    line-height: 1.2;
+    color: rgba(232, 228, 220, 0.95);
+    margin-bottom: 6px;
   }
 
-  /* Footer row — description on the left, action pill on the right */
+  /* Footer — solid block, meta on the left, action pill on the right */
 .collection-card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 4px 14px 10px;
+    padding: 20px 22px;
+    background: var(--blue-dark);
   }
 
 .collection-card-meta {
     display: flex;
     flex-direction: column;
-    gap: 2px;
   }
 
 .collection-card-line {
@@ -957,10 +950,8 @@ nav {
     color: rgba(232, 228, 220, 0.4);
   }
 
-.collection-card-line:first-child {
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: rgba(232, 228, 220, 0.25);
+.collection-card-line + .collection-card-line {
+    margin-top: 10px;
   }
 
   /* "Open" action pill */
@@ -1688,7 +1679,7 @@ nav {
 }
 
 /* Individual card */
-.collection-card {
+.collection-overlay-card {
   position: relative;
   aspect-ratio: 1 / 1;
   background: #060810;
@@ -1697,7 +1688,7 @@ nav {
   overflow: hidden;
 }
 
-.collection-card-img {
+.collection-overlay-card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1706,18 +1697,18 @@ nav {
   transition: transform 0.3s ease;
 }
 
-.collection-card:hover .collection-card-img {
+.collection-overlay-card:hover .collection-overlay-card-img {
   transform: scale(1.1);
 }
 
 /* Square source images include a wall/frame mockup around the
    artwork — zoom in to crop that border out so every thumbnail
    reads as a flush portrait crop. */
-.collection-card-img--zoom {
+.collection-overlay-card-img--zoom {
   transform: scale(1.8);
 }
 
-.collection-card:hover .collection-card-img--zoom {
+.collection-overlay-card:hover .collection-overlay-card-img--zoom {
   transform: scale(1.98);
 }
 
@@ -1936,16 +1927,6 @@ nav {
 
   .vault-symbols {
     padding: 160px 24px 120px;
-  }
-
-  /* Less tall image frame — better balance with the footer below */
-  .collection-card-frame {
-    aspect-ratio: 4 / 3;
-  }
-
-  /* Push the open pill to the right with a comfortable margin */
-  .collection-card-footer {
-    padding: 4px 18px 14px 14px;
   }
 
   .collection-card-open {
