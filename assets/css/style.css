@@ -283,6 +283,12 @@ nav {
     transform: none;
   }
 
+  /* Glassmorphism overlay clipped to the R shape itself — only used
+     on mobile, where the rotating ring/halo is removed. */
+.logo-glass-r {
+    display: none;
+  }
+
   /* Year label — top right of header */
 .home-year {
     font-size: 11px;
@@ -1758,23 +1764,51 @@ nav {
 /* --- Mobile (480px) --- */
 @media (max-width: 480px) {
   .global-logo {
-    top: 26px;
+    top: 20px;
     left: 16px;
+    opacity: 1;
+  }
+
+  /* Drop the rotating typography ring on mobile — keep a small,
+     static "R" mark for identity without the visual noise. No
+     outer halo container; the glass treatment is applied to the
+     R glyph itself below. */
+  .global-logo::before {
+    display: none;
+  }
+
+  /* Glass layer clipped to the exact R shape (via #logo-r-clip):
+     light blur + translucent white + thin bright edge, no dark
+     shadow, so the mark reads as frosted glass on any background. */
+  .logo-glass-r {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    transform: translate(-50%, -50%);
+    clip-path: url(#logo-r-clip);
+    -webkit-clip-path: url(#logo-r-clip);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    pointer-events: none;
   }
 
   .logo-ring-wrap {
-    width: 80px;
-    height: 80px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .logo-ring-svg {
+    display: none;
   }
 
   .logo-icon-svg {
-    width: 48px;
-    height: 48px;
-  }
-
-  .logo-ring-text {
-    font-size: 33px;
-    letter-spacing: 5px;
+    width: 32px;
+    height: 32px;
   }
 
   .pill {
