@@ -1673,6 +1673,10 @@ nav {
   cursor: pointer;
   padding: 4px 8px;
   transition: color 0.2s ease;
+  /* Nav stays visible and clickable while a collection is open
+     (z-index: 90) and doubles as the way back, so the close
+     button is redundant at every breakpoint. */
+  display: none;
 }
 .collection-overlay-close:hover { color: rgba(232, 228, 220, 0.7); }
 
@@ -2062,13 +2066,13 @@ nav {
   .collection-overlay-card {
     flex: none;
     width: 150px;
-    height: 180px;
+    height: 120px;
   }
 
   /* Drop every other card into the bottom row, zig-zagging the
      sequence so consecutive pieces don't line up in a rigid grid. */
   .collection-overlay-card:nth-child(even) {
-    margin-top: 240px;
+    margin-top: 190px;
   }
 
   .collection-overlay-scrollbar {
@@ -2092,12 +2096,6 @@ nav {
 
   .collection-overlay-count {
     color: rgba(196, 98, 45, 1);
-  }
-
-  /* Bottom nav stays visible above the overlay (z-index 90) and
-     doubles as the way back, so the close button is redundant. */
-  .collection-overlay-close {
-    display: none;
   }
 
   /* Nav — almost full width */
