@@ -644,7 +644,11 @@ function buildCollectionOverlay(collection) {
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
 
-  /* Close handlers: button, backdrop click, Escape key */
+  /* Close handlers: × button, Escape key, or navigating to another
+     page via the nav pills. The gallery now has wide gaps between
+     cards, so closing on a backdrop click would be too easy to
+     trigger by accident — the user stays here until they explicitly
+     choose to leave. */
   function closeOverlay() {
     overlay.classList.remove('open');
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
@@ -657,8 +661,21 @@ function buildCollectionOverlay(collection) {
   }
 
   closeBtn.addEventListener('click', closeOverlay);
-  overlay.addEventListener('click', e => { if (e.target === overlay) { closeOverlay(); } });
   document.addEventListener('keydown', onKey);
+
+  /* Mouse wheel scrolls the carousel horizontally. Scroll-snap fights
+     small programmatic scrollLeft changes the same way it fights the
+     drag bar, so suspend it for the duration of the wheel gesture and
+     let it re-settle once scrolling stops. */
+  let wheelSettleTimer = null;
+  grid.addEventListener('wheel', e => {
+    if (e.deltaY === 0) { return; }
+    e.preventDefault();
+    grid.style.scrollSnapType = 'none';
+    grid.scrollLeft += e.deltaY;
+    clearTimeout(wheelSettleTimer);
+    wheelSettleTimer = setTimeout(() => { grid.style.scrollSnapType = ''; }, 150);
+  }, { passive: false });
 
   return overlay;
 }

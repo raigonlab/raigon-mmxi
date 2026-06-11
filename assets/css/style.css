@@ -1613,7 +1613,9 @@ nav {
 .collection-overlay {
   position: fixed;
   inset: 0;
-  z-index: 9998;
+  /* Below the nav (z-index: 100) so the menu stays reachable while a
+     collection is open, on every breakpoint. */
+  z-index: 90;
   background: rgba(6, 8, 16, 0.97);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -2032,11 +2034,6 @@ nav {
   .collection-card-open {
     font-size: 12px;
     padding: 10px 20px;
-  }
-
-  /* Carousel layout — exactly 2 rows, swipe horizontally between columns */
-  .collection-overlay {
-    z-index: 90;
   }
 
   .collection-overlay-grid {
