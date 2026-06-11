@@ -36,6 +36,67 @@ const artworks = [
 
 
 /* ============================================================
+   COLLECTION DATA
+   Vault collection details (title, count, works) used by the
+   collection overlay. Kept inline so the overlay works when the
+   page is opened directly (file://), where fetch() of a JSON
+   file is blocked by CORS.
+============================================================ */
+const COLLECTIONS_DATA = {
+  "digital-charcoal": {
+    "title": "Digital Charcoal",
+    "count": 19,
+    "works": [
+      { "src": "assets/images/hero/digital-charcoal-00001.jpg", "title": "Triforce"  },
+      { "src": "assets/images/hero/digital-charcoal-00002.jpg", "title": "Bloom"     },
+      { "src": "assets/images/hero/digital-charcoal-00003.jpg", "title": "Intersect" },
+      { "src": "assets/images/hero/digital-charcoal-00004.jpg", "title": "Serpent"   },
+      { "src": "assets/images/hero/digital-charcoal-00005.jpg", "title": "Dissolve"  },
+      { "src": "assets/images/hero/digital-charcoal-00006.jpg", "title": "Collapse"  },
+      { "src": "assets/images/hero/digital-charcoal-00007.jpg", "title": "Drift"     },
+      { "src": "assets/images/hero/digital-charcoal-00008.jpg", "title": "Coil"      },
+      { "src": "assets/images/hero/digital-charcoal-00009.jpg", "title": "Monolith"  },
+      { "src": "assets/images/hero/digital-charcoal-00010.jpg", "title": "Knot"      },
+      { "src": "assets/images/hero/digital-charcoal-00011.jpg", "title": "Vessel"    },
+      { "src": "assets/images/hero/digital-charcoal-00012.jpg", "title": "Scale"     },
+      { "src": "assets/images/hero/digital-charcoal-00013.jpg", "title": "Presence"  },
+      { "src": "assets/images/hero/digital-charcoal-00014.jpg", "title": "Threshold" },
+      { "src": "assets/images/hero/digital-charcoal-00015.jpg", "title": "Mass"      },
+      { "src": "assets/images/hero/digital-charcoal-00016.jpg", "title": "Void"      },
+      { "src": "assets/images/hero/digital-charcoal-00017.jpg", "title": "Loop"      },
+      { "src": "assets/images/hero/digital-charcoal-00018.jpg", "title": "Strike"    },
+      { "src": "assets/images/hero/digital-charcoal-00019.jpg", "title": "Torsion"   }
+    ]
+  },
+  "form-and-void": {
+    "title": "Form and Void",
+    "count": 8,
+    "works": [
+      { "src": "assets/images/hero/digital-charcoal-00001.jpg", "title": "Anchor"   },
+      { "src": "assets/images/hero/digital-charcoal-00002.jpg", "title": "Membrane" },
+      { "src": "assets/images/hero/digital-charcoal-00003.jpg", "title": "Fracture" },
+      { "src": "assets/images/hero/digital-charcoal-00004.jpg", "title": "Tension"  },
+      { "src": "assets/images/hero/digital-charcoal-00005.jpg", "title": "Residue"  },
+      { "src": "assets/images/hero/digital-charcoal-00006.jpg", "title": "Hollow"   },
+      { "src": "assets/images/hero/digital-charcoal-00007.jpg", "title": "Current"  },
+      { "src": "assets/images/hero/digital-charcoal-00008.jpg", "title": "Shard"    }
+    ]
+  },
+  "e-motion": {
+    "title": "E-Motion",
+    "count": 5,
+    "works": [
+      { "src": "assets/images/e-motion/e-motion-00001.jpg", "title": "You",     "sold": true },
+      { "src": "assets/images/e-motion/e-motion-00002.jpg", "title": "Anima"               },
+      { "src": "assets/images/e-motion/e-motion-00003.jpg", "title": "Dynamis"             },
+      { "src": "assets/images/e-motion/e-motion-00004.jpg", "title": "Surge"               },
+      { "src": "assets/images/e-motion/e-motion-00005.jpg", "title": "Corpus"              }
+    ]
+  }
+};
+
+
+/* ============================================================
    NAVIGATION
    Switches active page section and triggers data loads.
    Hash routing: URL updates on nav so back/forward work natively.
@@ -597,46 +658,29 @@ function buildCollectionOverlay(collection) {
   return overlay;
 }
 
-/* Fetch collection data from JSON, build overlay, and open it.
-   Shows "loading..." while the request is in flight.
-   On success: clears feedback and opens the overlay.
-   On error: shows an error message that stays visible for the user to read. */
-async function loadCollection(collectionName) {
-  showVaultFeedback('loading...');
+/* Look up collection data, build overlay, and open it.
+   On error: shows a message that stays visible for the user to read. */
+function loadCollection(collectionName) {
+  const collection = COLLECTIONS_DATA[collectionName];
 
-  try {
-    const response = await fetch('data/collections.json');
-
-    if (!response.ok) {
-      throw new Error(`Server error: ${response.status}`);
-    }
-
-    const data       = await response.json();
-    const collection = data[collectionName];
-
-    if (!collection) {
-      throw new Error(`Collection "${collectionName}" not found`);
-    }
-
-    const overlay = buildCollectionOverlay(collection);
-    document.body.appendChild(overlay);
-
-    /* Double rAF ensures the browser paints before the open class triggers the transition */
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        overlay.classList.add('open');
-        location.hash = 'vault/collection';
-      });
-    });
-
-    /* Clear the "loading..." message only after a successful open */
-    showVaultFeedback('');
-
-  } catch (error) {
-    /* Error message stays visible — no finally block clears it */
+  if (!collection) {
     showVaultFeedback('unable to load collection. please try again.', true);
-    console.error('Collection fetch failed:', error);
+    console.error(`Collection "${collectionName}" not found`);
+    return;
   }
+
+  const overlay = buildCollectionOverlay(collection);
+  document.body.appendChild(overlay);
+
+  /* Double rAF ensures the browser paints before the open class triggers the transition */
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add('open');
+      location.hash = 'vault/collection';
+    });
+  });
+
+  showVaultFeedback('');
 }
 
 /* Wire each collection button to its fetch call */
