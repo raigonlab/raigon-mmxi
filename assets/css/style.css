@@ -228,7 +228,7 @@ nav {
     text-decoration: none;
     transition: opacity 0.2s ease;
   }
-  .global-logo:hover { opacity: 1; }
+  .global-logo:hover, .global-logo:active { opacity: 1; }
 
 .global-logo::before {
     content: '';
@@ -1764,9 +1764,9 @@ nav {
 /* --- Mobile (480px) --- */
 @media (max-width: 480px) {
   .global-logo {
-    top: 20px;
+    top: 10px;
     left: 16px;
-    opacity: 1;
+    opacity: 0.3;
   }
 
   /* Drop the rotating typography ring on mobile — keep a small,
@@ -1795,6 +1795,14 @@ nav {
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid rgba(255, 255, 255, 0.6);
     pointer-events: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Tap/hover feedback — the R turns fully white and stronger */
+  .global-logo:hover .logo-glass-r,
+  .global-logo:active .logo-glass-r {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 1);
   }
 
   .logo-ring-wrap {
