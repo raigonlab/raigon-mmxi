@@ -46,12 +46,6 @@
   100% { transform: translate(-50%, -50%) scale(1.0)  translate(0%,   0%);   }
 }
 
-/* ── DOT-GRID CANVAS ── */
-/* Absolute inside #vault, behind vault-scene (which holds the topo canvas) */
-#dot-grid {
-  display: none;
-}
-
 /* ── RESET ── */
 *, *::before, *::after {
   margin: 0;
