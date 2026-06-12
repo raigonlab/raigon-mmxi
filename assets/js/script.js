@@ -803,6 +803,22 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
   vaultScrollBar.addEventListener('pointercancel', endVaultBarDrag);
 }
 
+/* Mouse wheel scrolls the Arquive carousel horizontally, so desktop
+   users without a horizontal-scroll gesture can reach every card. */
+const arquiveGrid = document.querySelector('.arquive-grid');
+
+if (arquiveGrid) {
+  let arquiveWheelSettleTimer = null;
+  arquiveGrid.addEventListener('wheel', e => {
+    if (e.deltaY === 0) { return; }
+    e.preventDefault();
+    arquiveGrid.style.scrollSnapType = 'none';
+    arquiveGrid.scrollLeft += e.deltaY;
+    clearTimeout(arquiveWheelSettleTimer);
+    arquiveWheelSettleTimer = setTimeout(() => { arquiveGrid.style.scrollSnapType = ''; }, 150);
+  }, { passive: false });
+}
+
 /* ============================================================
    E-MOTION ACCESS GATE
 ============================================================ */

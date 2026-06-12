@@ -1097,7 +1097,7 @@ nav {
 .arquive-col {
   display: flex;
   flex-direction: column;
-  flex: 0 0 min(420px, 85vw);
+  flex: 0 0 min(360px, 85vw);
   scroll-snap-align: start;
 }
 
