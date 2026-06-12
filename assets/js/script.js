@@ -106,6 +106,15 @@ const pages = document.querySelectorAll('.page');
 
 const VALID_PAGES = ['home', 'vault', 'arquive'];
 
+/* On small screens, the nav bar shifts left to make room for the
+   home gallery's play/pause button — or, when a collection overlay
+   is open, for its scroll bar in the same spot. Every other page
+   keeps the nav centered. */
+function updateNavShift(page) {
+  const collectionOpen = document.querySelector('.collection-overlay.open');
+  document.body.classList.toggle('nav-shift', page === 'home' || !!collectionOpen);
+}
+
 function switchSection(page) {
   pages.forEach(p => p.classList.remove('active'));
   pills.forEach(p => p.classList.remove('active'));
@@ -113,6 +122,8 @@ function switchSection(page) {
   document.getElementById(page).classList.add('active');
   document.querySelector(`.pill[data-page="${page}"]`).classList.add('active');
   document.getElementById(page).scrollTop = 0;
+
+  updateNavShift(page);
 
   if (page === 'arquive') { loadEvents(); }
 }
@@ -166,6 +177,7 @@ window.addEventListener('hashchange', () => {
     if (openOverlay) {
       openOverlay.classList.remove('open');
       openOverlay.addEventListener('transitionend', () => openOverlay.remove(), { once: true });
+      updateNavShift('vault');
       return;
     }
   }
@@ -681,6 +693,7 @@ function buildCollectionOverlay(collection) {
     overlay.classList.remove('open');
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
     document.removeEventListener('keydown', onKey);
+    updateNavShift('vault');
     if (location.hash === '#vault/collection') { location.hash = 'vault'; }
   }
 
@@ -726,6 +739,7 @@ function loadCollection(collectionName) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       overlay.classList.add('open');
+      updateNavShift('vault');
       location.hash = 'vault/collection';
     });
   });

@@ -2146,14 +2146,17 @@ nav {
   }
 
   /* Nav — almost full width, shifted right to leave room for the
-     play/pause circle on the left */
-  .nav-pills {
+     play/pause circle on the left. Only applies on Home (play/pause
+     button) or while a collection overlay is open (its scroll bar
+     occupies the same space) — toggled via body.nav-shift in script.js.
+     Other pages keep the default centered nav. */
+  body.nav-shift .nav-pills {
     width: calc(100% - 102px);
     margin-left: 62px;
     justify-content: space-between;
   }
 
-  .pill {
+  body.nav-shift .pill {
     flex: 1;
     justify-content: center;
   }
