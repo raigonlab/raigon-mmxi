@@ -86,7 +86,7 @@ const COLLECTIONS_DATA = {
     "title": "E-Motion",
     "count": 5,
     "works": [
-      { "src": "assets/images/e-motion/e-motion-00001.jpg", "title": "You",     "sold": true },
+      { "src": "assets/images/e-motion/e-motion-00001.jpg", "title": "You"                  },
       { "src": "assets/images/e-motion/e-motion-00002.jpg", "title": "Anima"               },
       { "src": "assets/images/e-motion/e-motion-00003.jpg", "title": "Dynamis"             },
       { "src": "assets/images/e-motion/e-motion-00004.jpg", "title": "Surge"               },
