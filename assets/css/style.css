@@ -470,10 +470,10 @@ nav {
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.8);
+    color: rgba(91, 90, 87, 0.8);
     pointer-events: none;
     opacity: 0;
-    animation: hintFade 6s ease 1s forwards;
+    animation: hintFade 9s ease 1s forwards;
   }
 
   /* Scroll position indicator bar — draggable, pushes the gallery when scrubbed */
@@ -484,8 +484,8 @@ nav {
     transform: translateX(-50%);
     width: 150px;
     height: 2px;
-    background: rgba(232, 228, 220, 0.18);
-    border-radius: 2px;
+    background: rgba(232, 228, 220, 0.1);
+    border-radius: 4px;
     cursor: grab;
     touch-action: none;
   }
@@ -509,7 +509,7 @@ nav {
     left: 0;
     width: 30px;
     height: 4px;
-    background: rgba(232, 228, 220, 0.55);
+    background: rgba(111, 110, 110, 0.55);
     border-radius: 2px;
     transition: background 0.2s ease;
   }
@@ -1917,7 +1917,7 @@ nav {
   .pill {
     padding: 12px 12px;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 2.2px;
   }
 
