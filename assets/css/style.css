@@ -1679,6 +1679,9 @@ nav {
   -webkit-backdrop-filter: blur(18px);
   display: flex;
   flex-direction: column;
+  /* Shrinks the centered grid's stage from below, lifting the artwork
+     rows away from the nav bar at the bottom of the screen. */
+  padding-bottom: 10%;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -1745,9 +1748,9 @@ nav {
   flex-wrap: wrap;
   align-content: flex-start;
   flex: none;
-  height: 524px;
+  height: 472px;
   margin: auto 0;
-  gap: 128px;
+  gap: 115px;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -1773,7 +1776,7 @@ nav {
   position: relative;
   flex: none;
   width: auto;
-  height: 192px;
+  height: 173px;
   background: #060810;
   cursor: pointer;
   border-radius: 8px;
@@ -1788,7 +1791,7 @@ nav {
    row 38px lower than the original layout — without negative
    margins, which would get clipped by overflow-x: auto. */
 .collection-overlay-card:nth-child(even) {
-  margin-top: 332px;
+  margin-top: 299px;
 }
 
 /* Position indicator — same draggable bar style as the vault carousel,
@@ -1847,19 +1850,19 @@ nav {
   }
 
   .collection-overlay-grid {
-    height: 364px;
-    gap: 104px;
+    height: 328px;
+    gap: 94px;
     padding: 0 120px;
     scroll-padding: 0 120px;
   }
 
   .collection-overlay-card {
     width: auto;
-    height: 130px;
+    height: 117px;
   }
 
   .collection-overlay-card:nth-child(even) {
-    margin-top: 234px;
+    margin-top: 211px;
   }
 }
 
@@ -2091,9 +2094,9 @@ nav {
     flex-wrap: wrap;
     align-content: flex-start;
     flex: none;
-    height: 468px;
+    height: 421px;
     margin: auto 0;
-    gap: 120px;
+    gap: 108px;
     padding: 0 60px;
     scroll-padding: 0 60px;
     overflow-x: auto;
@@ -2112,13 +2115,13 @@ nav {
   .collection-overlay-card {
     flex: none;
     width: auto;
-    height: 120px;
+    height: 108px;
   }
 
   /* Drop every other card into the bottom row, zig-zagging the
      sequence so consecutive pieces don't line up in a rigid grid. */
   .collection-overlay-card:nth-child(even) {
-    margin-top: 238px;
+    margin-top: 214px;
   }
 
   .collection-overlay-scrollbar {
