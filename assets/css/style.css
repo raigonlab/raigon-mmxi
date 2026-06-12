@@ -1640,7 +1640,6 @@ nav {
   justify-content: center;
   gap: 16px;
   padding: 36px 48px 24px;
-  border-bottom: 1px solid rgba(232, 228, 220, 0.06);
   flex-shrink: 0;
 }
 
@@ -1698,6 +1697,10 @@ nav {
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
   scroll-snap-type: x mandatory;
+  /* Without this, scroll-snap-align: start on the first/last card
+     snaps it flush against the viewport edge, ignoring the side
+     padding — keep some breathing room visible after snapping. */
+  scroll-padding: 0 192px;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 0 14%;
@@ -1796,7 +1799,8 @@ nav {
   .collection-overlay-grid {
     height: 312px;
     gap: 104px;
-    padding: 0 8%;
+    padding: 0 120px;
+    scroll-padding: 0 120px;
   }
 
   .collection-overlay-card {
@@ -2063,7 +2067,8 @@ nav {
     height: 420px;
     margin: auto 0;
     gap: 120px;
-    padding: 0 20px;
+    padding: 0 60px;
+    scroll-padding: 0 60px;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
