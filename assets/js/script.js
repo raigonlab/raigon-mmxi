@@ -188,6 +188,11 @@ window.addEventListener('hashchange', () => {
 const initialPage = location.hash.slice(1);
 switchSection(VALID_PAGES.includes(initialPage) ? initialPage : 'home');
 
+/* Shared play/pause icons — reused by the home gallery's timeline bar
+   and the collection overlay's autoplay control. */
+const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1.5"/><rect x="10" y="2" width="3" height="12" rx="1.5"/></svg>';
+const ICON_PLAY  = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+
 const globalLogo = document.querySelector('.global-logo');
 globalLogo.addEventListener('click', () => navigateTo('home'));
 globalLogo.addEventListener('keydown', e => {
@@ -263,9 +268,6 @@ window.addEventListener('load', () => {
   const barTravel = scrollBar.offsetWidth - scrollThumb.offsetWidth;
 
   /* Play/pause toggle — stops the auto-scroll without affecting drag/parallax */
-  const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1.5"/><rect x="10" y="2" width="3" height="12" rx="1.5"/></svg>';
-  const ICON_PLAY  = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
-
   let autoScrollPaused = false;
 
   const playPauseBtn = document.createElement('button');
@@ -632,6 +634,25 @@ function buildCollectionOverlay(collection) {
   overlayScrollBar.appendChild(overlayThumb);
   overlay.appendChild(overlayScrollBar);
 
+  /* Play/pause control — same icon/style as the home gallery's timeline
+     bar, toggling the autoplay loop set up below. */
+  let autoScrollPaused = false;
+
+  const playPauseBtn = document.createElement('button');
+  playPauseBtn.className = 'scroll-playpause';
+  playPauseBtn.type      = 'button';
+  playPauseBtn.innerHTML = ICON_PAUSE;
+  playPauseBtn.setAttribute('aria-label', 'Pause auto-scroll');
+
+  playPauseBtn.addEventListener('click', () => {
+    autoScrollPaused = !autoScrollPaused;
+    playPauseBtn.innerHTML = autoScrollPaused ? ICON_PLAY : ICON_PAUSE;
+    playPauseBtn.setAttribute('aria-label', autoScrollPaused ? 'Resume auto-scroll' : 'Pause auto-scroll');
+    if (autoScrollPaused) { grid.style.scrollSnapType = ''; }
+  });
+
+  overlay.appendChild(playPauseBtn);
+
   const OVERLAY_TRACK_WIDTH = 200;
 
   function updateOverlayThumb() {
@@ -641,6 +662,7 @@ function buildCollectionOverlay(collection) {
     const progress  = maxScroll > 0 ? grid.scrollLeft / maxScroll : 0;
 
     overlayScrollBar.style.display = maxScroll > 0 ? '' : 'none';
+    playPauseBtn.style.display     = maxScroll > 0 ? '' : 'none';
     overlayThumb.style.width = thumbW.toFixed(1) + 'px';
     overlayThumb.style.left  = (progress * (OVERLAY_TRACK_WIDTH - thumbW)).toFixed(1) + 'px';
   }
@@ -683,6 +705,28 @@ function buildCollectionOverlay(collection) {
 
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
+
+  /* Autoplay loop — advances the grid at a steady pace, same as the
+     home gallery's auto-scroll. Loops back to the start once the last
+     card scrolls past, and stops entirely once the overlay closes
+     (detected via isConnected, since the overlay is removed from the
+     DOM on both close paths — the × button and back-navigation). */
+  function autoScrollGrid() {
+    if (!overlay.isConnected) { return; }
+
+    if (!autoScrollPaused && !overlayBarDragging) {
+      const maxScroll = grid.scrollWidth - grid.clientWidth;
+      if (maxScroll > 0) {
+        grid.style.scrollSnapType = 'none';
+        const next = grid.scrollLeft + 0.6;
+        grid.scrollLeft = next >= maxScroll ? 0 : next;
+      }
+    }
+
+    requestAnimationFrame(autoScrollGrid);
+  }
+
+  requestAnimationFrame(autoScrollGrid);
 
   /* Close handlers: × button, Escape key, or navigating to another
      page via the nav pills. The gallery now has wide gaps between
