@@ -1692,7 +1692,9 @@ nav {
   margin: auto 0;
   gap: 128px;
   overflow-x: auto;
-  overflow-y: hidden;
+  /* visible so the top-row offset below can lift those cards without
+     getting clipped against the grid's own box. */
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
   scroll-snap-type: x mandatory;
@@ -1705,17 +1707,25 @@ nav {
   display: none;
 }
 
-/* Individual card */
+/* Individual card — width is left to size itself to the artwork's
+   own aspect ratio (see .collection-overlay-card-img), so each
+   piece keeps its original proportions instead of a forced crop. */
 .collection-overlay-card {
   position: relative;
   flex: none;
-  width: 160px;
+  width: auto;
   height: 192px;
   background: #060810;
   cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
   scroll-snap-align: start;
+}
+
+/* Lift the top-row cards by 20% of their height for extra stagger;
+   the bottom row's offset below stays put. */
+.collection-overlay-card:nth-child(odd) {
+  margin-top: -38px;
 }
 
 /* Drop every other card into the bottom row, zig-zagging the
@@ -1735,7 +1745,7 @@ nav {
 }
 
 .collection-overlay-card-img {
-  width: 100%;
+  width: auto;
   height: 100%;
   object-fit: cover;
   display: block;
@@ -1790,8 +1800,12 @@ nav {
   }
 
   .collection-overlay-card {
-    width: 130px;
+    width: auto;
     height: 130px;
+  }
+
+  .collection-overlay-card:nth-child(odd) {
+    margin-top: -26px;
   }
 
   .collection-overlay-card:nth-child(even) {
@@ -2065,8 +2079,12 @@ nav {
 
   .collection-overlay-card {
     flex: none;
-    width: 150px;
+    width: auto;
     height: 120px;
+  }
+
+  .collection-overlay-card:nth-child(odd) {
+    margin-top: -24px;
   }
 
   /* Drop every other card into the bottom row, zig-zagging the
