@@ -533,7 +533,8 @@ nav {
     padding: 0;
     color: rgba(232, 228, 220, 0.55);
     cursor: pointer;
-    transition: color 0.2s ease;
+    opacity: 0.7;
+    transition: color 0.2s ease, opacity 0.2s ease;
   }
 
 .scroll-playpause:hover {
@@ -548,6 +549,17 @@ nav {
     left: 58px;
     bottom: 49px;
     transform: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Dim the home gallery's controls until hovered, focused, or dragged */
+.scroll-playpause:hover,
+.scroll-playpause:active,
+.scroll-bar.home-scroll-bar:hover,
+.scroll-bar.home-scroll-bar:active,
+.scroll-bar.home-scroll-bar.scroll-bar--dragging {
+    opacity: 1;
   }
 
   /* ============================================================
@@ -2185,7 +2197,7 @@ nav {
   .scroll-bar.home-scroll-bar {
     left: 50%;
     bottom: 105px;
-    width: calc(100% - 40px);
+    width: calc((100% - 40px) * 0.9);
     transform: translateX(-50%);
   }
 }

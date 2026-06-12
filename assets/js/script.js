@@ -251,8 +251,8 @@ window.addEventListener('load', () => {
   const barTravel = scrollBar.offsetWidth - scrollThumb.offsetWidth;
 
   /* Play/pause toggle — stops the auto-scroll without affecting drag/parallax */
-  const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1"/><rect x="10" y="2" width="3" height="12" rx="1"/></svg>';
-  const ICON_PLAY  = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+  const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1.5"/><rect x="10" y="2" width="3" height="12" rx="1.5"/></svg>';
+  const ICON_PLAY  = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
 
   let autoScrollPaused = false;
 
