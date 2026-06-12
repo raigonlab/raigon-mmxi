@@ -1077,16 +1077,28 @@ nav {
 }
 
 
+  /* Horizontal carousel — one card (bio / next event / get in touch)
+     per snap point, on every breakpoint */
 .arquive-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
+  display: flex;
   align-items: stretch;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.arquive-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .arquive-col {
   display: flex;
   flex-direction: column;
+  flex: 0 0 min(420px, 85vw);
+  scroll-snap-align: start;
 }
 
 .arquive-col-label {
@@ -1825,10 +1837,6 @@ nav {
     height: 80px;
   }
 
-  .arquive-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .artwork-modal {
     gap: 28px;
     padding: 60px 28px 80px;
@@ -1923,10 +1931,6 @@ nav {
 
   .arquive-wrap {
     padding: 100px 16px 60px;
-  }
-
-  .arquive-grid {
-    grid-template-columns: 1fr;
   }
 
   .home-scene {
