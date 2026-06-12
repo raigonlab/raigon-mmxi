@@ -1687,13 +1687,11 @@ nav {
   flex-wrap: wrap;
   align-content: flex-start;
   flex: none;
-  height: 448px;
+  height: 524px;
   margin: auto 0;
   gap: 128px;
   overflow-x: auto;
-  /* visible so the top-row offset below can lift those cards without
-     getting clipped against the grid's own box. */
-  overflow-y: visible;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
   scroll-snap-type: x mandatory;
@@ -1725,16 +1723,14 @@ nav {
   scroll-snap-align: start;
 }
 
-/* Lift the top-row cards by 20% of their height for extra stagger;
-   the bottom row's offset below stays put. */
-.collection-overlay-card:nth-child(odd) {
-  margin-top: -38px;
-}
-
 /* Drop every other card into the bottom row, zig-zagging the
-   sequence so consecutive pieces don't line up in a rigid grid. */
+   sequence so consecutive pieces don't line up in a rigid grid.
+   The extra height above (+76px) is split evenly by the grid's
+   auto centering, so the top row sits 38px higher and the bottom
+   row 38px lower than the original layout — without negative
+   margins, which would get clipped by overflow-x: auto. */
 .collection-overlay-card:nth-child(even) {
-  margin-top: 256px;
+  margin-top: 332px;
 }
 
 /* Position indicator — same draggable bar style as the vault carousel,
@@ -1797,7 +1793,7 @@ nav {
   }
 
   .collection-overlay-grid {
-    height: 312px;
+    height: 364px;
     gap: 104px;
     padding: 0 120px;
     scroll-padding: 0 120px;
@@ -1808,12 +1804,8 @@ nav {
     height: 130px;
   }
 
-  .collection-overlay-card:nth-child(odd) {
-    margin-top: -26px;
-  }
-
   .collection-overlay-card:nth-child(even) {
-    margin-top: 182px;
+    margin-top: 234px;
   }
 }
 
@@ -2064,7 +2056,7 @@ nav {
     flex-wrap: wrap;
     align-content: flex-start;
     flex: none;
-    height: 420px;
+    height: 468px;
     margin: auto 0;
     gap: 120px;
     padding: 0 60px;
@@ -2088,14 +2080,10 @@ nav {
     height: 120px;
   }
 
-  .collection-overlay-card:nth-child(odd) {
-    margin-top: -24px;
-  }
-
   /* Drop every other card into the bottom row, zig-zagging the
      sequence so consecutive pieces don't line up in a rigid grid. */
   .collection-overlay-card:nth-child(even) {
-    margin-top: 190px;
+    margin-top: 238px;
   }
 
   .collection-overlay-scrollbar {

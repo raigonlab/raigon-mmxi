@@ -162,7 +162,7 @@
 
   <!-- ============================================================
     ARQUIVE SECTION
-    Three-column layout: contact · events · bio
+    Three-column layout: bio · events · contact
   ============================================================ -->
   <div class="page" id="arquive">
     <div class="arquive-wrap">
@@ -170,7 +170,37 @@
       <!-- Three-column grid -->
       <div class="arquive-grid">
 
-        <!-- Column 1: Get in Touch -->
+        <!-- Column 1: Bio -->
+        <div class="arquive-col">
+          <div class="arquive-col-label">bio</div>
+          <div class="arquive-card">
+            <div class="bio-photo">
+              <img src="assets/images/rai-profile.jpg" alt="Railson Viana" class="bio-photo-img">
+            </div>
+            <p class="bio-text">
+              He develops work at the intersection of art, form, and digital systems.
+              His practice explores structure, rhythm, and visual language through
+              abstraction and continuous flow, treating the body as a canvas for
+              conceptual composition.
+            </p>
+            <div class="bio-role">Artist · Tattooist · Designer · Zürich</div>
+            <button class="bio-learn-more" id="bio-open-btn">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Column 2: Next Event — blocks populated by loadEvents() in script.js -->
+        <div class="arquive-col">
+          <div class="arquive-col-label">next event</div>
+          <div class="arquive-card">
+            <div id="events-list"></div>
+            <div class="arquive-socials">
+              <a href="https://youtube.com/@raigon" target="_blank" rel="noopener noreferrer" class="social-link">Youtube</a>
+              <a href="https://instagram.com/raigon.art" target="_blank" rel="noopener noreferrer" class="social-link">@raigon.art</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Get in Touch -->
         <div class="arquive-col">
           <div class="arquive-col-label">get in touch</div>
           <div class="arquive-card">
@@ -200,36 +230,6 @@
               <div>create@raigonlab.com</div>
               <div>+41 79 635 43 99</div>
             </div>
-          </div>
-        </div>
-
-        <!-- Column 2: Next Event — blocks populated by loadEvents() in script.js -->
-        <div class="arquive-col">
-          <div class="arquive-col-label">next event</div>
-          <div class="arquive-card">
-            <div id="events-list"></div>
-            <div class="arquive-socials">
-              <a href="https://youtube.com/@raigon" target="_blank" rel="noopener noreferrer" class="social-link">Youtube</a>
-              <a href="https://instagram.com/raigon.art" target="_blank" rel="noopener noreferrer" class="social-link">@raigon.art</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Column 3: Bio -->
-        <div class="arquive-col">
-          <div class="arquive-col-label">bio</div>
-          <div class="arquive-card">
-            <div class="bio-photo">
-              <img src="assets/images/rai-profile.jpg" alt="Railson Viana" class="bio-photo-img">
-            </div>
-            <p class="bio-text">
-              He develops work at the intersection of art, form, and digital systems.
-              His practice explores structure, rhythm, and visual language through
-              abstraction and continuous flow, treating the body as a canvas for
-              conceptual composition.
-            </p>
-            <div class="bio-role">Artist · Tattooist · Designer · Zürich</div>
-            <button class="bio-learn-more" id="bio-open-btn">Learn More</button>
           </div>
         </div>
 
