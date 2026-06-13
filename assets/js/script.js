@@ -705,21 +705,82 @@ function buildCollectionOverlay(collection, collectionId) {
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
 
+  /* Drag the grid itself with mouse/touch — pointer events cover both. */
+  let gridDragging    = false;
+  let gridDragMoved   = false;
+  let gridDragStartX  = 0;
+  let gridStartScroll = 0;
+
+  grid.addEventListener('pointerdown', e => {
+    if (e.target.closest('.scroll-bar')) { return; }
+    gridDragging    = true;
+    gridDragMoved   = false;
+    gridDragStartX  = e.clientX;
+    gridStartScroll = grid.scrollLeft;
+    grid.classList.add('dragging');
+    grid.setPointerCapture(e.pointerId);
+  });
+
+  grid.addEventListener('pointermove', e => {
+    if (!gridDragging) { return; }
+    const dx = e.clientX - gridDragStartX;
+    if (Math.abs(dx) > 5) { gridDragMoved = true; }
+    grid.scrollLeft = gridStartScroll - dx;
+  });
+
+  function endGridDrag(e) {
+    if (!gridDragging) { return; }
+    gridDragging = false;
+    grid.classList.remove('dragging');
+    grid.style.scrollSnapType = '';
+    grid.releasePointerCapture(e.pointerId);
+  }
+
+  grid.addEventListener('pointerup', endGridDrag);
+  grid.addEventListener('pointercancel', endGridDrag);
+
+  /* Suppress the card's click (which opens the work) when the pointer
+     movement was actually a drag rather than a tap. */
+  grid.addEventListener('click', e => {
+    if (gridDragMoved) {
+      e.preventDefault();
+      e.stopPropagation();
+      gridDragMoved = false;
+    }
+  }, true);
+
   /* Autoplay loop — advances the grid at a steady pace, same as the
-     home gallery's auto-scroll. Loops back to the start once the last
-     card scrolls past, and stops entirely once the overlay closes
+     home gallery's auto-scroll. Once the last card scrolls past, it
+     eases back to the start with a smooth scroll instead of an
+     instant jump, and stops entirely once the overlay closes
      (detected via isConnected, since the overlay is removed from the
      DOM on both close paths — the × button and back-navigation). */
-  function autoScrollGrid() {
+  const REWIND_MS = 600;
+  let rewindStart = null;
+  let rewindFrom  = 0;
+
+  function autoScrollGrid(now) {
     if (!overlay.isConnected) { return; }
 
-    if (!autoScrollPaused && !overlayBarDragging) {
+    if (!autoScrollPaused && !overlayBarDragging && !gridDragging) {
       const maxScroll = grid.scrollWidth - grid.clientWidth;
       if (maxScroll > 0) {
         grid.style.scrollSnapType = 'none';
-        const next = grid.scrollLeft + 0.6;
-        grid.scrollLeft = next >= maxScroll ? 0 : next;
+
+        if (rewindStart !== null) {
+          const t      = Math.min(1, (now - rewindStart) / REWIND_MS);
+          const eased  = 1 - Math.pow(1 - t, 3);
+          grid.scrollLeft = rewindFrom * (1 - eased);
+          if (t >= 1) { rewindStart = null; }
+        } else if (grid.scrollLeft >= maxScroll - 0.6) {
+          rewindFrom  = grid.scrollLeft;
+          rewindStart = now;
+        } else {
+          grid.scrollLeft += 0.6;
+        }
       }
+    } else {
+      rewindStart = null;
     }
 
     requestAnimationFrame(autoScrollGrid);
