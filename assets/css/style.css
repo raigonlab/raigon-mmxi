@@ -60,7 +60,7 @@
     --surface:    #1c1916;
     --border:     rgba(196, 98, 45, 0.18);
     --text:       #e8e4dc;
-    --muted:      rgba(232, 228, 220, 0.8);
+    --muted:      rgba(232, 228, 220, 0.4);
     --accent:     #c4622d;
     --blue-mid:   #1a2a3a;
     --green:      #4a7c6a;
@@ -1146,7 +1146,7 @@ nav {
 /* Bio card — text on the left, portrait photo on the right */
 .arquive-card--bio {
   display: flex;
-  height: 314px;
+  height: 251px;
   padding: 0;
   overflow: hidden;
 }
