@@ -1036,7 +1036,7 @@ nav {
   }
 
   /* Coming soon card — visible but not interactive, aside from the
-     "remind me" calendar link in its footer */
+     "add to calendar" link in its footer */
 .collection-card--soon {
     cursor: default;
     pointer-events: none;
@@ -1096,15 +1096,6 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-/* On tablets and up, narrow the card stack so the cards don't
-   stretch edge-to-edge of the wrap. */
-@media (min-width: 768px) {
-  .arquive-stack {
-    max-width: 75%;
-    margin: 0 auto;
-  }
 }
 
 .arquive-card {
