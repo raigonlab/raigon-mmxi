@@ -552,12 +552,16 @@ nav {
     transition: opacity 0.2s ease;
   }
 
-  /* Dim the home gallery's controls until hovered, focused, or dragged */
+  /* Dim the home gallery's controls until hovered, focused, or dragged —
+     also applies to the collection overlay's matching controls */
 .scroll-playpause:hover,
 .scroll-playpause:active,
 .scroll-bar.home-scroll-bar:hover,
 .scroll-bar.home-scroll-bar:active,
-.scroll-bar.home-scroll-bar.scroll-bar--dragging {
+.scroll-bar.home-scroll-bar.scroll-bar--dragging,
+.scroll-bar.collection-overlay-scrollbar:hover,
+.scroll-bar.collection-overlay-scrollbar:active,
+.scroll-bar.collection-overlay-scrollbar.scroll-bar--dragging {
     opacity: 1;
   }
 
@@ -1800,14 +1804,17 @@ nav {
   margin-top: 299px;
 }
 
-/* Position indicator — same draggable bar style as the vault carousel,
-   reused here to navigate the collection carousel horizontally. The
-   overlay spans the full viewport (vault's scene box is shorter), so
-   it needs extra bottom offset to land at the same height as the
-   vault page's bar. */
+/* Position indicator — same placement and style as the home gallery's
+   bar, sitting left of center beside the play/pause button. The overlay
+   is appended to .collection-overlay (full viewport, like #home), so the
+   same left/bottom offsets land in the same spot. */
 .collection-overlay-scrollbar {
   display: block;
-  bottom: 78px;
+  left: 58px;
+  bottom: 49px;
+  transform: none;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
 .collection-overlay-card-img {
@@ -2135,7 +2142,9 @@ nav {
   }
 
   .scroll-bar.collection-overlay-scrollbar {
+    left: 50%;
     bottom: 105px;
+    transform: translateX(-50%);
   }
 
   .scroll-bar.arquive-scroll-bar {
