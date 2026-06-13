@@ -2155,6 +2155,38 @@ nav {
   }
 }
 
+/* --- Narrow phones (320px) --- */
+@media (max-width: 340px) {
+  /* On very narrow screens the bio card grows tall enough that the
+     portrait photo reads as stretched/flattened. Tighten the text
+     column's rhythm and give it a bit more width so the card sits
+     ~20% shorter overall. */
+  .arquive-card--bio .arquive-card-photo {
+    flex: 0 0 35%;
+  }
+
+  .arquive-card--bio .arquive-card-body {
+    padding: 20px;
+  }
+
+  .arquive-card--bio .arquive-card-title {
+    margin-bottom: 12px;
+  }
+
+  .arquive-card--bio .arquive-card-subtitle {
+    margin-bottom: 12px;
+  }
+
+  .arquive-card--bio .bio-text {
+    font-size: 11.5px;
+    line-height: 1.7;
+  }
+
+  .arquive-card--bio .arquive-pill-btn {
+    margin-top: 16px;
+  }
+}
+
 /* ============================================================
    ARQUIVE — EVENTS
    Loading / error states for the dynamically rendered event block.
