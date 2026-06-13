@@ -1042,7 +1042,7 @@ nav {
     pointer-events: none;
   }
 
-  .collection-card--soon .collection-card-img { opacity: 0.5; }
+  .collection-card--soon .collection-card-img { opacity: 0.85; }
 
   /* Calendar link — re-enable pointer events for just this pill */
 .collection-card-cal-btn {
