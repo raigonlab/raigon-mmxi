@@ -1758,14 +1758,118 @@ nav {
     height: 80px;
   }
 
+  /* Below 768px the row layout (image + 220px side panel + edge
+     chevrons) doesn't fit without the side panel sliding under the
+     right chevron — switch to a stacked, swipe-driven layout. */
   .artwork-modal {
-    gap: 28px;
-    padding: 60px 28px 80px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    padding: 110px 20px 80px;
+    overflow-y: auto;
   }
 
+  /* Close button — full opacity and larger tap target */
+  .modal-close {
+    opacity: 1;
+    color: rgba(232, 228, 220, 0.85);
+    font-size: 20px;
+    top: 20px;
+    right: 24px;
+  }
+
+  /* Hide left/right arrows — replaced by dots */
+  .modal-chevron {
+    display: none;
+  }
+
+  /* Image: natural aspect ratio — no forced square, artwork displays as intended */
   .modal-image {
-    max-width: 52vw;
-    max-height: 60vh;
+    width: auto;
+    max-width: 88vw;
+    height: auto;
+    max-height: 52vh;
+    object-fit: contain;
+  }
+
+  /* Hide the info-panel counter — shown below image instead */
+  .modal-counter { display: none; }
+
+  /* Counter below image — close to what it describes */
+  .modal-counter-img {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(232, 228, 220, 0.9);
+    text-align: center;
+  }
+
+  /* INQUIRE as a real button */
+  .modal-inquire-link {
+    margin-top: 20px;
+    border: 1px solid rgba(232, 228, 220, 0.8);
+    border-radius: 100px;
+    padding: 14px 0;
+    width: 100%;
+    text-align: center;
+    color: rgba(232, 228, 220, 0.85);
+    font-size: 11px;
+  }
+
+  .modal-side {
+    width: 100%;
+    overflow: visible;
+  }
+
+  /* Hide back button — the × button handles going back */
+  .modal-inquire-back {
+    display: none;
+  }
+
+  /* Cancel the desktop horizontal slide */
+  .modal-side.inquire-open .modal-panels {
+    transform: none;
+  }
+
+  /* Grid overlap — both panels share one cell, container sizes to the taller one */
+  .modal-panels {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .modal-info-panel {
+    grid-area: 1 / 1;
+    width: 100%;
+    transition: opacity 0.35s ease;
+    justify-content: flex-start;
+  }
+
+  .modal-inquire-panel {
+    grid-area: 1 / 1;
+    position: static;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    justify-content: flex-start;
+  }
+
+  .modal-side.inquire-open .modal-info-panel {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .modal-side.inquire-open .modal-inquire-panel {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-inquire-success {
+    margin-top: 24px;
   }
 
   .collection-overlay-grid {
@@ -1878,117 +1982,6 @@ nav {
 
   .home-scene {
     touch-action: none;
-  }
-
-  .artwork-modal {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 12px;
-    padding: 110px 20px 80px;
-    overflow-y: auto;
-  }
-
-  /* Close button — full opacity and larger tap target on mobile */
-  .modal-close {
-    opacity: 1;
-    color: rgba(232, 228, 220, 0.85);
-    font-size: 20px;
-    top: 20px;
-    right: 24px;
-  }
-
-  /* Hide left/right arrows — replaced by dots */
-  .modal-chevron {
-    display: none;
-  }
-
-  /* Image: natural aspect ratio — no forced square, artwork displays as intended */
-  .modal-image {
-    width: auto;
-    max-width: 88vw;
-    height: auto;
-    max-height: 52vh;
-    object-fit: contain;
-  }
-
-  /* Hide the info-panel counter on mobile — shown below image instead */
-  .modal-counter { display: none; }
-
-  /* Counter below image — close to what it describes */
-  .modal-counter-img {
-    display: block;
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(232, 228, 220, 0.9);
-    text-align: center;
-  }
-
-  /* INQUIRE as a real button on mobile */
-  .modal-inquire-link {
-    margin-top: 20px;
-    border: 1px solid rgba(232, 228, 220, 0.8);
-    border-radius: 100px;
-    padding: 14px 0;
-    width: 100%;
-    text-align: center;
-    color: rgba(232, 228, 220, 0.85);
-    font-size: 11px;
-  }
-
-  .modal-side {
-    width: 100%;
-    overflow: visible;
-  }
-
-  /* Hide back button on mobile — X button handles going back */
-  .modal-inquire-back {
-    display: none;
-  }
-
-  /* Cancel the desktop horizontal slide on mobile */
-  .modal-side.inquire-open .modal-panels {
-    transform: none;
-  }
-
-  /* Grid overlap — both panels share one cell, container sizes to the taller one */
-  .modal-panels {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-  }
-
-  .modal-info-panel {
-    grid-area: 1 / 1;
-    width: 100%;
-    transition: opacity 0.35s ease;
-    justify-content: flex-start;
-  }
-
-  .modal-inquire-panel {
-    grid-area: 1 / 1;
-    position: static;
-    width: 100%;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-    justify-content: flex-start;
-  }
-
-  .modal-side.inquire-open .modal-info-panel {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .modal-side.inquire-open .modal-inquire-panel {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .modal-inquire-success {
-    margin-top: 24px;
   }
 
   /* Stack collection cards vertically, each spanning the available width
