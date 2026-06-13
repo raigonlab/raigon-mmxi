@@ -1098,6 +1098,15 @@ nav {
   gap: 24px;
 }
 
+/* On tablets and up, narrow the card stack so the cards don't
+   stretch edge-to-edge of the wrap. */
+@media (min-width: 768px) {
+  .arquive-stack {
+    max-width: 75%;
+    margin: 0 auto;
+  }
+}
+
 .arquive-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(232, 228, 220, 0.2);
