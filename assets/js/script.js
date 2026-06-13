@@ -548,9 +548,9 @@ function showVaultFeedback(message, isError = false) {
 ============================================================ */
 
 /* Build the overlay DOM for one collection and return the root element. */
-function buildCollectionOverlay(collection) {
+function buildCollectionOverlay(collection, collectionId) {
   const overlay = document.createElement('div');
-  overlay.className = 'collection-overlay';
+  overlay.className = `collection-overlay collection-overlay--${collectionId}`;
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-label', collection.title);
@@ -775,7 +775,7 @@ function loadCollection(collectionName) {
     return;
   }
 
-  const overlay = buildCollectionOverlay(collection);
+  const overlay = buildCollectionOverlay(collection, collectionName);
   document.body.appendChild(overlay);
 
   /* Double rAF ensures the browser paints before the open class triggers the transition */

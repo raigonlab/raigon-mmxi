@@ -1877,6 +1877,22 @@ nav {
   .collection-overlay-card:nth-child(even) {
     margin-top: 211px;
   }
+
+  /* E-Motion artworks read ~25% larger than other collections on
+     small screens — every dimension in the zigzag scales together
+     (×1.25) so the layout rhythm stays proportional. */
+  .collection-overlay--e-motion .collection-overlay-grid {
+    height: 410px;
+    gap: 117.5px;
+  }
+
+  .collection-overlay--e-motion .collection-overlay-card {
+    height: 146px;
+  }
+
+  .collection-overlay--e-motion .collection-overlay-card:nth-child(even) {
+    margin-top: 264px;
+  }
 }
 
 /* --- Mobile (480px) --- */
@@ -2137,6 +2153,22 @@ nav {
     margin-top: 214px;
   }
 
+  /* E-Motion artworks read ~25% larger than other collections on
+     small screens — every dimension in the zigzag scales together
+     (×1.25) so the layout rhythm stays proportional. */
+  .collection-overlay--e-motion .collection-overlay-grid {
+    height: 526px;
+    gap: 135px;
+  }
+
+  .collection-overlay--e-motion .collection-overlay-card {
+    height: 135px;
+  }
+
+  .collection-overlay--e-motion .collection-overlay-card:nth-child(even) {
+    margin-top: 268px;
+  }
+
   .collection-overlay-scrollbar {
     display: block;
   }
@@ -2144,6 +2176,7 @@ nav {
   .scroll-bar.collection-overlay-scrollbar {
     left: 50%;
     bottom: 105px;
+    width: calc((100% - 40px) * 0.9);
     transform: translateX(-50%);
   }
 
