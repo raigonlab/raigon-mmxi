@@ -1727,7 +1727,7 @@ nav {
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(196, 98, 45, 0.45);
+  color: rgba(196, 98, 45, 1);
 }
 
 .collection-overlay-close {
