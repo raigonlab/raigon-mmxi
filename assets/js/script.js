@@ -82,15 +82,15 @@ const COLLECTIONS_DATA = {
       { "src": "assets/images/hero/digital-charcoal-00008.jpg", "title": "Shard"    }
     ]
   },
-  "e-motion": {
-    "title": "E-Motion",
+  "accord": {
+    "title": "Accord",
     "count": 5,
     "works": [
-      { "src": "assets/images/e-motion/e-motion-00001.jpg", "title": "You"                  },
-      { "src": "assets/images/e-motion/e-motion-00002.jpg", "title": "Anima"               },
-      { "src": "assets/images/e-motion/e-motion-00003.jpg", "title": "Dynamis"             },
-      { "src": "assets/images/e-motion/e-motion-00004.jpg", "title": "Surge"               },
-      { "src": "assets/images/e-motion/e-motion-00005.jpg", "title": "Corpus"              }
+      { "src": "assets/images/accord/accord-00001.jpg", "title": "You"                  },
+      { "src": "assets/images/accord/accord-00002.jpg", "title": "Anima"               },
+      { "src": "assets/images/accord/accord-00003.jpg", "title": "Dynamis"             },
+      { "src": "assets/images/accord/accord-00004.jpg", "title": "Surge"               },
+      { "src": "assets/images/accord/accord-00005.jpg", "title": "Corpus"              }
     ]
   }
 };
@@ -793,7 +793,7 @@ function loadCollection(collectionName) {
 /* Wire each collection button to its fetch call */
 document.querySelectorAll('.collection-card').forEach(btn => {
   btn.addEventListener('click', () => {
-    if (btn.dataset.collection === 'e-motion') {
+    if (btn.dataset.collection === 'accord') {
       openAccessGate();
       return;
     }
@@ -930,7 +930,7 @@ if (arquiveGrid && arquiveScrollBar && arquiveThumb) {
 }
 
 /* ============================================================
-   E-MOTION ACCESS GATE
+   ACCORD ACCESS GATE
 ============================================================ */
 const ACCESS_CODE          = 'MMXXVI';
 const accessGate           = document.getElementById('access-gate');
@@ -989,7 +989,7 @@ accessGate.addEventListener('click', e => {
 
 accessGateEnter.addEventListener('click', () => {
   closeAccessGate();
-  loadCollection('e-motion');
+  loadCollection('accord');
 });
 
 
