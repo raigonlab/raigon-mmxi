@@ -941,7 +941,7 @@ nav {
     scroll-snap-align: center;
     cursor: pointer;
     background: rgba(232, 228, 220, 0.03);
-    border: 1px solid rgba(232, 228, 220, 0.1);
+    border: 1px solid rgba(232, 228, 220, 0.2);
     border-radius: 24px;
     overflow: hidden;
     text-align: left;
@@ -1294,7 +1294,7 @@ nav {
   font-family: 'Syne', sans-serif;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 6px;
