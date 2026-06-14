@@ -1876,9 +1876,12 @@ nav {
     grid-template-rows: 1fr;
   }
 
+  /* Inset to roughly match the image's max-width (88vw) above, so the
+     text block reads as aligned with the artwork rather than edge-to-edge. */
   .modal-info-panel {
     grid-area: 1 / 1;
-    width: 100%;
+    width: 88%;
+    margin: 0 auto;
     transition: opacity 0.35s ease;
     justify-content: flex-start;
   }
@@ -1886,7 +1889,8 @@ nav {
   .modal-inquire-panel {
     grid-area: 1 / 1;
     position: static;
-    width: 100%;
+    width: 88%;
+    margin: 0 auto;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s ease;
