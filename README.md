@@ -92,36 +92,36 @@ The long-term vision is to evolve this system into a framework that other indepe
 **User Flow Desktop**
 
 1. User lands on the Home gallery
-![Home - desktop](documentation/home-desktop.png)
+![Home - desktop](documentation/home-desktop.jpeg)
 
 2. Drags or scrolls to explore the artwork
-![Gallery scroll - desktop](documentation/gallery-scroll-desktop.png)
+![Gallery scroll - desktop](documentation/gallery-scroll-desktop.jpeg)
 
 3. Clicks an artwork to open the full-screen modal
-![Artwork modal - desktop](documentation/modal-desktop.png)
+![Artwork modal - desktop](documentation/modal-desktop.jpeg)
 
 4. Navigates to Vault to explore collections
-![Vault - desktop](documentation/vault-desktop.png)
+![Vault - desktop](documentation/vault-desktop.jpeg)
 
 5. Navigates to Arquive to find contact information
-![Arquive - desktop](documentation/arquive-desktop.png)
+![Arquive - desktop](documentation/arquive-desktop.jpeg)
 
 **User Flow Mobile**
 
 1. User lands on the Home gallery
-![Home - mobile](documentation/home-mobile.png)
+![Home - mobile](documentation/home-mobile.jpeg)
 
 2. Swipes to explore the artwork
-![Gallery scroll - mobile](documentation/gallery-scroll-mobile.png)
+![Gallery scroll - mobile](documentation/gallery-scroll-mobile.jpeg)
 
 3. Taps an artwork to open the modal
-![Artwork modal - mobile](documentation/modal-mobile.png)
+![Artwork modal - mobile](documentation/modal-mobile.jpeg)
 
 4. Navigates to Vault
-![Vault - mobile](documentation/vault-mobile.png)
+![Vault - mobile](documentation/vault-mobile.jpeg)
 
 5. Navigates to Arquive
-![Arquive - mobile](documentation/arquive-mobile.png)
+![Arquive - mobile](documentation/arquive-mobile.jpeg)
 
 ---
 
@@ -159,7 +159,7 @@ Dark, editorial scheme centred on the artwork:
 
 Clean, minimal, and designed to frame artwork without competing with it.
 
-![raigon Colour Scheme](documentation/colour-scheme.png)
+![raigon Colour Scheme](documentation/colour-scheme.jpg)
 
 ---
 
