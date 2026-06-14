@@ -437,7 +437,6 @@ const modalCounterEl   = document.getElementById('modal-counter');
 const modalCounterImg  = document.getElementById('modal-counter-img');
 const modalInquireName = document.getElementById('modal-inquire-name');
 const modalInquireMsg  = document.getElementById('inquire-message-input');
-const modalInquireForm = document.getElementById('modal-inquire-form');
 
 /* Open the modal for the artwork that matches the given object */
 function openArtwork(art) {
@@ -880,7 +879,7 @@ const vaultScrollBar = document.getElementById('vault-scroll-bar');
 const vaultThumb     = vaultScrollBar?.querySelector('.scroll-thumb');
 
 if (vaultSymbols && vaultScrollBar && vaultThumb) {
-  function updateVaultThumb() {
+  const updateVaultThumb = () => {
     const trackWidth = vaultScrollBar.clientWidth;
     const maxScroll  = vaultSymbols.scrollWidth - vaultSymbols.clientWidth;
     const ratio      = Math.min(1, vaultSymbols.clientWidth / vaultSymbols.scrollWidth);
@@ -889,7 +888,7 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
 
     vaultThumb.style.width = thumbW.toFixed(1) + 'px';
     vaultThumb.style.left  = (progress * (trackWidth - thumbW)).toFixed(1) + 'px';
-  }
+  };
 
   vaultSymbols.addEventListener('scroll', () => requestAnimationFrame(updateVaultThumb));
   window.addEventListener('resize', updateVaultThumb);
@@ -919,13 +918,13 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
     vaultSymbols.scrollLeft += dx * (maxScroll / vaultScrollBar.clientWidth);
   });
 
-  function endVaultBarDrag(e) {
+  const endVaultBarDrag = (e) => {
     if (!vaultBarDragging) { return; }
     vaultBarDragging = false;
     vaultScrollBar.classList.remove('scroll-bar--dragging');
     vaultScrollBar.releasePointerCapture(e.pointerId);
     vaultSymbols.style.scrollSnapType = '';
-  }
+  };
 
   vaultScrollBar.addEventListener('pointerup', endVaultBarDrag);
   vaultScrollBar.addEventListener('pointercancel', endVaultBarDrag);
