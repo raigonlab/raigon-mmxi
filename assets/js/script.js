@@ -218,12 +218,22 @@ window.addEventListener('load', () => {
   ];
 
   const layers         = [];
+  const allCards       = [];
   const offsets        = [0, -285, -140];
   const targetOffsets  = [0, -285, -140];
   const parallaxSpeeds = [0.08, 0.05, 0.03];
 
   let mouseX = 0;
   const W = window.innerWidth;
+
+  /* Depth-of-field focus effect — cards fade, blur, shrink and drop
+     behind as they move away from screen centre. Tunable: */
+  const FOCUS_RADIUS     = 0.55; // influence radius, as a fraction of viewport width
+  const FOCUS_BLUR       = 2.5;  // max blur (px) at the edges
+  const FOCUS_FADE       = 0.55; // max opacity reduction at the edges
+  const FOCUS_SCALE      = 0.12; // max scale boost at the centre
+  const LERP_FACTOR      = 0.08; // offset smoothing per frame
+  const AUTOSCROLL_SPEED = 0.4;  // px of offset lost per frame when auto-scrolling
 
   rows.forEach((row, ri) => {
     const layer = document.createElement('div');
@@ -241,6 +251,7 @@ window.addEventListener('load', () => {
       card.appendChild(img);
       card.addEventListener('click', () => { if (!dragMoved) { openArtwork(art); } });
       layer.appendChild(card);
+      allCards.push(card);
     });
 
     scene.appendChild(layer);
@@ -377,7 +388,7 @@ window.addEventListener('load', () => {
   function animate() {
     if (!autoScrollPaused) {
       layers.forEach((_, i) => {
-        targetOffsets[i] -= 0.4;
+        targetOffsets[i] -= AUTOSCROLL_SPEED;
       });
     }
 
@@ -398,10 +409,29 @@ window.addEventListener('load', () => {
       const prev = targetOffsets[i];
       targetOffsets[i] = wrapOffset(targetOffsets[i], layer);
       offsets[i] += targetOffsets[i] - prev;
-      offsets[i] += (targetOffsets[i] - offsets[i]) * 0.08;
+      offsets[i] += (targetOffsets[i] - offsets[i]) * LERP_FACTOR;
 
       const px = mouseX * 120 * parallaxSpeeds[i] * 10;
       layer.style.transform = `translateX(${offsets[i] + px}px)`;
+    });
+
+    /* Depth-of-field focus pass — blur, fade, shrink and drop behind
+       each card based on its distance from screen centre. Reads are
+       batched after all layer transforms are written, so this costs
+       one layout reflow per frame rather than one per card. */
+    const centerX = W / 2;
+    const maxDist = W * FOCUS_RADIUS;
+
+    allCards.forEach(card => {
+      const r    = card.getBoundingClientRect();
+      const cx   = r.left + r.width / 2;
+      const dist = Math.abs(cx - centerX);
+      const t    = Math.min(1, dist / maxDist);
+
+      card.style.opacity   = (1 - t * FOCUS_FADE).toFixed(2);
+      card.style.filter    = `blur(${(t * FOCUS_BLUR).toFixed(1)}px)`;
+      card.style.transform = `scale(${(1 + (1 - t) * FOCUS_SCALE).toFixed(3)})`;
+      card.style.zIndex    = Math.round((1 - t) * 10);
     });
 
     if (layers[0] && layers[0].scrollWidth > 0) {
