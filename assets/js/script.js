@@ -229,7 +229,7 @@ window.addEventListener('load', () => {
   /* Depth-of-field focus effect — cards fade, blur, shrink and drop
      behind as they move away from screen centre. Tunable: */
   const FOCUS_RADIUS     = 0.55; // influence radius, as a fraction of viewport width
-  const FOCUS_BLUR       = 2.5;  // max blur (px) at the edges
+  const FOCUS_BLUR       = W <= 768 ? 0.625 : 1.875; // max blur (px) at the edges — barely there on tablet/mobile
   const FOCUS_FADE       = 0.55; // max opacity reduction at the edges
   const FOCUS_SCALE      = 0.12; // max scale boost at the centre
   const LERP_FACTOR      = 0.08; // offset smoothing per frame
