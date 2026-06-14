@@ -1603,6 +1603,34 @@ nav {
   pointer-events: auto;
 }
 
+/* Progressive edge blur — a soft focus vignette, strongest at the
+   left/right edges and fading out toward the centre, so the cards
+   nearest the viewport's sides feel slightly out of focus. */
+.collection-overlay::before,
+.collection-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20%;
+  z-index: 1;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.collection-overlay::before {
+  left: 0;
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.collection-overlay::after {
+  right: 0;
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
 /* Header bar */
 .collection-overlay-header {
   position: relative;
@@ -1721,6 +1749,13 @@ nav {
   transform: none;
   opacity: 0.7;
   transition: opacity 0.2s ease;
+  /* Sit above the edge-blur layer (z-index: 1) so it stays sharp. */
+  z-index: 2;
+}
+
+.collection-overlay .scroll-playpause {
+  /* Sit above the edge-blur layer (z-index: 1) so it stays sharp. */
+  z-index: 2;
 }
 
 .collection-overlay-card-img {
@@ -1906,15 +1941,46 @@ nav {
 
   /* Below 768px .nav-pills sits closer to center while the timeline
      stays at left:58px — once the two get close enough the progress
-     bar runs underneath the pill bar. Lift the playback controls
-     clear of the nav bar. */
+     bar runs underneath the pill bar. Move the timeline to its own
+     centred row above the nav, matching the phone layout. */
   .scroll-bar.home-scroll-bar,
   .scroll-bar.collection-overlay-scrollbar {
-    bottom: 90px;
+    left: 50%;
+    bottom: 105px;
+    width: calc((100% - 40px) * 0.9);
+    transform: translateX(-50%);
   }
 
+  /* Clean play/pause icon, no container, aligned with the nav bar on the left */
   .scroll-playpause {
-    bottom: 83px;
+    width: 50px;
+    height: 50px;
+    bottom: 28px;
+    left: 20px;
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  .scroll-playpause svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Nav — almost full width, pills stretched evenly, shifted right to
+     leave room for the play/pause button (toggled via body.nav-shift). */
+  .nav-pills {
+    width: calc(100% - 102px);
+    justify-content: space-between;
+  }
+
+  .pill {
+    flex: 1;
+    justify-content: center;
+  }
+
+  body.nav-shift .nav-pills {
+    margin-left: 62px;
   }
 }
 
@@ -2077,13 +2143,6 @@ nav {
     display: block;
   }
 
-  .scroll-bar.collection-overlay-scrollbar {
-    left: 50%;
-    bottom: 105px;
-    width: calc((100% - 40px) * 0.9);
-    transform: translateX(-50%);
-  }
-
   .collection-overlay-header {
     flex-direction: column;
     align-items: center;
@@ -2097,25 +2156,6 @@ nav {
 
   .collection-overlay-count {
     color: rgba(196, 98, 45, 1);
-  }
-
-  /* Nav — almost full width on every page, pills stretched evenly.
-     On Home (play/pause button) or while a collection overlay is open
-     (its scroll bar occupies the same spot), the bar is shifted right
-     to leave room on the left — toggled via body.nav-shift in
-     script.js. Other pages keep this same wide bar centered. */
-  .nav-pills {
-    width: calc(100% - 102px);
-    justify-content: space-between;
-  }
-
-  .pill {
-    flex: 1;
-    justify-content: center;
-  }
-
-  body.nav-shift .nav-pills {
-    margin-left: 62px;
   }
 
   /* Gallery layers — cards 20% bigger, 30% less lateral gap */
@@ -2144,32 +2184,6 @@ nav {
     width: calc((100% - 102px) * 0.8);
   }
 
-  /* Clean play/pause icon, no container, aligned with the nav bar on the left */
-  .scroll-playpause {
-    width: 50px;
-    height: 50px;
-    bottom: 28px;
-    left: 20px;
-    background: none;
-    border: none;
-    border-radius: 0;
-  }
-
-  .scroll-playpause svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* Restore centered position on mobile, matching the other scroll bars.
-     Bottom is measured against #home's full-height box, so add back the
-     60px gap between #home and .home-scene to land in the same spot.
-     Width spans edge-to-edge of the play button + nav bar group below. */
-  .scroll-bar.home-scroll-bar {
-    left: 50%;
-    bottom: 105px;
-    width: calc((100% - 40px) * 0.9);
-    transform: translateX(-50%);
-  }
 }
 
 /* --- Narrow phones (320px) --- */
