@@ -2204,6 +2204,21 @@ nav {
   }
 }
 
+/* --- Very tall windows (manual resize) ---
+   .collection-overlay-grid has a fixed height and is vertically
+   centred, so on unusually tall viewports it floats far above the
+   bottom-anchored position indicator. Pull the indicator up toward
+   the grid so the two stay visually connected. */
+@media (min-height: 1100px) {
+  .collection-overlay .scroll-bar.collection-overlay-scrollbar {
+    bottom: 30vh;
+  }
+
+  .collection-overlay .scroll-playpause {
+    bottom: calc(30vh - 7px);
+  }
+}
+
 /* ============================================================
    ARQUIVE — EVENTS
    Loading / error states for the dynamically rendered event block.

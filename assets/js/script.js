@@ -918,13 +918,13 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
     vaultSymbols.scrollLeft += dx * (maxScroll / vaultScrollBar.clientWidth);
   });
 
-  const endVaultBarDrag = (e) => {
+  function endVaultBarDrag(e) {
     if (!vaultBarDragging) { return; }
     vaultBarDragging = false;
     vaultScrollBar.classList.remove('scroll-bar--dragging');
     vaultScrollBar.releasePointerCapture(e.pointerId);
     vaultSymbols.style.scrollSnapType = '';
-  };
+  }
 
   vaultScrollBar.addEventListener('pointerup', endVaultBarDrag);
   vaultScrollBar.addEventListener('pointercancel', endVaultBarDrag);
