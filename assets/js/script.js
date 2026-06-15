@@ -193,6 +193,29 @@ switchSection(VALID_PAGES.includes(initialPage) ? initialPage : 'home');
 const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1.5"/><rect x="10" y="2" width="3" height="12" rx="1.5"/></svg>';
 const ICON_PLAY  = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
 
+/* Fullscreen toggle — visible on all pages, desktop only (hidden ≤768px) */
+const ICON_EXPAND   = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 5V1.5H5"/><path d="M11 1.5h3.5V5"/><path d="M14.5 11V14.5H11"/><path d="M5 14.5H1.5V11"/></svg>';
+const ICON_COLLAPSE = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 1.5V5H2"/><path d="M10.5 1.5V5H14"/><path d="M14 11h-3.5v3.5"/><path d="M2 11h3.5v3.5"/></svg>';
+
+const fullscreenToggle = document.getElementById('fullscreen-toggle');
+
+function updateFullscreenToggle() {
+  const isFullscreen = !!document.fullscreenElement;
+  fullscreenToggle.innerHTML = isFullscreen ? ICON_COLLAPSE : ICON_EXPAND;
+  fullscreenToggle.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen');
+}
+
+fullscreenToggle.addEventListener('click', () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    document.documentElement.requestFullscreen();
+  }
+});
+
+document.addEventListener('fullscreenchange', updateFullscreenToggle);
+updateFullscreenToggle();
+
 const globalLogo = document.querySelector('.global-logo');
 globalLogo.addEventListener('click', () => navigateTo('home'));
 globalLogo.addEventListener('keydown', e => {
