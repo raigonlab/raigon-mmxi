@@ -2495,8 +2495,8 @@ nav {
   margin-left: 8px;
 }
 
-.frame-svg  { width: 128px; color: rgba(232, 228, 220, 0.28); display: block; }
-.plant-svg  { width: 68px;  color: rgba(232, 228, 220, 0.25); display: block; }
+.frame-svg  { width: 128px; color: rgba(232, 228, 220, 0.39); display: block; }
+.plant-svg  { width: 68px;  color: rgba(232, 228, 220, 0.35); display: block; }
 
 .not-found-label {
   font-family: 'Syne', sans-serif;
@@ -2544,4 +2544,19 @@ nav {
   .access-gate-input::placeholder {
     font-size: 11px;
   }
+
+  /* The 404 frame row (3 frames + plant) is wider than the viewport
+     on mobile, clipping the leftmost frame — scale everything down
+     so the whole composition fits. */
+  .gallery-wall {
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .plant-wrap {
+    margin-left: 4px;
+  }
+
+  .frame-svg { width: 88px; }
+  .plant-svg { width: 48px; }
 }

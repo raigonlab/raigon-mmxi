@@ -106,6 +106,9 @@ The long-term vision is to evolve this system into a framework that other indepe
 5. Navigates to Arquive to find contact information
 ![Arquive - desktop](documentation/arquive-desktop.jpeg)
 
+6. Visits a broken or unknown URL and is shown the custom 404 page
+![Error page - desktop](documentation/error-desktop.jpeg)
+
 **User Flow Mobile**
 
 1. User lands on the Home gallery
@@ -122,6 +125,9 @@ The long-term vision is to evolve this system into a framework that other indepe
 
 5. Navigates to Arquive
 ![Arquive - mobile](documentation/arquive-mobile.jpeg)
+
+6. Visits a broken or unknown URL and is shown the custom 404 page
+![Error page - mobile](documentation/error-mobile.jpeg)
 
 ---
 
