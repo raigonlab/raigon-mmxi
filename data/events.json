@@ -2,14 +2,14 @@
   "events": [
     {
       "id": "evt-001",
-      "title": "Carvão Digital — Opening Night",
+      "title": "Digital Charcoal — Opening Night",
       "venue": "Galerie Lange + Pult",
       "city": "Zürich, Switzerland",
-      "dateStart": "20260710",
-      "dateEnd": "20260710",
+      "dateStart": "20270110",
+      "dateEnd": "20270110",
       "timeStart": "190000",
       "timeEnd": "220000",
-      "description": "Opening reception for the solo exhibition Carvão Digital. Works from the Digital Charcoal and Form and Void series on view through August.",
+      "description": "Opening reception for the solo exhibition Digital Charcoal. Works from the Digital Charcoal and Form and Void series on view through August.",
       "type": "Opening"
     },
     {
