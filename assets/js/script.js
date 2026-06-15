@@ -563,9 +563,9 @@ function showVaultFeedback(message, isError = false) {
   const feedback = document.getElementById('vault-feedback');
   if (!feedback) { return; }
   feedback.textContent = message;
-  feedback.style.color = isError
-    ? 'rgba(220, 100, 80, 0.7)'
-    : 'rgba(232, 228, 220, 0.4)';
+  feedback.style.color = isError ?
+    'rgba(220, 100, 80, 0.7)' :
+    'rgba(232, 228, 220, 0.4)';
 }
 
 
@@ -948,13 +948,13 @@ if (vaultSymbols && vaultScrollBar && vaultThumb) {
     vaultSymbols.scrollLeft += dx * (maxScroll / vaultScrollBar.clientWidth);
   });
 
-  function endVaultBarDrag(e) {
+  const endVaultBarDrag = (e) => {
     if (!vaultBarDragging) { return; }
     vaultBarDragging = false;
     vaultScrollBar.classList.remove('scroll-bar--dragging');
     vaultScrollBar.releasePointerCapture(e.pointerId);
     vaultSymbols.style.scrollSnapType = '';
-  }
+  };
 
   vaultScrollBar.addEventListener('pointerup', endVaultBarDrag);
   vaultScrollBar.addEventListener('pointercancel', endVaultBarDrag);
@@ -1380,7 +1380,11 @@ function resetInquirePanel() {
   });
 
   toggleBtn.addEventListener('click', () => {
-    card.classList.contains('expanded') ? collapseBio() : expandBio();
+    if (card.classList.contains('expanded')) {
+      collapseBio();
+    } else {
+      expandBio();
+    }
   });
 
   closeBtn.addEventListener('click', collapseBio);
