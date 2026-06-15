@@ -311,6 +311,7 @@ To run the project locally:
 
 ### Content
 
+- Markdown.2bn.dev - documentation
 - [MDN Web Docs](https://developer.mozilla.org/) — Fetch API and DOM reference
 - Code Institute materials
 - Claude — coding assistant for debugging and project support
