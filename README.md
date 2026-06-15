@@ -150,12 +150,12 @@ Wireframes were created before development began, covering both mobile and deskt
 Dark, editorial scheme centred on the artwork:
 
 | Token | Value |
-| ----- | ----- |
-| Background | `#0a0907` |
-| Surface | `#1c1916` |
+| ------- | ------- |
+| Background | `#1c1916` |
+| Secondary | `#1a2a3a` |
+| Accent Secondary | `#4a7c6a` |
 | Accent | `#c4622d` |
 | Text | `#e8e4dc` |
-| Muted | `rgba(232,228,220,0.4)` |
 
 Clean, minimal, and designed to frame artwork without competing with it.
 
@@ -190,8 +190,8 @@ Wireframes were created using Figma to define layout and structure across device
 | Target | Expectation | Outcome |
 | ------ | ----------- | ------- |
 | As an art collector | I want to browse artwork in a visually immersive gallery | So I can evaluate pieces for acquisition |
-| As an art collector | I want to view an artwork in full detail | So I can see the title, series, year, and description |
-| As an art collector | I want to navigate between artworks without closing the viewer | So my browsing flow is uninterrupted |
+| As a visitor | I want to view an artwork in full detail | So I can see the title, series, year, and description |
+| As a visitor | I want to navigate between artworks without closing the viewer | So my browsing flow is uninterrupted |
 | As an art collector | I want to inquire about acquiring a piece through direct contact | So I can begin a personal conversation with the artist |
 | As a creative / peer artist | I want to understand the artist's visual language | So I can engage meaningfully with the work |
 | As a creative / peer artist | I want to explore curated collections by theme | So I can discover conceptual groupings |
@@ -310,13 +310,14 @@ To run the project locally:
 - ChatGPT — debugging and explanations
 - Gemini — image generation
 - [fonts.google.com](https://fonts.google.com)
-- [fireship.dev](https://fireship.dev) — JavaScript reference and tutorials
+- [fireship.dev](https://fireship.dev)
 - [tinypng.com](https://tinypng.com) — image compression
+- ResponsivelyApp - manage screenshot
 
 ### Media
 
 - All artwork pieces by Railson Gonçalves (© Raigon Lab, MMXXIII)
-- Logo and symbol images are original works by Raigon
+- Logo and symbol images are original works by Railson
 
 ---
 
