@@ -239,14 +239,22 @@ window.addEventListener('load', () => {
     const layer = document.createElement('div');
     layer.className = `layer layer-${ri + 1}`;
 
-    [...row, ...row, ...row].forEach(art => {
+    [...row, ...row, ...row].forEach((art, ai) => {
       const card = document.createElement('div');
       card.className = 'artwork-card';
 
       const img = document.createElement('img');
-      img.src     = art.src;
-      img.alt     = art.title;
-      img.loading = 'lazy';
+      img.src = art.src;
+      img.alt = art.title;
+
+      /* The very first card is the Largest Contentful Paint candidate —
+         load it eagerly and at high priority instead of lazily. */
+      if (ri === 0 && ai === 0) {
+        img.loading = 'eager';
+        img.setAttribute('fetchpriority', 'high');
+      } else {
+        img.loading = 'lazy';
+      }
 
       card.appendChild(img);
       card.addEventListener('click', () => { if (!dragMoved) { openArtwork(art); } });
