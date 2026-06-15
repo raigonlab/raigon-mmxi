@@ -1,11 +1,11 @@
-# [raigon](https://raigonlab.github.io/raigon)
+# [raigon](https://raigonlab.github.io/raigon-mmxi)
 
 Developer: Railson Goncalves ([raigonlab](https://www.github.com/raigonlab))
 
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/raigonlab/raigon)](https://www.github.com/raigonlab/raigon/commits/main)
-[![GitHub last commit](https://img.shields.io/github/last-commit/raigonlab/raigon)](https://www.github.com/raigonlab/raigon/commits/main)
-[![GitHub repo size](https://img.shields.io/github/repo-size/raigonlab/raigon)](https://www.github.com/raigonlab/raigon)
-[![badge](https://img.shields.io/badge/deployment-GitHub_Pages-purple)](https://raigonlab.github.io/raigon)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/raigonlab/raigon-mmxi)](https://www.github.com/raigonlab/raigon-mmxi/commits/main)
+[![GitHub last commit](https://img.shields.io/github/last-commit/raigonlab/raigon-mmxi)](https://www.github.com/raigonlab/raigon-mmxi/commits/main)
+[![GitHub repo size](https://img.shields.io/github/repo-size/raigonlab/raigon-mmxi)](https://www.github.com/raigonlab/raigon-mmxi)
+[![badge](https://img.shields.io/badge/deployment-GitHub_Pages-purple)](https://raigonlab.github.io/raigon-mmxi)
 
 ---
 
@@ -21,13 +21,13 @@ The key technical decisions were: a single-page architecture with hash-based rou
 
 The long-term vision is to evolve this system into a framework that other independent artists can use to present and manage their work online, reducing dependence on traditional platforms.
 
-#### [Live site →](https://raigonlab.github.io/raigon)
+#### [Live site →](https://raigonlab.github.io/raigon-mmxi)
 
 ---
 
 ![raigon responsive mockup](documentation/responsive_design.png)
 
-*source: https://ui.dev/amiresponsive?url=https://raigonlab.github.io/raigon*
+*source: https://ui.dev/amiresponsive?url=https://raigonlab.github.io/raigon-mmxi*
 
 ---
 
@@ -277,7 +277,7 @@ The site was deployed to GitHub Pages. The steps to deploy are as follows:
 3. In the build and deployment area, choose from source **"deploy from a branch"** and then choose the **main** branch, **root** folder, and save
 4. Once saved, the page will be automatically refreshed with a ribbon confirming successful deployment (it can take around 5 minutes for the link to appear)
 
-**Live link:** https://raigonlab.github.io/raigon
+**Live link:** https://raigonlab.github.io/raigon-mmxi
 
 ### Local Development
 
@@ -285,11 +285,11 @@ To run the project locally:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/raigonlab/raigon.git
+   git clone https://github.com/raigonlab/raigon-mmxi.git
    ```
 2. Navigate into the project folder:
    ```
-   cd raigon
+   cd raigon-mmxi
    ```
 3. Start a local server — either with the VS Code Live Server extension, or via terminal:
    ```
