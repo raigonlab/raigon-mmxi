@@ -127,11 +127,12 @@ The long-term vision is to evolve this system into a framework that other indepe
 
 #### 4. Skeleton
 
-Wireframes were created before development began, covering both mobile and desktop layouts.
+Low-fidelity sketches were created first to define content placement and user flow, before moving on to more detailed wireframes.
 
-![Home wireframe](documentation/wireframe-home.png)
-![Modal wireframe](documentation/wireframe-modal.png)
-![Vault wireframe](documentation/wireframe-vault.png)
+![Home skeleton](documentation/skeleton-home.png)
+![Modal skeleton](documentation/skeleton-modal.png)
+![Vault skeleton](documentation/skeleton-vault.png)
+![Arquive skeleton](documentation/skeleton-arquive.png)
 
 ---
 
@@ -159,7 +160,7 @@ Dark, editorial scheme centred on the artwork:
 
 Clean, minimal, and designed to frame artwork without competing with it.
 
-![raigon Colour Scheme](documentation/colour-scheme.jpg)
+![raigon Colour Scheme](documentation/colour-scheme.png)
 
 ---
 
