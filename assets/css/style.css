@@ -1254,6 +1254,10 @@ nav {
   color: rgba(232, 228, 220, 0.8);
 }
 
+/* ── AI ASSISTANCE: Event styles below (.event-block through .events-error)
+   were developed with the help of Claude Sonnet 4.6 (Anthropic).
+   Commit: 75c4905 — "Add dynamic events column to Arquive section" ── */
+
 /* Next event card — a single compact row */
 .arquive-card--events .event-block {
   display: flex;
@@ -1580,6 +1584,10 @@ nav {
    COLLECTION OVERLAY
    Full-screen image grid opened by the Vault collection buttons.
    HTML is built dynamically by script.js (not in index.html).
+
+   AI ASSISTANCE: This section was developed with the help of
+   Claude Sonnet 4.6 (Anthropic).
+   Commit: 1fef314 — "Add collection overlay grid to Vault section"
 ============================================================ */
 
 /* Backdrop */

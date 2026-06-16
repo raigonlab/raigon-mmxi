@@ -585,6 +585,10 @@ function showVaultFeedback(message, isError = false) {
    Builds and opens a full-screen grid when a collection is
    selected in the Vault. All DOM is created here at runtime;
    nothing is added to index.html for this feature.
+
+   AI ASSISTANCE: This section (buildCollectionOverlay, loadCollection)
+   was developed with the help of Claude Sonnet 4.6 (Anthropic).
+   Commit: 1fef314 — "Add collection overlay grid to Vault section"
 ============================================================ */
 
 /* Build the overlay DOM for one collection and return the root element. */
@@ -1031,6 +1035,11 @@ accessGateEnter.addEventListener('click', () => {
    Fetches upcoming events from data/events.json and renders
    the next one into the events column, keeping it compact.
    Called automatically the first time Arquive becomes active.
+
+   AI ASSISTANCE: This section (formatEventDate, buildCalendarUrl,
+   buildAllDayCalendarUrl, buildEventBlock, loadEvents) was developed
+   with the help of Claude Sonnet 4.6 (Anthropic).
+   Commit: 75c4905 — "Add dynamic events column to Arquive section"
 ============================================================ */
 
 /* Format a YYYYMMDD pair into a human-readable label.
