@@ -1049,21 +1049,6 @@ nav {
 
   .collection-card--soon .collection-card-img { opacity: 0.85; }
 
-  /* Calendar link — re-enable pointer events for just this pill */
-.collection-card-cal-btn {
-    pointer-events: auto;
-    cursor: pointer;
-    color: rgba(232, 228, 220, 0.6);
-    text-decoration: none;
-    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
-  }
-
-  .collection-card-cal-btn:hover {
-    border-color: rgba(196, 98, 45, 0.4);
-    background: rgba(196, 98, 45, 0.08);
-    color: var(--text);
-  }
-
   /* Feedback message area — shown on collection load or error */
 .vault-feedback {
     position: absolute;
@@ -1282,27 +1267,6 @@ nav {
   font-size: 11px;
   letter-spacing: 1px;
   color: var(--muted);
-}
-
-.event-cal-btn {
-  flex-shrink: 0;
-  display: inline-block;
-  background: none;
-  border: 1px solid rgba(232, 228, 220, 0.2);
-  border-radius: 100px;
-  padding: 9px 20px;
-  color: rgba(232, 228, 220, 0.6);
-  font-family: 'Syne', sans-serif;
-  font-size: 11px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.event-cal-btn:hover {
-  border-color: rgba(232, 228, 220, 0.5);
-  color: var(--text);
 }
 
 /* Contact form — pill-shaped fields stacked vertically */

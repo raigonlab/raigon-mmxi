@@ -1066,44 +1066,6 @@ function formatEventDate(dateStart, dateEnd) {
   return `${sd} ${months[sm]} – ${ed} ${months[em]} ${ey}`;
 }
 
-/* Build a Google Calendar URL for one event object. */
-function buildCalendarUrl(event) {
-  const params = new URLSearchParams({
-    action:   'TEMPLATE',
-    text:     event.title,
-    dates:    `${event.dateStart}T${event.timeStart}/${event.dateEnd}T${event.timeEnd}`,
-    location: `${event.venue}, ${event.city}`,
-    details:  event.description,
-  });
-  return `https://calendar.google.com/calendar/render?${params.toString()}`;
-}
-
-/* Build a Google Calendar URL for an all-day reminder, given a
-   start/end date pair in YYYYMMDD form (end exclusive). */
-function buildAllDayCalendarUrl({ title, dateStart, dateEnd, details }) {
-  const params = new URLSearchParams({
-    action: 'TEMPLATE',
-    text:   title,
-    dates:  `${dateStart}/${dateEnd}`,
-    details,
-  });
-  return `https://calendar.google.com/calendar/render?${params.toString()}`;
-}
-
-/* "Coming soon" Vault card — wire its calendar link to a reminder
-   spanning the announced arrival month. */
-(function () {
-  const calBtn = document.getElementById('vault-soon-cal-btn');
-  if (!calBtn) { return; }
-
-  calBtn.href = buildAllDayCalendarUrl({
-    title:     'Raigon Vault — New Collection',
-    dateStart: '20270101',
-    dateEnd:   '20270201',
-    details:   'Reminder: a new collection arrives in the Raigon Vault.',
-  });
-})();
-
 /* Clone a <template> by id and return the root element. */
 function cloneTpl(id) {
   return document.getElementById(id).content.cloneNode(true).firstElementChild;
@@ -1115,7 +1077,6 @@ function buildEventBlock(event) {
 
   block.querySelector('.event-title').textContent = event.title;
   block.querySelector('.event-meta').textContent   = `${formatEventDate(event.dateStart, event.dateEnd)} · ${event.city}`;
-  block.querySelector('.event-cal-btn').href       = buildCalendarUrl(event);
 
   return block;
 }
