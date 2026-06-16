@@ -898,6 +898,7 @@ function loadCollection(collectionName) {
 /* Wire each collection button to its fetch call */
 document.querySelectorAll('.collection-card').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (!btn.dataset.collection) { return; }
     if (btn.dataset.collection === 'accord') {
       openAccessGate();
       return;
