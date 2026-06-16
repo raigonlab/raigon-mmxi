@@ -27,20 +27,7 @@ const COLLECTIONS_DATA = {
       { "src": "assets/images/hero/digital-charcoal-00019.jpg", "title": "Torsion",   "description": "Opposing forces twist around a shared axis — yin and yang rendered as physical torque pressed into the surface." }
     ]
   },
-  "form-and-void": {
-    "title": "Form and Void",
-    "count": 8,
-    "works": [
-      { "src": "assets/images/hero/digital-charcoal-00001.jpg", "title": "Anchor",   "description": "A fixed point amid drifting forms — the Stoic anchor of the self, steady while everything else keeps moving." },
-      { "src": "assets/images/hero/digital-charcoal-00002.jpg", "title": "Membrane", "description": "A thin boundary separates two states without fully dividing them, permeable like the Hermetic membrane between the inner and outer worlds." },
-      { "src": "assets/images/hero/digital-charcoal-00003.jpg", "title": "Fracture", "description": "Where structure gives way, new surfaces appear — fracture not as failure but as the moment one form quietly becomes many." },
-      { "src": "assets/images/hero/digital-charcoal-00004.jpg", "title": "Tension",  "description": "Two forces hold each other in place, neither yielding — tension as a kind of stillness, the quiet labor beneath all balance." },
-      { "src": "assets/images/hero/digital-charcoal-00005.jpg", "title": "Residue",  "description": "What remains after the gesture has passed — residue as memory, the faint trace energy leaves behind as it disperses." },
-      { "src": "assets/images/hero/digital-charcoal-00006.jpg", "title": "Hollow",   "description": "A shape defined by what it lacks — hollow space carrying as much weight in the composition as the densest mass." },
-      { "src": "assets/images/hero/digital-charcoal-00007.jpg", "title": "Current",  "description": "Movement without a visible source — charcoal dust following paths it did not choose, carried like qi through the body." },
-      { "src": "assets/images/hero/digital-charcoal-00008.jpg", "title": "Shard",    "description": "A fragment that still carries the pattern of the whole — each shard a small mirror of the structure it broke away from." }
-    ]
-  },
+ 
   "accord": {
     "title": "Accord",
     "count": 5,
