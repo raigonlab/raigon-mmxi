@@ -1150,10 +1150,9 @@ async function loadEvents() {
     list.appendChild(buildEventBlock(data.events[0]));
     eventsLoaded = true;
 
-  } catch (error) {
+  } catch {
     list.innerHTML = '';
     list.appendChild(cloneTpl('events-error-tpl'));
-    console.error('Events fetch failed:', error);
 
   } finally {
     /* Remove any residual loading indicator left after an error */
