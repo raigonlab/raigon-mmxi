@@ -53,6 +53,9 @@
   box-sizing: border-box;
 }
 
+button, input, select, textarea { font: inherit; color: inherit; }
+button { background: none; border: none; padding: 0; cursor: pointer; }
+
  
 /* ── CSS CUSTOM PROPERTIES (design tokens) ── */
 :root {
@@ -956,6 +959,7 @@ nav {
 
   /* Image frame — padding-bottom hack forces a square regardless of flex sizing */
 .collection-card-frame {
+    display: block;
     position: relative;
     width: 100%;
     padding-bottom: 100%;
@@ -979,6 +983,7 @@ nav {
 
   /* Title — sits in the footer above the meta lines */
 .collection-card-title {
+    display: block;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 300;

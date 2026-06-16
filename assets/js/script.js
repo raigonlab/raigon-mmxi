@@ -131,6 +131,7 @@ function switchSection(page) {
 function navigateTo(page) {
   artworkModal.classList.remove('open');
   artworkModal.setAttribute('aria-hidden', 'true');
+  artworkModal.setAttribute('inert', '');
   modalWorks   = artworks;
   modalContext = 'home';
   document.querySelectorAll('.collection-overlay').forEach(o => o.remove());
@@ -159,6 +160,7 @@ window.addEventListener('hashchange', () => {
   if (page === 'home' && artworkModal.classList.contains('open')) {
     artworkModal.classList.remove('open');
     artworkModal.setAttribute('aria-hidden', 'true');
+    artworkModal.setAttribute('inert', '');
     return;
   }
 
@@ -166,6 +168,7 @@ window.addEventListener('hashchange', () => {
     if (artworkModal.classList.contains('open')) {
       artworkModal.classList.remove('open');
       artworkModal.setAttribute('aria-hidden', 'true');
+      artworkModal.setAttribute('inert', '');
       modalWorks   = artworks;
       modalContext = 'home';
     }
@@ -194,10 +197,7 @@ const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="curren
 const ICON_PLAY  = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
 
 const globalLogo = document.querySelector('.global-logo');
-globalLogo.addEventListener('click', () => navigateTo('home'));
-globalLogo.addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ' ') { navigateTo('home'); }
-});
+globalLogo.addEventListener('click', e => { e.preventDefault(); navigateTo('home'); });
 
 
 /* ============================================================
@@ -501,6 +501,7 @@ function showModal(idx) {
   resetInquirePanel();
   artworkModal.classList.add('open');
   artworkModal.setAttribute('aria-hidden', 'false');
+  artworkModal.removeAttribute('inert');
   const expectedHash = `${modalContext}/modal/${idx}`;
   if (location.hash !== `#${expectedHash}`) { location.hash = expectedHash; }
 }
@@ -516,6 +517,7 @@ function openCollectionWork(works, idx) {
 function closeModal() {
   artworkModal.classList.remove('open');
   artworkModal.setAttribute('aria-hidden', 'true');
+  artworkModal.setAttribute('inert', '');
   const returnHash = modalContext === 'vault/collection' ? 'vault/collection' : 'home';
   modalWorks   = artworks;
   modalContext = 'home';
@@ -899,17 +901,6 @@ document.querySelectorAll('.collection-card').forEach(btn => {
   });
 });
 
-/* Collection cards are divs with role="button" — restore keyboard
-   activation (Enter/Space) for assistive tech users */
-document.querySelectorAll('.collection-card[role="button"]').forEach(card => {
-  card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      card.click();
-    }
-  });
-});
-
 /* Scroll bar — same draggable indicator style as the home gallery,
    scrubbing it scrolls the horizontal collection row directly */
 const vaultSymbols   = document.querySelector('.vault-symbols');
@@ -984,6 +975,7 @@ const accessGateEnter      = document.getElementById('access-gate-enter');
 function openAccessGate() {
   accessGate.classList.add('open');
   accessGate.setAttribute('aria-hidden', 'false');
+  accessGate.removeAttribute('inert');
   accessGateInputState.classList.remove('hidden');
   accessGateSuccess.classList.add('hidden');
   accessGateSuccess.setAttribute('aria-hidden', 'true');
@@ -995,6 +987,7 @@ function openAccessGate() {
 function closeAccessGate() {
   accessGate.classList.remove('open');
   accessGate.setAttribute('aria-hidden', 'true');
+  accessGate.setAttribute('inert', '');
 }
 
 function submitAccessCode() {
@@ -1231,6 +1224,7 @@ function showContactSuccess(form) {
   const overlay = document.getElementById('contact-success-overlay');
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
+  overlay.removeAttribute('inert');
   form.reset();
 }
 
@@ -1296,6 +1290,7 @@ function resetInquirePanel() {
   function closeContactSuccess() {
     overlay.classList.remove('open');
     overlay.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('inert', '');
   }
 
   closeBtn.addEventListener('click', closeContactSuccess);

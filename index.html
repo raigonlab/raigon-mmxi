@@ -21,7 +21,7 @@
   <div class="site-bg" aria-hidden="true"></div>
 
   <!-- Global fixed logo stamp — visible on all pages, acts as home button -->
-  <div class="global-logo" role="button" aria-label="Go to Home" tabindex="0">
+  <a class="global-logo" href="#" aria-label="Go to Home">
     <div class="logo-ring-wrap">
       <svg class="logo-ring-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
@@ -33,7 +33,7 @@
       </svg>
       <div class="logo-icon-wrap">
         <svg class="logo-icon-svg" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg"
-          aria-label="Raigon logo mark">
+          aria-hidden="true">
           <defs>
             <clipPath id="logo-r-clip" clipPathUnits="objectBoundingBox">
               <path transform="scale(0.000925926)"
@@ -46,7 +46,7 @@
         <div class="logo-glass-r" aria-hidden="true"></div>
       </div>
     </div>
-  </div>
+  </a>
 
   <!-- ============================================================
     HOME SECTION
@@ -79,34 +79,34 @@
       <div class="vault-symbols">
 
         <!-- Collection 1: Digital Charcoal -->
-        <div class="collection-card" data-collection="digital-charcoal" role="button" tabindex="0" aria-label="Open Digital Charcoal collection">
-          <div class="collection-card-frame">
+        <button class="collection-card" type="button" data-collection="digital-charcoal" aria-label="Open Digital Charcoal collection">
+          <span class="collection-card-frame">
             <img id="img-pyramid" class="collection-card-img" src="assets/images/hero/digital-charcoal-00011.jpg" alt="Digital Charcoal">
-          </div>
-          <div class="collection-card-footer">
-            <div class="collection-card-meta">
-              <div class="collection-card-title">Digital charcoal</div>
+          </span>
+          <span class="collection-card-footer">
+            <span class="collection-card-meta">
+              <span class="collection-card-title">Digital charcoal</span>
               <span class="collection-card-line">About simulacra</span>
               <span class="collection-card-line">free to vist.</span>
-            </div>
+            </span>
             <span class="collection-card-open">open</span>
-          </div>
-        </div>
+          </span>
+        </button>
 
         <!-- Collection 2: Accord -->
-        <div class="collection-card" data-collection="accord" role="button" tabindex="0" aria-label="Open Accord collection">
-          <div class="collection-card-frame">
+        <button class="collection-card" type="button" data-collection="accord" aria-label="Open Accord collection">
+          <span class="collection-card-frame">
             <img id="img-accord" class="collection-card-img" src="assets/images/accord/accord-00001.jpg" alt="Accord">
-          </div>
-          <div class="collection-card-footer">
-            <div class="collection-card-meta">
-              <div class="collection-card-title">Accord</div>
+          </span>
+          <span class="collection-card-footer">
+            <span class="collection-card-meta">
+              <span class="collection-card-title">Accord</span>
               <span class="collection-card-line">About resonance</span>
               <span class="collection-card-line">by invitation.</span>
-            </div>
+            </span>
             <span class="collection-card-open">open</span>
-          </div>
-        </div>
+          </span>
+        </button>
 
         <!-- Coming soon — placeholder, not yet a collection -->
         <div class="collection-card collection-card--soon">
@@ -136,22 +136,22 @@
   <!-- End vault section -->
 
   <!-- Accord access gate -->
-  <div class="access-gate" id="access-gate" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Accord access">
+  <div class="access-gate" id="access-gate" aria-hidden="true" inert role="dialog" aria-modal="true" aria-label="Accord access">
     <div class="access-gate-box">
-      <button class="access-gate-close" id="access-gate-close" aria-label="Close">&#x2715;</button>
+      <button class="access-gate-close" type="button" id="access-gate-close" aria-label="Close">&#x2715;</button>
       <div class="access-gate-label">By invitation only</div>
       <div class="access-gate-title">Accord</div>
 
       <div class="access-gate-input-state" id="access-gate-input-state">
         <input class="access-gate-input" id="access-gate-input" type="text" placeholder="enter your access code" maxlength="20" autocomplete="off" spellcheck="false">
         <div class="access-gate-error" id="access-gate-error" aria-live="polite"></div>
-        <button class="access-gate-submit" id="access-gate-submit">enter</button>
+        <button class="access-gate-submit" type="button" id="access-gate-submit">enter</button>
       </div>
 
       <div class="access-gate-success" id="access-gate-success" aria-hidden="true">
         <p class="access-gate-msg">As above, so below.<br>As within, so without.</p>
         <p class="access-gate-msg">Welcome!</p>
-        <button class="access-gate-enter" id="access-gate-enter">Enter the collection</button>
+        <button class="access-gate-enter" type="button" id="access-gate-enter">Enter the collection</button>
       </div>
     </div>
   </div>
@@ -168,7 +168,7 @@
 
         <!-- Bio -->
         <div class="arquive-card arquive-card--bio" id="bio-card">
-          <button class="bio-card-close" id="bio-card-close" aria-label="Close">&#x2715;</button>
+          <button class="bio-card-close" type="button" id="bio-card-close" aria-label="Close">&#x2715;</button>
           <div class="arquive-card-body">
             <div class="arquive-card-title">Bio</div>
             <div class="arquive-card-subtitle">Artist · Tattooist · Designer · Zürich</div>
@@ -190,7 +190,7 @@
                 <a href="https://youtube.com/@raigon" target="_blank" rel="noopener noreferrer" class="social-link">Youtube</a>
               </div>
             </div>
-            <button class="arquive-pill-btn" id="bio-open-btn" aria-expanded="false">More</button>
+            <button class="arquive-pill-btn" type="button" id="bio-open-btn" aria-expanded="false">More</button>
           </div>
           <div class="arquive-card-photo">
             <img src="assets/images/rai-profile.jpg" alt="Railson Viana" class="bio-photo-img">
@@ -245,21 +245,21 @@
   ============================================================ -->
   <nav aria-label="Main navigation">
     <div class="nav-pills">
-      <button class="pill active" data-page="home" aria-label="Go to Home">
+      <button class="pill active" type="button" data-page="home" aria-label="Go to Home">
         <span class="pill-dots" aria-hidden="true">
           <span></span><span></span><span></span><span></span>
         </span>
       </button>
-      <button class="pill" data-page="vault" aria-label="Go to Vault">VAULT</button>
-      <button class="pill" data-page="arquive" aria-label="Go to Arquive">ARQUIVE</button>
+      <button class="pill" type="button" data-page="vault" aria-label="Go to Vault">VAULT</button>
+      <button class="pill" type="button" data-page="arquive" aria-label="Go to Arquive">ARQUIVE</button>
     </div>
   </nav>
   <!-- End navigation -->
 
   <!-- Contact form success overlay — user dismisses it via the × button -->
-  <div class="contact-success-overlay" id="contact-success-overlay" aria-hidden="true">
+  <div class="contact-success-overlay" id="contact-success-overlay" aria-hidden="true" inert>
     <div class="contact-success-panel" role="dialog" aria-modal="true" aria-label="Message sent">
-      <button class="contact-success-close" id="contact-success-close" aria-label="Close">&#x2715;</button>
+      <button class="contact-success-close" type="button" id="contact-success-close" aria-label="Close">&#x2715;</button>
       <div class="contact-success-line"></div>
       <div class="contact-success-title">Thank you.</div>
       <p class="contact-success-message">Your message has been received.<br>We'll be in touch with you shortly.</p>
@@ -267,9 +267,9 @@
   </div>
 
   <!-- Artwork modal overlay — content populated by script.js -->
-  <div class="artwork-modal" id="artwork-modal" aria-hidden="true">
-    <button class="modal-close" id="modal-close" aria-label="Close">&#x2715;</button>
-    <button class="modal-chevron modal-chevron--left" id="modal-prev" aria-label="Previous artwork">&#8249;</button>
+  <div class="artwork-modal" id="artwork-modal" aria-hidden="true" inert>
+    <button class="modal-close" type="button" id="modal-close" aria-label="Close">&#x2715;</button>
+    <button class="modal-chevron modal-chevron--left" type="button" id="modal-prev" aria-label="Previous artwork">&#8249;</button>
 
     <img class="modal-image" id="modal-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
     <div class="modal-counter-img" id="modal-counter-img" aria-hidden="true"></div>
@@ -287,11 +287,11 @@
           <div class="modal-divider"></div>
           <div class="modal-description" id="modal-description"></div>
           <div class="modal-counter" id="modal-counter"></div>
-          <button class="modal-inquire-link" id="modal-inquire-link">Inquire</button>
+          <button class="modal-inquire-link" type="button" id="modal-inquire-link">Inquire</button>
         </div>
 
         <div class="modal-inquire-panel">
-          <button class="modal-inquire-back" id="modal-inquire-back">&#8592; back</button>
+          <button class="modal-inquire-back" type="button" id="modal-inquire-back">&#8592; back</button>
           <div class="modal-inquire-heading">Inquire</div>
           <div class="modal-inquire-artwork-name" id="modal-inquire-name"></div>
           <form class="modal-inquire-form" id="modal-inquire-form">
@@ -321,7 +321,7 @@
       </div>
     </div>
 
-    <button class="modal-chevron modal-chevron--right" id="modal-next" aria-label="Next artwork">&#8250;</button>
+    <button class="modal-chevron modal-chevron--right" type="button" id="modal-next" aria-label="Next artwork">&#8250;</button>
   </div>
   <!-- End artwork modal -->
 
@@ -337,7 +337,7 @@
         <div class="event-title"></div>
         <div class="event-meta"></div>
       </div>
-      <a class="event-cal-btn" target="_blank" rel="noopener noreferrer">Add to calendar</a>
+      <a class="event-cal-btn" href="#" target="_blank" rel="noopener noreferrer">Add to calendar</a>
     </div>
   </template>
 
