@@ -1049,6 +1049,15 @@ nav {
 
   .collection-card--soon .collection-card-img { opacity: 0.85; }
 
+  .collection-card--soon .collection-card-soon-copy {
+    pointer-events: auto;
+  }
+
+  .collection-card-soon-copy:hover {
+    border-color: rgba(196, 98, 45, 0.4);
+    background: rgba(196, 98, 45, 0.08);
+  }
+
   /* Feedback message area — shown on collection load or error */
 .vault-feedback {
     position: absolute;
@@ -1267,6 +1276,26 @@ nav {
   font-size: 11px;
   letter-spacing: 1px;
   color: var(--muted);
+}
+
+.event-copy-btn {
+  flex-shrink: 0;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: lowercase;
+  color: var(--muted);
+  border: 1px solid rgba(232, 228, 220, 0.15);
+  border-radius: 100px;
+  padding: 8px 16px;
+  transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.event-copy-btn:hover {
+  border-color: rgba(196, 98, 45, 0.4);
+  background: rgba(196, 98, 45, 0.08);
+  color: var(--text);
 }
 
 /* Contact form — pill-shaped fields stacked vertically */

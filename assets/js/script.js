@@ -820,6 +820,17 @@ document.querySelectorAll('.collection-card').forEach(btn => {
   });
 });
 
+/* Coming soon — copy collection + date to clipboard */
+const soonCopyBtn = document.querySelector('.collection-card-soon-copy');
+if (soonCopyBtn) {
+  soonCopyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText('Raigon Vault — New collection · January 2027').then(() => {
+      soonCopyBtn.textContent = 'copied';
+      setTimeout(() => { soonCopyBtn.textContent = 'copy'; }, 2000);
+    }).catch(() => {});
+  });
+}
+
 /* Scroll bar — same draggable indicator style as the home gallery,
    scrubbing it scrolls the horizontal collection row directly */
 const vaultSymbols   = document.querySelector('.vault-symbols');
@@ -990,6 +1001,15 @@ function buildEventBlock(event) {
 
   block.querySelector('.event-title').textContent = event.title;
   block.querySelector('.event-meta').textContent   = `${formatEventDate(event.dateStart, event.dateEnd)} · ${event.city}`;
+
+  const copyBtn  = block.querySelector('.event-copy-btn');
+  const copyText = `${event.title}\n${formatEventDate(event.dateStart, event.dateEnd)} · ${event.venue}, ${event.city}`;
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(copyText).then(() => {
+      copyBtn.textContent = 'copied';
+      setTimeout(() => { copyBtn.textContent = 'copy'; }, 2000);
+    }).catch(() => {});
+  });
 
   return block;
 }
