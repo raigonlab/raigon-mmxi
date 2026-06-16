@@ -1,3 +1,4 @@
+/* jshint esversion: 11 */
 /* ============================================================
    script.js — raigon-mmxi
    All JavaScript for the site lives here.
