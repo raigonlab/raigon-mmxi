@@ -314,13 +314,13 @@ To run the project locally:
 - Markdown.2bn.dev - documentation
 - [MDN Web Docs](https://developer.mozilla.org/) — Fetch API and DOM reference
 - Code Institute materials
-- Claude — coding assistant for debugging and project support
+- Claude — (https://claude.com/) coding assistant for debugging and project support
 - ChatGPT — debugging and explanations
 - Gemini — image generation
 - [fonts.google.com](https://fonts.google.com)
 - [fireship.dev](https://fireship.dev)
 - [tinypng.com](https://tinypng.com) — image compression
-- ResponsivelyApp - manage screenshot
+- ResponsivelyApp - (https://responsively.app/) manage screenshot
 
 ### Media
 
