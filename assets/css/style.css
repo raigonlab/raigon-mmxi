@@ -1680,12 +1680,7 @@ nav {
   overflow: visible;
   touch-action: none;
   padding: 0 14%;
-  cursor: grab;
   will-change: transform;
-}
-
-.collection-overlay-grid.dragging {
-  cursor: grabbing;
 }
 
 /* Individual card — width is left to size itself to the artwork's
