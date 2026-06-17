@@ -547,7 +547,7 @@ function buildCollectionOverlay(collection, collectionId) {
     const origIdx = workIdx % collection.works.length;
     const card    = document.createElement('div');
     card.className = 'collection-overlay-card';
-    if (origIdx % 2 === 1) { card.classList.add('collection-overlay-card--stagger'); }
+    if (workIdx % 2 === 1) { card.classList.add('collection-overlay-card--stagger'); }
     if (work.sold)          { card.classList.add('collection-overlay-card--sold'); }
 
     card.addEventListener('click', () => openCollectionWork(collection.works, origIdx));
@@ -708,33 +708,32 @@ function buildCollectionOverlay(collection, collectionId) {
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
 
-  /* ── Grid drag ── */
+  /* ── Grid drag — window-level handlers so cards keep their click events ── */
   grid.addEventListener('pointerdown', e => {
     if (e.target.closest('.scroll-bar')) { return; }
-    ovlGridDragging  = true;
-    ovlGridMoved     = false;
-    ovlGridStartX    = e.clientX;
-    ovlGridStartOff  = ovlTarget;
+    ovlGridDragging = true;
+    ovlGridMoved    = false;
+    ovlGridStartX   = e.clientX;
+    ovlGridStartOff = ovlTarget;
     grid.classList.add('dragging');
-    grid.setPointerCapture(e.pointerId);
   });
 
-  grid.addEventListener('pointermove', e => {
+  function onOvlMove(e) {
     if (!ovlGridDragging) { return; }
     const dx = e.clientX - ovlGridStartX;
     if (Math.abs(dx) > 5) { ovlGridMoved = true; }
     ovlTarget = ovlGridStartOff - dx;
-  });
+  }
 
-  function endGridDrag(e) {
+  function endGridDrag() {
     if (!ovlGridDragging) { return; }
     ovlGridDragging = false;
     grid.classList.remove('dragging');
-    grid.releasePointerCapture(e.pointerId);
   }
 
-  grid.addEventListener('pointerup', endGridDrag);
-  grid.addEventListener('pointercancel', endGridDrag);
+  window.addEventListener('pointermove',   onOvlMove);
+  window.addEventListener('pointerup',     endGridDrag);
+  window.addEventListener('pointercancel', endGridDrag);
 
   grid.addEventListener('click', e => {
     if (ovlGridMoved) {
@@ -756,6 +755,9 @@ function buildCollectionOverlay(collection, collectionId) {
     overlay.classList.remove('open');
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
     document.removeEventListener('keydown', onKey);
+    window.removeEventListener('pointermove',   onOvlMove);
+    window.removeEventListener('pointerup',     endGridDrag);
+    window.removeEventListener('pointercancel', endGridDrag);
     updateNavShift('vault');
     if (location.hash === '#vault/collection') { location.hash = 'vault'; }
   }
