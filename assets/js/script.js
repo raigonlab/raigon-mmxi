@@ -314,19 +314,6 @@ window.addEventListener('load', () => {
       });
     }
 
-    const deadZone = 0.2;
-    const absX     = Math.abs(mouseX);
-
-    if (absX > deadZone) {
-      const dir       = mouseX > 0 ? -1 : 1;
-      const intensity = (absX - deadZone) / (1 - deadZone);
-      const speed     = intensity * intensity * 1.2;
-
-      layers.forEach((_, i) => {
-        targetOffsets[i] += dir * speed * (1 - i * 0.15);
-      });
-    }
-
     layers.forEach((layer, i) => {
       const prev = targetOffsets[i];
       targetOffsets[i] = wrapOffset(targetOffsets[i], layer);
