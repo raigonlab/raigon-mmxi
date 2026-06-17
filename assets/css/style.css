@@ -1988,6 +1988,32 @@ nav {
   body.nav-shift .nav-pills {
     margin-left: 62px;
   }
+
+  /* iOS Safari auto-zooms when a focused input/textarea has font-size below
+     16px — bump these to 16px on touch breakpoints to prevent that zoom. */
+  .modal-inquire-input,
+  .modal-inquire-textarea,
+  .cf-input,
+  .access-gate-input {
+    font-size: 16px;
+  }
+
+  .access-gate-input::placeholder {
+    font-size: 11px;
+  }
+
+  /* 404 frame row — scale down so the whole composition fits the viewport. */
+  .gallery-wall {
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .plant-wrap {
+    margin-left: 4px;
+  }
+
+  .frame-svg { width: 88px; }
+  .plant-svg { width: 48px; }
 }
 
 /* --- Mobile (480px) --- */
@@ -2517,36 +2543,3 @@ nav {
   background: rgba(122, 168, 208, 0.05);
 }
 
-/* iOS Safari auto-zooms the page when a focused input/textarea has
-   font-size below 16px — bump these to 16px on touch breakpoints
-   to prevent that zoom from firing. */
-@media (max-width: 768px) {
-  .modal-inquire-input,
-  .modal-inquire-textarea,
-  .cf-input,
-  .access-gate-input {
-    font-size: 16px;
-  }
-
-  /* The access-gate placeholder is too wide for its field at 16px with
-     the wide letter-spacing — shrink the placeholder only, the input
-     itself (and anything typed into it) stays at 16px. */
-  .access-gate-input::placeholder {
-    font-size: 11px;
-  }
-
-  /* The 404 frame row (3 frames + plant) is wider than the viewport
-     on mobile, clipping the leftmost frame — scale everything down
-     so the whole composition fits. */
-  .gallery-wall {
-    gap: 14px;
-    margin-bottom: 32px;
-  }
-
-  .plant-wrap {
-    margin-left: 4px;
-  }
-
-  .frame-svg { width: 88px; }
-  .plant-svg { width: 48px; }
-}
