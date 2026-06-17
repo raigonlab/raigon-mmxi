@@ -820,16 +820,16 @@ document.querySelectorAll('.collection-card').forEach(btn => {
   });
 });
 
-/* AI ASSISTANCE: The copy toast below (showCopyToast, copyToastTimer)
+/* AI ASSISTANCE: The copy feedback below (showCopyFeedback)
    was developed with the help of Claude Sonnet 4.6 (Anthropic). */
-/* Brief toast notification shown after any copy action */
-let copyToastTimer = null;
-function showCopyToast() {
-  const toast = document.getElementById('copy-toast');
-  clearTimeout(copyToastTimer);
-  toast.textContent = 'copied';
-  toast.classList.add('visible');
-  copyToastTimer = setTimeout(() => toast.classList.remove('visible'), 1800);
+/* Lights up a copy button with the accent colour for 2s, then resets it. */
+function showCopyFeedback(btn) {
+  btn.textContent = 'copied';
+  btn.classList.add('copy-active');
+  setTimeout(() => {
+    btn.textContent = 'copy';
+    btn.classList.remove('copy-active');
+  }, 2000);
 }
 
 /* Coming soon — copy collection + date to clipboard */
@@ -837,9 +837,7 @@ const soonCopyBtn = document.querySelector('.collection-card-soon-copy');
 if (soonCopyBtn) {
   soonCopyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText('Raigon Vault — New collection · January 2027').then(() => {
-      soonCopyBtn.textContent = 'copied';
-      showCopyToast();
-      setTimeout(() => { soonCopyBtn.textContent = 'copy'; }, 2000);
+      showCopyFeedback(soonCopyBtn);
     }).catch(() => {});
   });
 }
@@ -1019,9 +1017,7 @@ function buildEventBlock(event) {
   const copyText = `${event.title}\n${formatEventDate(event.dateStart, event.dateEnd)} · ${event.venue}, ${event.city}`;
   copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(copyText).then(() => {
-      copyBtn.textContent = 'copied';
-      showCopyToast();
-      setTimeout(() => { copyBtn.textContent = 'copy'; }, 2000);
+      showCopyFeedback(copyBtn);
     }).catch(() => {});
   });
 
