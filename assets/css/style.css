@@ -1618,33 +1618,6 @@ nav {
   pointer-events: auto;
 }
 
-/* Progressive edge blur — a soft focus vignette, strongest at the
-   left/right edges and fading out toward the centre, so the cards
-   nearest the viewport's sides feel slightly out of focus. */
-.collection-overlay::before,
-.collection-overlay::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 20%;
-  z-index: 1;
-  pointer-events: none;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-.collection-overlay::before {
-  left: 0;
-  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-}
-
-.collection-overlay::after {
-  right: 0;
-  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-}
 
 /* Header bar */
 .collection-overlay-header {
@@ -1704,28 +1677,15 @@ nav {
   height: 472px;
   margin: auto 0;
   gap: 115px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
-  scroll-snap-type: x mandatory;
-  /* Without this, scroll-snap-align: start on the first/last card
-     snaps it flush against the viewport edge, ignoring the side
-     padding — keep some breathing room visible after snapping. */
-  scroll-padding: 0 192px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  overflow: visible;
+  touch-action: none;
   padding: 0 14%;
   cursor: grab;
+  will-change: transform;
 }
 
 .collection-overlay-grid.dragging {
   cursor: grabbing;
-  scroll-snap-type: none;
-}
-
-.collection-overlay-grid::-webkit-scrollbar {
-  display: none;
 }
 
 /* Individual card — width is left to size itself to the artwork's
@@ -1740,16 +1700,12 @@ nav {
   cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
-  scroll-snap-align: start;
 }
 
-/* Drop every other card into the bottom row, zig-zagging the
-   sequence so consecutive pieces don't line up in a rigid grid.
-   The extra height above (+76px) is split evenly by the grid's
-   auto centering, so the top row sits 38px higher and the bottom
-   row 38px lower than the original layout — without negative
-   margins, which would get clipped by overflow-x: auto. */
-.collection-overlay-card:nth-child(even) {
+/* Drop every other card into the bottom row, zig-zagging the sequence.
+   Class assigned in JS (not nth-child) so the pattern stays consistent
+   across the tripled copies used for infinite scroll. */
+.collection-overlay-card--stagger {
   margin-top: 299px;
 }
 
@@ -1930,7 +1886,6 @@ nav {
     height: 328px;
     gap: 94px;
     padding: 0 120px;
-    scroll-padding: 0 120px;
   }
 
   .collection-overlay-card {
@@ -1938,7 +1893,7 @@ nav {
     height: 117px;
   }
 
-  .collection-overlay-card:nth-child(even) {
+  .collection-overlay-card--stagger {
     margin-top: 211px;
   }
 
@@ -1954,7 +1909,7 @@ nav {
     height: 146px;
   }
 
-  .collection-overlay--accord .collection-overlay-card:nth-child(even) {
+  .collection-overlay--accord .collection-overlay-card--stagger {
     margin-top: 264px;
   }
 
@@ -2116,18 +2071,8 @@ nav {
     margin: auto 0;
     gap: 108px;
     padding: 0 60px;
-    scroll-padding: 0 60px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .collection-overlay-grid::-webkit-scrollbar {
-    display: none;
+    overflow: visible;
+    touch-action: none;
   }
 
   .collection-overlay-card {
@@ -2136,9 +2081,7 @@ nav {
     height: 108px;
   }
 
-  /* Drop every other card into the bottom row, zig-zagging the
-     sequence so consecutive pieces don't line up in a rigid grid. */
-  .collection-overlay-card:nth-child(even) {
+  .collection-overlay-card--stagger {
     margin-top: 214px;
   }
 
@@ -2154,7 +2097,7 @@ nav {
     height: 135px;
   }
 
-  .collection-overlay--accord .collection-overlay-card:nth-child(even) {
+  .collection-overlay--accord .collection-overlay-card--stagger {
     margin-top: 268px;
   }
 

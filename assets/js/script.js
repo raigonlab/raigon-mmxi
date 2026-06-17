@@ -504,7 +504,8 @@ function showVaultFeedback(message, isError = false) {
    Commit: 1fef314 — "Add collection overlay grid to Vault section"
 ============================================================ */
 
-/* Build the overlay DOM for one collection and return the root element. */
+/* Build the overlay DOM for one collection and return the root element.
+   Uses the same depth-of-field + infinite scroll architecture as the home gallery. */
 function buildCollectionOverlay(collection, collectionId) {
   const overlay = document.createElement('div');
   overlay.className = `collection-overlay collection-overlay--${collectionId}`;
@@ -533,28 +534,29 @@ function buildCollectionOverlay(collection, collectionId) {
   header.appendChild(countEl);
   header.appendChild(closeBtn);
 
-  /* Grid: one card per work */
+  /* Grid: works tripled for seamless infinite scroll.
+     Stagger class assigned per original index so the zig-zag pattern
+     repeats consistently across all three copies. */
   const grid = document.createElement('div');
   grid.className = 'collection-overlay-grid';
 
-  collection.works.forEach((work, workIdx) => {
-    const card = document.createElement('div');
+  const allOverlayCards = [];
+  const tripled = [...collection.works, ...collection.works, ...collection.works];
+
+  tripled.forEach((work, workIdx) => {
+    const origIdx = workIdx % collection.works.length;
+    const card    = document.createElement('div');
     card.className = 'collection-overlay-card';
+    if (origIdx % 2 === 1) { card.classList.add('collection-overlay-card--stagger'); }
+    if (work.sold)          { card.classList.add('collection-overlay-card--sold'); }
 
-    /* Mark sold works with a CSS class for styling */
-    if (work.sold) { card.classList.add('collection-overlay-card--sold'); }
-
-    card.addEventListener('click', () => openCollectionWork(collection.works, workIdx));
+    card.addEventListener('click', () => openCollectionWork(collection.works, origIdx));
 
     const img = document.createElement('img');
     img.className = 'collection-overlay-card-img';
     img.alt       = work.title;
     img.loading   = 'lazy';
 
-    /* Square source images are wall-mockup renders with a frame/border
-       baked in — zoom in so the thumbnail reads as a flush portrait crop.
-       Images already cached from the home page can be `complete` before
-       the load listener attaches, so check both. */
     function applyZoomIfSquare() {
       if (img.naturalWidth === img.naturalHeight) {
         img.classList.add('collection-overlay-card-img--zoom');
@@ -564,7 +566,6 @@ function buildCollectionOverlay(collection, collectionId) {
     img.src = work.src;
     if (img.complete) { applyZoomIfSquare(); }
 
-    /* Sold badge — only rendered when the work.sold flag is true */
     if (work.sold) {
       const badge = document.createElement('div');
       badge.className   = 'collection-card-sold';
@@ -574,14 +575,13 @@ function buildCollectionOverlay(collection, collectionId) {
 
     card.appendChild(img);
     grid.appendChild(card);
+    allOverlayCards.push(card);
   });
 
   overlay.appendChild(header);
   overlay.appendChild(grid);
 
-  /* Position indicator — same draggable bar as the vault carousel.
-     Only meaningful on mobile, where the grid becomes a horizontal
-     2-row carousel; hidden via CSS everywhere else. */
+  /* Position indicator */
   const overlayScrollBar = document.createElement('div');
   overlayScrollBar.className = 'scroll-bar collection-overlay-scrollbar';
 
@@ -591,8 +591,7 @@ function buildCollectionOverlay(collection, collectionId) {
   overlayScrollBar.appendChild(overlayThumb);
   overlay.appendChild(overlayScrollBar);
 
-  /* Play/pause control — same icon/style as the home gallery's timeline
-     bar, toggling the autoplay loop set up below. */
+  /* Play/pause control */
   let autoScrollPaused = false;
 
   const playPauseBtn = document.createElement('button');
@@ -605,151 +604,154 @@ function buildCollectionOverlay(collection, collectionId) {
     autoScrollPaused = !autoScrollPaused;
     playPauseBtn.innerHTML = autoScrollPaused ? ICON_PLAY : ICON_PAUSE;
     playPauseBtn.setAttribute('aria-label', autoScrollPaused ? 'Resume auto-scroll' : 'Pause auto-scroll');
-    if (autoScrollPaused) { grid.style.scrollSnapType = ''; }
   });
 
   overlay.appendChild(playPauseBtn);
 
-  function updateOverlayThumb() {
-    const trackWidth = overlayScrollBar.clientWidth;
-    const maxScroll  = grid.scrollWidth - grid.clientWidth;
-    const ratio      = Math.min(1, grid.clientWidth / grid.scrollWidth);
-    const thumbW     = Math.max(trackWidth * ratio, 30);
-    const progress   = maxScroll > 0 ? grid.scrollLeft / maxScroll : 0;
+  /* ── Depth-of-field constants (mirror of home gallery) ── */
+  const W_OVL        = window.innerWidth;
+  const FOCUS_RADIUS = 0.55;
+  const FOCUS_BLUR   = W_OVL <= 768 ? 0.8 : 2.2;
+  const FOCUS_FADE   = 0.6;
+  const FOCUS_SCALE  = 0.10;
+  const OVL_LERP     = 0.06;
+  const OVL_SPEED    = 0.5;
 
-    overlayScrollBar.style.display = maxScroll > 0 ? '' : 'none';
-    playPauseBtn.style.display     = maxScroll > 0 ? '' : 'none';
-    overlayThumb.style.width = thumbW.toFixed(1) + 'px';
-    overlayThumb.style.left  = (progress * (trackWidth - thumbW)).toFixed(1) + 'px';
+  /* Animation state */
+  let ovlOffset      = 0;
+  let ovlTarget      = 0;
+  let ovlBarDragging = false;
+  let ovlBarLastX    = 0;
+  let ovlGridDragging = false;
+  let ovlGridMoved    = false;
+  let ovlGridStartX   = 0;
+  let ovlGridStartOff = 0;
+
+  /* Period = width of one copy, measured from offsetLeft of first cards of each copy */
+  function getOvlPeriod() {
+    if (allOverlayCards.length < collection.works.length + 1) { return 0; }
+    return allOverlayCards[collection.works.length].offsetLeft
+         - allOverlayCards[0].offsetLeft;
   }
 
-  grid.addEventListener('scroll', () => requestAnimationFrame(updateOverlayThumb));
-  window.addEventListener('resize', updateOverlayThumb);
-  requestAnimationFrame(() => requestAnimationFrame(updateOverlayThumb));
+  function updateOverlayThumb() {
+    const period = getOvlPeriod();
+    if (period <= 0) { return; }
+    const trackWidth = overlayScrollBar.clientWidth;
+    const thumbW     = Math.max(trackWidth / 3, 30);
+    const pos        = ((-ovlOffset % period) + period) % period;
+    overlayThumb.style.width = thumbW.toFixed(1) + 'px';
+    overlayThumb.style.left  = ((pos / period) * (trackWidth - thumbW)).toFixed(1) + 'px';
+  }
 
-  /* Drag the bar to scrub the grid left/right */
-  let overlayBarDragging = false;
-  let overlayBarLastX    = 0;
+  /* Main animation loop — infinite translateX scroll + depth-of-field pass */
+  function animateOverlay() {
+    if (!overlay.isConnected) { return; }
 
+    const period = getOvlPeriod();
+
+    if (!autoScrollPaused && !ovlBarDragging && !ovlGridDragging) {
+      ovlTarget -= OVL_SPEED;
+    }
+
+    if (period > 0) {
+      if (ovlTarget < -(period * 2)) { ovlOffset += period; ovlTarget += period; }
+      if (ovlTarget > 0)             { ovlOffset -= period; ovlTarget -= period; }
+    }
+
+    ovlOffset += (ovlTarget - ovlOffset) * OVL_LERP;
+    grid.style.transform = `translateX(${ovlOffset}px)`;
+
+    /* Depth-of-field — blur, fade, and scale each card by distance from centre */
+    const centerX = W_OVL / 2;
+    const maxDist = W_OVL * FOCUS_RADIUS;
+    allOverlayCards.forEach(card => {
+      const r    = card.getBoundingClientRect();
+      const cx   = r.left + r.width / 2;
+      const dist = Math.abs(cx - centerX);
+      const t    = Math.min(1, dist / maxDist);
+      card.style.opacity   = (1 - t * FOCUS_FADE).toFixed(2);
+      card.style.filter    = `blur(${(t * FOCUS_BLUR).toFixed(1)}px)`;
+      card.style.transform = `scale(${(1 + (1 - t) * FOCUS_SCALE).toFixed(3)})`;
+      card.style.zIndex    = Math.round((1 - t) * 10);
+    });
+
+    updateOverlayThumb();
+    requestAnimationFrame(animateOverlay);
+  }
+
+  requestAnimationFrame(animateOverlay);
+
+  /* ── Bar drag ── */
   overlayScrollBar.addEventListener('pointerdown', e => {
-    overlayBarDragging = true;
-    overlayBarLastX    = e.clientX;
+    ovlBarDragging = true;
+    ovlBarLastX    = e.clientX;
     overlayScrollBar.classList.add('scroll-bar--dragging');
     overlayScrollBar.setPointerCapture(e.pointerId);
-    /* Scroll-snap fights small drag increments, snapping the grid
-       straight back to its current position. Suspend it for the
-       drag and let it re-settle once the pointer is released. */
-    grid.style.scrollSnapType = 'none';
   });
 
   overlayScrollBar.addEventListener('pointermove', e => {
-    if (!overlayBarDragging) { return; }
-    const dx = e.clientX - overlayBarLastX;
-    overlayBarLastX = e.clientX;
-
-    const maxScroll = grid.scrollWidth - grid.clientWidth;
-    grid.scrollLeft += dx * (maxScroll / overlayScrollBar.clientWidth);
+    if (!ovlBarDragging) { return; }
+    const dx     = e.clientX - ovlBarLastX;
+    ovlBarLastX  = e.clientX;
+    const period = getOvlPeriod();
+    if (period > 0) { ovlTarget -= dx * (period / overlayScrollBar.clientWidth); }
   });
 
   function endOverlayBarDrag(e) {
-    if (!overlayBarDragging) { return; }
-    overlayBarDragging = false;
+    if (!ovlBarDragging) { return; }
+    ovlBarDragging = false;
     overlayScrollBar.classList.remove('scroll-bar--dragging');
     overlayScrollBar.releasePointerCapture(e.pointerId);
-    grid.style.scrollSnapType = '';
   }
 
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
 
-  /* Drag the grid itself with mouse/touch — pointer events cover both. */
-  let gridDragging    = false;
-  let gridDragMoved   = false;
-  let gridDragStartX  = 0;
-  let gridStartScroll = 0;
-
+  /* ── Grid drag ── */
   grid.addEventListener('pointerdown', e => {
     if (e.target.closest('.scroll-bar')) { return; }
-    gridDragging    = true;
-    gridDragMoved   = false;
-    gridDragStartX  = e.clientX;
-    gridStartScroll = grid.scrollLeft;
+    ovlGridDragging  = true;
+    ovlGridMoved     = false;
+    ovlGridStartX    = e.clientX;
+    ovlGridStartOff  = ovlTarget;
     grid.classList.add('dragging');
     grid.setPointerCapture(e.pointerId);
   });
 
   grid.addEventListener('pointermove', e => {
-    if (!gridDragging) { return; }
-    const dx = e.clientX - gridDragStartX;
-    if (Math.abs(dx) > 5) { gridDragMoved = true; }
-    grid.scrollLeft = gridStartScroll - dx;
+    if (!ovlGridDragging) { return; }
+    const dx = e.clientX - ovlGridStartX;
+    if (Math.abs(dx) > 5) { ovlGridMoved = true; }
+    ovlTarget = ovlGridStartOff - dx;
   });
 
   function endGridDrag(e) {
-    if (!gridDragging) { return; }
-    gridDragging = false;
+    if (!ovlGridDragging) { return; }
+    ovlGridDragging = false;
     grid.classList.remove('dragging');
-    grid.style.scrollSnapType = '';
     grid.releasePointerCapture(e.pointerId);
   }
 
   grid.addEventListener('pointerup', endGridDrag);
   grid.addEventListener('pointercancel', endGridDrag);
 
-  /* Suppress the card's click (which opens the work) when the pointer
-     movement was actually a drag rather than a tap. */
   grid.addEventListener('click', e => {
-    if (gridDragMoved) {
+    if (ovlGridMoved) {
       e.preventDefault();
       e.stopPropagation();
-      gridDragMoved = false;
+      ovlGridMoved = false;
     }
   }, true);
 
-  /* Autoplay loop — advances the grid at a steady pace, same as the
-     home gallery's auto-scroll. Once the last card scrolls past, it
-     eases back to the start with a smooth scroll instead of an
-     instant jump, and stops entirely once the overlay closes
-     (detected via isConnected, since the overlay is removed from the
-     DOM on both close paths — the × button and back-navigation). */
-  const REWIND_MS = 600;
-  let rewindStart = null;
-  let rewindFrom  = 0;
+  /* Mouse wheel scrolls the carousel horizontally */
+  grid.addEventListener('wheel', e => {
+    if (e.deltaY === 0) { return; }
+    e.preventDefault();
+    ovlTarget -= e.deltaY;
+  }, { passive: false });
 
-  function autoScrollGrid(now) {
-    if (!overlay.isConnected) { return; }
-
-    if (!autoScrollPaused && !overlayBarDragging && !gridDragging) {
-      const maxScroll = grid.scrollWidth - grid.clientWidth;
-      if (maxScroll > 0) {
-        grid.style.scrollSnapType = 'none';
-
-        if (rewindStart !== null) {
-          const t      = Math.min(1, (now - rewindStart) / REWIND_MS);
-          const eased  = 1 - Math.pow(1 - t, 3);
-          grid.scrollLeft = rewindFrom * (1 - eased);
-          if (t >= 1) { rewindStart = null; }
-        } else if (grid.scrollLeft >= maxScroll - 0.6) {
-          rewindFrom  = grid.scrollLeft;
-          rewindStart = now;
-        } else {
-          grid.scrollLeft += 0.6;
-        }
-      }
-    } else {
-      rewindStart = null;
-    }
-
-    requestAnimationFrame(autoScrollGrid);
-  }
-
-  requestAnimationFrame(autoScrollGrid);
-
-  /* Close handlers: × button, Escape key, or navigating to another
-     page via the nav pills. The gallery now has wide gaps between
-     cards, so closing on a backdrop click would be too easy to
-     trigger by accident — the user stays here until they explicitly
-     choose to leave. */
+  /* Close handlers */
   function closeOverlay() {
     overlay.classList.remove('open');
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
@@ -764,20 +766,6 @@ function buildCollectionOverlay(collection, collectionId) {
 
   closeBtn.addEventListener('click', closeOverlay);
   document.addEventListener('keydown', onKey);
-
-  /* Mouse wheel scrolls the carousel horizontally. Scroll-snap fights
-     small programmatic scrollLeft changes the same way it fights the
-     drag bar, so suspend it for the duration of the wheel gesture and
-     let it re-settle once scrolling stops. */
-  let wheelSettleTimer = null;
-  grid.addEventListener('wheel', e => {
-    if (e.deltaY === 0) { return; }
-    e.preventDefault();
-    grid.style.scrollSnapType = 'none';
-    grid.scrollLeft += e.deltaY;
-    clearTimeout(wheelSettleTimer);
-    wheelSettleTimer = setTimeout(() => { grid.style.scrollSnapType = ''; }, 150);
-  }, { passive: false });
 
   return overlay;
 }
