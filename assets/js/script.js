@@ -1,4 +1,5 @@
 /* jshint esversion: 11 */
+/* global artworks, COLLECTIONS_DATA */
 /* ============================================================
    script.js — raigon-mmxi
    All JavaScript for the site lives here.
@@ -662,8 +663,7 @@ function buildCollectionOverlay(collection, collectionId) {
   /* Period = width of one copy, measured from offsetLeft of first cards of each copy */
   function getOvlPeriod() {
     if (allOverlayCards.length < collection.works.length + 1) { return 0; }
-    return allOverlayCards[collection.works.length].offsetLeft
-         - allOverlayCards[0].offsetLeft;
+    return allOverlayCards[collection.works.length].offsetLeft - allOverlayCards[0].offsetLeft;
   }
 
   function updateOverlayThumb() {
