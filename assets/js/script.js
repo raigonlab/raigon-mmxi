@@ -526,17 +526,10 @@ function showVaultFeedback(message, isError = false) {
    Commit: 1fef314 — "Add collection overlay grid to Vault section"
 ============================================================ */
 
-/* Build the overlay DOM for one collection and return the root element.
-   Uses the same depth-of-field + infinite scroll architecture as the home gallery. */
-function buildCollectionOverlay(collection, collectionId) {
-  const overlay = document.createElement('div');
-  overlay.className = `collection-overlay collection-overlay--${collectionId}`;
-  overlay.setAttribute('role', 'dialog');
-  overlay.setAttribute('aria-modal', 'true');
-  overlay.setAttribute('aria-label', collection.title);
+/* ── DOM helpers ─────────────────────────────────────────── */
 
-  /* Header: title · work count · close button */
-  const header  = document.createElement('div');
+function buildOverlayHeader(collection) {
+  const header = document.createElement('div');
   header.className = 'collection-overlay-header';
 
   const titleEl = document.createElement('span');
@@ -555,10 +548,13 @@ function buildCollectionOverlay(collection, collectionId) {
   header.appendChild(titleEl);
   header.appendChild(countEl);
   header.appendChild(closeBtn);
+  return { header, closeBtn };
+}
 
-  /* Grid: works tripled for seamless infinite scroll.
-     Stagger class assigned per original index so the zig-zag pattern
-     repeats consistently across all three copies. */
+/* Works are tripled for seamless infinite scroll.
+   Stagger class uses the global workIdx so the zig-zag repeats
+   consistently across all three copies. */
+function buildOverlayGrid(collection) {
   const grid = document.createElement('div');
   grid.className = 'collection-overlay-grid';
 
@@ -575,10 +571,10 @@ function buildCollectionOverlay(collection, collectionId) {
     card.addEventListener('click', () => openCollectionWork(collection.works, origIdx));
 
     const img = document.createElement('img');
-    img.className    = 'collection-overlay-card-img';
-    img.alt          = work.title;
-    img.loading      = 'eager';
-    img.draggable    = false;
+    img.className = 'collection-overlay-card-img';
+    img.alt       = work.title;
+    img.loading   = 'eager';
+    img.draggable = false;
 
     function applyZoomIfSquare() {
       if (img.naturalWidth === img.naturalHeight) {
@@ -601,34 +597,47 @@ function buildCollectionOverlay(collection, collectionId) {
     allOverlayCards.push(card);
   });
 
+  return { grid, allOverlayCards };
+}
+
+function buildOverlayScrollBar() {
+  const bar = document.createElement('div');
+  bar.className = 'scroll-bar collection-overlay-scrollbar';
+  const thumb = document.createElement('div');
+  thumb.className = 'scroll-thumb';
+  bar.appendChild(thumb);
+  return { bar, thumb };
+}
+
+/* ── Assembler ───────────────────────────────────────────── */
+
+function buildCollectionOverlay(collection, collectionId) {
+  const overlay = document.createElement('div');
+  overlay.className = `collection-overlay collection-overlay--${collectionId}`;
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', collection.title);
+
+  const { header, closeBtn }                          = buildOverlayHeader(collection);
+  const { grid, allOverlayCards }                     = buildOverlayGrid(collection);
+  const { bar: overlayScrollBar, thumb: overlayThumb } = buildOverlayScrollBar();
+
   overlay.appendChild(header);
   overlay.appendChild(grid);
-
-  /* Position indicator */
-  const overlayScrollBar = document.createElement('div');
-  overlayScrollBar.className = 'scroll-bar collection-overlay-scrollbar';
-
-  const overlayThumb = document.createElement('div');
-  overlayThumb.className = 'scroll-thumb';
-
-  overlayScrollBar.appendChild(overlayThumb);
   overlay.appendChild(overlayScrollBar);
 
-  /* Play/pause control */
+  /* Play/pause */
   let autoScrollPaused = false;
-
   const playPauseBtn = document.createElement('button');
   playPauseBtn.className = 'scroll-playpause';
   playPauseBtn.type      = 'button';
   playPauseBtn.innerHTML = ICON_PAUSE;
   playPauseBtn.setAttribute('aria-label', 'Pause auto-scroll');
-
   playPauseBtn.addEventListener('click', () => {
     autoScrollPaused = !autoScrollPaused;
     playPauseBtn.innerHTML = autoScrollPaused ? ICON_PLAY : ICON_PAUSE;
     playPauseBtn.setAttribute('aria-label', autoScrollPaused ? 'Resume auto-scroll' : 'Pause auto-scroll');
   });
-
   overlay.appendChild(playPauseBtn);
 
   const overlayFsBtn = makeFsButton();
