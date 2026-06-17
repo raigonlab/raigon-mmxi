@@ -647,11 +647,10 @@ function buildCollectionOverlay(collection, collectionId) {
 
     const period = getOvlPeriod();
 
-    if (!autoScrollPaused && !ovlBarDragging) {
-      ovlTarget -= OVL_SPEED;
-    }
-
     if (period > 0) {
+      if (!autoScrollPaused && !ovlBarDragging) {
+        ovlTarget -= OVL_SPEED;
+      }
       if (ovlTarget < -(period * 2)) { ovlOffset += period; ovlTarget += period; }
       if (ovlTarget > 0)             { ovlOffset -= period; ovlTarget -= period; }
     }
@@ -677,17 +676,7 @@ function buildCollectionOverlay(collection, collectionId) {
     requestAnimationFrame(animateOverlay);
   }
 
-  const firstCopyImgs = allOverlayCards
-    .slice(0, collection.works.length)
-    .map(card => card.querySelector('img'));
-
-  Promise.all(
-    firstCopyImgs.map(img =>
-      img.complete
-        ? Promise.resolve()
-        : new Promise(res => { img.addEventListener('load', res, { once: true }); })
-    )
-  ).then(() => requestAnimationFrame(animateOverlay));
+  requestAnimationFrame(animateOverlay);
 
   /* ── Bar drag ── */
   overlayScrollBar.addEventListener('pointerdown', e => {

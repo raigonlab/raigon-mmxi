@@ -30,13 +30,12 @@ const COLLECTIONS_DATA = {
  
   "accord": {
     "title": "Accord",
-    "count": 5,
+    "count": 4,
     "works": [
       { "src": "assets/images/accord/accord-00001.jpg", "title": "You",      "description": "The work becomes a mirror — an address to whoever stands before it, completed only by the act of being seen." },
       { "src": "assets/images/accord/accord-00002.jpg", "title": "Anima",    "description": "Anima — the animating breath the Hermeticists called the soul of the world, traced here as a current moving through still material." },
       { "src": "assets/images/accord/accord-00003.jpg", "title": "Dynamis",  "description": "Dynamis: potential held just before release, the Greek root of 'dynamic' — the stored capacity that precedes every motion." },
-      { "src": "assets/images/accord/accord-00004.jpg", "title": "Surge",    "description": "A sudden release after long containment — energy moving through the body the way a quantum system jumps to a new state, all at once." },
-      { "src": "assets/images/accord/accord-00005.jpg", "title": "Corpus",   "description": "Corpus — the body as microcosm, the Hermetic mirror of the cosmos rendered in a single physical form." }
+{ "src": "assets/images/accord/accord-00005.jpg", "title": "Corpus",   "description": "Corpus — the body as microcosm, the Hermetic mirror of the cosmos rendered in a single physical form." }
     ]
   }
 };
