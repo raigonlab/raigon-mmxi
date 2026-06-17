@@ -543,6 +543,33 @@ nav {
     color: rgba(232, 228, 220, 0.85);
   }
 
+.fs-btn {
+  position: absolute;
+  bottom: 42px;
+  right: 28px;
+  width: 20px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(232, 228, 220, 0.55);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.fs-btn:hover {
+  color: rgba(232, 228, 220, 0.85);
+  opacity: 1;
+}
+
+.collection-overlay .fs-btn {
+  z-index: 2;
+}
+
   /* Home gallery's bar sits left of center, beside the play/pause button.
      It's appended to #home (not .home-scene) so bottom is measured
      against the full page box and can align with the nav bar's middle

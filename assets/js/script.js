@@ -107,8 +107,42 @@ switchSection(VALID_PAGES.includes(initialPage) ? initialPage : 'home');
 
 /* Shared play/pause icons — reused by the home gallery's timeline bar
    and the collection overlay's autoplay control. */
-const ICON_PAUSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1.5"/><rect x="10" y="2" width="3" height="12" rx="1.5"/></svg>';
-const ICON_PLAY  = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const ICON_PAUSE    = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="2" width="3" height="12" rx="1.5"/><rect x="10" y="2" width="3" height="12" rx="1.5"/></svg>';
+const ICON_PLAY     = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const ICON_EXPAND   = '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 6V1.5H6M10 1.5h4.5V6M14.5 10v4.5H10M6 14.5H1.5V10"/></svg>';
+const ICON_COLLAPSE = '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 1.5V6H1.5M14.5 6H10V1.5M10 14.5V10h4.5M1.5 10H6v4.5"/></svg>';
+
+/* ── Fullscreen ── */
+const fsButtons = [];
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
+  }
+}
+
+function updateFsButtons() {
+  const isFs = !!document.fullscreenElement;
+  fsButtons.forEach(btn => {
+    btn.innerHTML = isFs ? ICON_COLLAPSE : ICON_EXPAND;
+    btn.setAttribute('aria-label', isFs ? 'Exit fullscreen' : 'Enter fullscreen');
+  });
+}
+
+document.addEventListener('fullscreenchange', updateFsButtons);
+
+function makeFsButton() {
+  const btn = document.createElement('button');
+  btn.type      = 'button';
+  btn.className = 'fs-btn';
+  btn.innerHTML = document.fullscreenElement ? ICON_COLLAPSE : ICON_EXPAND;
+  btn.setAttribute('aria-label', document.fullscreenElement ? 'Exit fullscreen' : 'Enter fullscreen');
+  btn.addEventListener('click', toggleFullscreen);
+  fsButtons.push(btn);
+  return btn;
+}
 
 const globalLogo = document.querySelector('.global-logo');
 globalLogo.addEventListener('click', e => { e.preventDefault(); navigateTo('home'); });
@@ -216,6 +250,7 @@ window.addEventListener('load', () => {
   });
 
   scene.parentElement.appendChild(playPauseBtn);
+  scene.parentElement.appendChild(makeFsButton());
 
   /* Scroll-bar drag control — scrubbing the bar pushes the artworks left/right */
   let barDragging   = false;
@@ -596,6 +631,10 @@ function buildCollectionOverlay(collection, collectionId) {
 
   overlay.appendChild(playPauseBtn);
 
+  const overlayFsBtn = makeFsButton();
+  overlayFsBtn.classList.add('fs-btn--overlay');
+  overlay.appendChild(overlayFsBtn);
+
   /* ── Depth-of-field constants (mirror of home gallery) ── */
   const W_OVL        = window.innerWidth;
   const FOCUS_RADIUS = 0.55;
@@ -703,6 +742,7 @@ function buildCollectionOverlay(collection, collectionId) {
     overlay.classList.remove('open');
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
     document.removeEventListener('keydown', onKey);
+    fsButtons.splice(fsButtons.indexOf(overlayFsBtn), 1);
     updateNavShift('vault');
     if (location.hash === '#vault/collection') { location.hash = 'vault'; }
   }
