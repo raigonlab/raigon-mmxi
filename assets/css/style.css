@@ -1791,6 +1791,8 @@ nav {
 
 /* --- Tablet (768px) --- */
 @media (max-width: 768px) {
+  .fs-btn { display: none; }
+
   .logo-ring-wrap {
     width: 80px;
     height: 80px;
