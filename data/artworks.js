@@ -1,4 +1,5 @@
 /* jshint esversion: 11 */
+/* exported artworks */
 /* Artwork data — Digital Charcoal series.
    Loaded via <script> before script.js; artworks is a global variable. */
 const artworks = [

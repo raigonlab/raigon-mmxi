@@ -1,4 +1,5 @@
 /* jshint esversion: 11 */
+/* exported COLLECTIONS_DATA */
 /* Collection data — Vault overlay content.
    Loaded via <script> before script.js; COLLECTIONS_DATA is a global variable. */
 const COLLECTIONS_DATA = {
