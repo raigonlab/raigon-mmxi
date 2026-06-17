@@ -555,7 +555,7 @@ function buildCollectionOverlay(collection, collectionId) {
     const img = document.createElement('img');
     img.className    = 'collection-overlay-card-img';
     img.alt          = work.title;
-    img.loading      = 'lazy';
+    img.loading      = 'eager';
     img.draggable    = false;
 
     function applyZoomIfSquare() {
@@ -677,7 +677,17 @@ function buildCollectionOverlay(collection, collectionId) {
     requestAnimationFrame(animateOverlay);
   }
 
-  requestAnimationFrame(animateOverlay);
+  const firstCopyImgs = allOverlayCards
+    .slice(0, collection.works.length)
+    .map(card => card.querySelector('img'));
+
+  Promise.all(
+    firstCopyImgs.map(img =>
+      img.complete
+        ? Promise.resolve()
+        : new Promise(res => { img.addEventListener('load', res, { once: true }); })
+    )
+  ).then(() => requestAnimationFrame(animateOverlay));
 
   /* ── Bar drag ── */
   overlayScrollBar.addEventListener('pointerdown', e => {
