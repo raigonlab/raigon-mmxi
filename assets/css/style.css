@@ -1435,6 +1435,8 @@ nav {
 ============================================================ */
 
 /* Inline error message rendered after an invalid field */
+/* ── AI ASSISTANCE: Copy toast styles below were developed
+   with the help of Claude Sonnet 4.6 (Anthropic). ── */
 /* ── COPY TOAST ── */
 .copy-toast {
   position: fixed;

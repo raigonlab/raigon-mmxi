@@ -820,6 +820,8 @@ document.querySelectorAll('.collection-card').forEach(btn => {
   });
 });
 
+/* AI ASSISTANCE: The copy toast below (showCopyToast, copyToastTimer)
+   was developed with the help of Claude Sonnet 4.6 (Anthropic). */
 /* Brief toast notification shown after any copy action */
 let copyToastTimer = null;
 function showCopyToast() {
