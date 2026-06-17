@@ -102,18 +102,18 @@ Manual testing was conducted to ensure correct user interactions and validation 
 
 ## User Story Testing
 
-| Target               | Expectation                                                          | Result    |
-| --------------------- | ------------------------------------------------------------------- | --------- |
-| As an art collector   | Browse artwork in a visually immersive gallery                       | Achieved  |
-| As a visitor          | View an artwork in full detail (title, series, year, description)    | Achieved  |
-| As a visitor          | Navigate between artworks without closing the viewer                 | Achieved  |
-| As an art collector   | Inquire about acquiring a piece through direct contact                | Achieved  |
-| As a creative / peer artist | Understand the artist's visual language                        | Achieved  |
-| As a creative / peer artist | Explore curated collections by theme                             | Achieved  |
-| As a site visitor     | Find contact information easily                                       | Achieved  |
-| As a site visitor     | Use the site on any device                                            | Achieved  |
-| As a site visitor     | Receive feedback when actions produce a result                       | Achieved  |
-| As a site visitor     | See a 404 page when something goes wrong                              | Achieved  |
+| Target               | Expectation                                                          | Result   | Screenshot                                                                         |
+| --------------------- | ------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
+| As an art collector   | Browse artwork in a visually immersive gallery                       | Achieved | ![gallery](documentation/testing/us-gallery.png)                                   |
+| As a visitor          | View an artwork in full detail (title, series, year, description)    | Achieved | ![modal detail](documentation/testing/us-modal-detail.png)                         |
+| As a visitor          | Navigate between artworks without closing the viewer                 | Achieved | ![modal navigation](documentation/testing/us-modal-navigation.png)                 |
+| As an art collector   | Inquire about acquiring a piece through direct contact               | Achieved | ![inquire panel](documentation/testing/us-inquire.png)                             |
+| As a creative / peer artist | Understand the artist's visual language                        | Achieved | ![bio card](documentation/testing/us-bio.png)                                      |
+| As a creative / peer artist | Explore curated collections by theme                             | Achieved | ![collection overlay](documentation/testing/us-collection-overlay.png)             |
+| As a site visitor     | Find contact information easily                                      | Achieved | ![contact form](documentation/testing/us-contact.png)                              |
+| As a site visitor     | Use the site on any device                                           | Achieved | ![responsive](documentation/testing/us-responsive.png)                             |
+| As a site visitor     | Receive feedback when actions produce a result                       | Achieved | ![form feedback](documentation/testing/us-feedback.png)                            |
+| As a site visitor     | See a 404 page when something goes wrong                             | Achieved | ![404 page](documentation/testing/us-404.png)                                      |
 
 ---
 
