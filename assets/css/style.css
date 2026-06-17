@@ -1435,6 +1435,33 @@ nav {
 ============================================================ */
 
 /* Inline error message rendered after an invalid field */
+/* ── COPY TOAST ── */
+.copy-toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(28, 25, 22, 0.95);
+  border: 1px solid rgba(196, 98, 45, 0.5);
+  border-radius: 100px;
+  padding: 10px 24px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  z-index: 9999;
+}
+
+.copy-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .field-error {
   display: block;
   font-family: 'Syne', sans-serif;

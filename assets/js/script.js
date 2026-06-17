@@ -820,12 +820,23 @@ document.querySelectorAll('.collection-card').forEach(btn => {
   });
 });
 
+/* Brief toast notification shown after any copy action */
+let copyToastTimer = null;
+function showCopyToast() {
+  const toast = document.getElementById('copy-toast');
+  clearTimeout(copyToastTimer);
+  toast.textContent = 'copied';
+  toast.classList.add('visible');
+  copyToastTimer = setTimeout(() => toast.classList.remove('visible'), 1800);
+}
+
 /* Coming soon — copy collection + date to clipboard */
 const soonCopyBtn = document.querySelector('.collection-card-soon-copy');
 if (soonCopyBtn) {
   soonCopyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText('Raigon Vault — New collection · January 2027').then(() => {
       soonCopyBtn.textContent = 'copied';
+      showCopyToast();
       setTimeout(() => { soonCopyBtn.textContent = 'copy'; }, 2000);
     }).catch(() => {});
   });
@@ -1007,6 +1018,7 @@ function buildEventBlock(event) {
   copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(copyText).then(() => {
       copyBtn.textContent = 'copied';
+      showCopyToast();
       setTimeout(() => { copyBtn.textContent = 'copy'; }, 2000);
     }).catch(() => {});
   });
@@ -1042,7 +1054,7 @@ async function loadEvents() {
     }
 
     list.innerHTML = '';
-    list.appendChild(buildEventBlock(data.events[0]));
+    data.events.forEach(evt => list.appendChild(buildEventBlock(evt)));
     eventsLoaded = true;
 
   } catch {
