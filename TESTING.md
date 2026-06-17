@@ -26,6 +26,7 @@ I have used the recommended [CSS Jigsaw Validator](https://jigsaw.w3.org/css-val
 | --------- | ----------------------------------------------- | ---------------------------------------------------------- | ----------------- |
 | style.css | https://jigsaw.w3.org/css-validator/validator | ![css validation](documentation/testing/css-validation.png) | No major errors |
 
+
 ---
 
 ### JavaScript
@@ -34,7 +35,10 @@ I have used [JSHint](https://jshint.com) to validate `script.js`.
 
 | File      | Screenshot                                              | Notes            |
 | --------- | --------------------------------------------------------- | ----------------- |
-| script.js | ![js validation](documentation/testing/js-validation.png) | No major errors  |
+| script.js      | ![js validation](documentation/testing/js-validation.png)             | No errors |
+| artworks.js    | ![js validation](documentation/testing/artworks-js-validation.png)    | No errors |
+| collections.js | ![js validation](documentation/testing/collections-js-validation.png) | No errors |
+
 
 ---
 

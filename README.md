@@ -15,7 +15,7 @@ raigon is an interactive digital art gallery presenting the original works of Ra
 
 The project is structured around two levels of access: a public gallery open to all visitors, and a private, invitation-only space for the *Accord* collection, protected by an access code gate. Acquisition happens through curated contact forms and direct artist–collector communication, not a traditional e-commerce flow.
 
-The site currently presents two collections — *Carvão Digital* and *Accord* — with a third marked as coming soon. The Arquive section lists upcoming events loaded asynchronously from a local JSON file, and a contact form with custom validation allows visitors to reach the artist directly.
+The site currently presents two collections — *Digital Charcoal* and *Accord* — with a third marked as coming soon. The Arquive section lists upcoming events loaded asynchronously from a local JSON file, and a contact form with custom validation allows visitors to reach the artist directly.
 
 The key technical decisions were: a single-page architecture with hash-based routing so back/forward navigation works natively; the Fetch API with `async/await` and `try/catch` for event data loading, keeping the UI responsive while the request resolves; and all interactivity built without frameworks to demonstrate direct control over the DOM and browser APIs.
 
@@ -221,7 +221,7 @@ Wireframes were created using Figma to define layout and structure across device
 | Keyboard Navigation | Arrow keys navigate between artworks; Escape closes the modal |
 | Swipe Navigation | Swipe left/right on mobile to browse artworks inside the modal |
 | Inquire Form | Inline acquisition form inside the modal with field validation and success state |
-| Vault Collections | Two collections (*Carvão Digital* and *Accord*) plus a coming-soon card with calendar link |
+| Vault Collections | Two collections (*Digital Charcoal* and *Accord*) plus a coming-soon card with copy-to-clipboard date |
 | Accord Access Gate | Invitation-only collection protected by an access code, with error feedback and two-step success flow |
 | Async Event Loading | Upcoming events fetched from `data/events.json` with loading indicator and error state |
 | Google Calendar Link | Event data used to generate an Add to Calendar link via `URLSearchParams` |
@@ -331,6 +331,6 @@ To run the project locally:
 
 ## Acknowledgements
 
-Special thanks to my mentor Tim Nelson for his guidance and support throughout the project, and to Tindy and Fernando Gonçalves for all their support.
+Special thanks to my mentor Tim Nelson for his guidance and support throughout the project, and Fernando Gonçalves for all their support.
 
 ---
