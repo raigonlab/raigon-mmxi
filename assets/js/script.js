@@ -553,9 +553,10 @@ function buildCollectionOverlay(collection, collectionId) {
     card.addEventListener('click', () => openCollectionWork(collection.works, origIdx));
 
     const img = document.createElement('img');
-    img.className = 'collection-overlay-card-img';
-    img.alt       = work.title;
-    img.loading   = 'lazy';
+    img.className    = 'collection-overlay-card-img';
+    img.alt          = work.title;
+    img.loading      = 'lazy';
+    img.draggable    = false;
 
     function applyZoomIfSquare() {
       if (img.naturalWidth === img.naturalHeight) {
@@ -708,14 +709,16 @@ function buildCollectionOverlay(collection, collectionId) {
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
 
-  /* ── Grid drag — window-level handlers so cards keep their click events ── */
+  /* ── Grid drag ── */
   grid.addEventListener('pointerdown', e => {
     if (e.target.closest('.scroll-bar')) { return; }
-    ovlGridDragging = true;
-    ovlGridMoved    = false;
-    ovlGridStartX   = e.clientX;
-    ovlGridStartOff = ovlTarget;
+    e.preventDefault();
+    ovlGridDragging  = true;
+    ovlGridMoved     = false;
+    ovlGridStartX    = e.clientX;
+    ovlGridStartOff  = ovlTarget;
     grid.classList.add('dragging');
+    grid.setPointerCapture(e.pointerId);
   });
 
   function onOvlMove(e) {
@@ -731,9 +734,9 @@ function buildCollectionOverlay(collection, collectionId) {
     grid.classList.remove('dragging');
   }
 
-  window.addEventListener('pointermove',   onOvlMove);
-  window.addEventListener('pointerup',     endGridDrag);
-  window.addEventListener('pointercancel', endGridDrag);
+  grid.addEventListener('pointermove',   onOvlMove);
+  grid.addEventListener('pointerup',     endGridDrag);
+  grid.addEventListener('pointercancel', endGridDrag);
 
   grid.addEventListener('click', e => {
     if (ovlGridMoved) {
@@ -755,9 +758,9 @@ function buildCollectionOverlay(collection, collectionId) {
     overlay.classList.remove('open');
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
     document.removeEventListener('keydown', onKey);
-    window.removeEventListener('pointermove',   onOvlMove);
-    window.removeEventListener('pointerup',     endGridDrag);
-    window.removeEventListener('pointercancel', endGridDrag);
+    grid.removeEventListener('pointermove',   onOvlMove);
+    grid.removeEventListener('pointerup',     endGridDrag);
+    grid.removeEventListener('pointercancel', endGridDrag);
     updateNavShift('vault');
     if (location.hash === '#vault/collection') { location.hash = 'vault'; }
   }
