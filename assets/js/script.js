@@ -692,7 +692,7 @@ function buildCollectionOverlay(collection, collectionId) {
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
 
   /* Mouse wheel scrolls the carousel horizontally */
-  grid.addEventListener('wheel', e => {
+  overlay.addEventListener('wheel', e => {
     if (e.deltaY === 0) { return; }
     e.preventDefault();
     ovlTarget -= e.deltaY;
