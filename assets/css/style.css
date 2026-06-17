@@ -1709,6 +1709,15 @@ nav {
   margin-top: 299px;
 }
 
+/* Accord has fewer works — extra vertical breathing room between rows. */
+.collection-overlay--accord .collection-overlay-grid {
+  height: 532px;
+}
+
+.collection-overlay--accord .collection-overlay-card--stagger {
+  margin-top: 359px;
+}
+
 /* Position indicator — same placement and style as the home gallery's
    bar, sitting left of center beside the play/pause button. The overlay
    is appended to .collection-overlay (full viewport, like #home), so the

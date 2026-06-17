@@ -611,7 +611,7 @@ function buildCollectionOverlay(collection, collectionId) {
   /* ── Depth-of-field constants (mirror of home gallery) ── */
   const W_OVL        = window.innerWidth;
   const FOCUS_RADIUS = 0.55;
-  const FOCUS_BLUR   = W_OVL <= 768 ? 0.8 : 2.2;
+  const FOCUS_BLUR   = W_OVL <= 768 ? 0.5 : 1.4;
   const FOCUS_FADE   = 0.6;
   const FOCUS_SCALE  = 0.10;
   const OVL_LERP     = 0.06;
