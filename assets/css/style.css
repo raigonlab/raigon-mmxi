@@ -1995,13 +1995,8 @@ nav {
      16px — bump these to 16px on touch breakpoints to prevent that zoom. */
   .modal-inquire-input,
   .modal-inquire-textarea,
-  .cf-input,
-  .access-gate-input {
+  .cf-input {
     font-size: 16px;
-  }
-
-  .access-gate-input::placeholder {
-    font-size: 11px;
   }
 
   /* 404 frame row — scale down so the whole composition fits the viewport. */
@@ -2390,6 +2385,20 @@ nav {
 }
 
 .access-gate-input:focus { border-bottom-color: rgba(232, 228, 220, 0.4); }
+
+/* This must come after the base .access-gate-input rule above —
+   CSS resolves equal-specificity ties by source order, so placing
+   it earlier in the file let the base 11px silently win on mobile,
+   defeating the iOS Safari auto-zoom fix. */
+@media (max-width: 768px) {
+  .access-gate-input {
+    font-size: 16px;
+  }
+
+  .access-gate-input::placeholder {
+    font-size: 11px;
+  }
+}
 
 .access-gate-error {
   font-family: 'Syne', sans-serif;

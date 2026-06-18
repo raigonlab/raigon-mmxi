@@ -685,7 +685,7 @@ function buildCollectionOverlay(collection, collectionId) {
     const period = getOvlPeriod();
 
     if (period > 0) {
-      if (!autoScrollPaused && !ovlBarDragging) {
+      if (!autoScrollPaused && !ovlBarDragging && !ovlDragging) {
         ovlTarget -= OVL_SPEED;
       }
       if (ovlTarget < -(period * 2)) { ovlOffset += period; ovlTarget += period; }
@@ -740,6 +740,43 @@ function buildCollectionOverlay(collection, collectionId) {
 
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
+
+  /* ── Grid drag/swipe — lets touch and mouse users pan the carousel
+     directly on the artwork cards, not just via the scroll bar ── */
+  let ovlDragging     = false;
+  let ovlDragStartX   = 0;
+  let ovlDragStartTgt = 0;
+  let ovlDragMoved    = false;
+
+  grid.addEventListener('pointerdown', e => {
+    ovlDragging     = true;
+    ovlDragMoved    = false;
+    ovlDragStartX   = e.clientX;
+    ovlDragStartTgt = ovlTarget;
+    grid.setPointerCapture(e.pointerId);
+  });
+
+  grid.addEventListener('pointermove', e => {
+    if (!ovlDragging) { return; }
+    const dx = e.clientX - ovlDragStartX;
+    if (Math.abs(dx) < 10) { return; }
+    ovlDragMoved = true;
+    ovlTarget    = ovlDragStartTgt + dx;
+  });
+
+  function endOvlDrag(e) {
+    if (!ovlDragging) { return; }
+    ovlDragging = false;
+    grid.releasePointerCapture(e.pointerId);
+  }
+
+  grid.addEventListener('pointerup', endOvlDrag);
+  grid.addEventListener('pointercancel', endOvlDrag);
+
+  /* Block the card's click handler from firing right after a drag */
+  grid.addEventListener('click', e => {
+    if (ovlDragMoved) { e.stopPropagation(); }
+  }, { capture: true });
 
   /* Mouse wheel scrolls the carousel horizontally */
   overlay.addEventListener('wheel', e => {
