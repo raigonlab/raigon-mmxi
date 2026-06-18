@@ -143,6 +143,12 @@ Manual testing was conducted to ensure correct user interactions and validation 
 
 * **Vault collection overlay could not be panned by touch/swipe** — the artwork grid inside a collection overlay only responded to the scroll bar or mouse wheel; dragging a finger directly across the artwork cards did nothing on mobile. Added pointer-based drag handling directly on the grid, with drag-detection to suppress accidental card clicks right after a swipe.
 
+* **Phone number auto-styled blue and underlined on iOS Safari** — the contact phone number was plain text, but iOS Safari's format detection auto-links any text that looks like a phone number and styles it as a link. Fixed by adding `<meta name="format-detection" content="telephone=no">` to `index.html`.
+
+  | Before (auto-linked, blue and underlined) | After (plain text) |
+  | --- | --- |
+  | ![Phone number bug](documentation/bugs/phone-format-before.jpeg) | ![Phone number fixed](documentation/bugs/phone-format-after.jpeg) |
+
 ---
 
 ### Unfixed Bugs
