@@ -741,22 +741,26 @@ function buildCollectionOverlay(collection, collectionId) {
   overlayScrollBar.addEventListener('pointerup', endOverlayBarDrag);
   overlayScrollBar.addEventListener('pointercancel', endOverlayBarDrag);
 
-  /* ── Grid drag/swipe — lets touch and mouse users pan the carousel
-     directly on the artwork cards, not just via the scroll bar ── */
+  /* ── Drag/swipe — lets touch and mouse users pan the carousel from
+     anywhere in the overlay, not just on the artwork cards or the
+     scroll bar. The grid is only 472px tall and sits centered inside
+     a full-screen overlay, so listening on the grid alone misses
+     swipes in the empty space above/below the row of cards. */
   let ovlDragging     = false;
   let ovlDragStartX   = 0;
   let ovlDragStartTgt = 0;
   let ovlDragMoved    = false;
 
-  grid.addEventListener('pointerdown', e => {
+  overlay.addEventListener('pointerdown', e => {
+    if (e.target.closest('.scroll-bar, .scroll-playpause, .fs-btn, .collection-overlay-close, .collection-overlay-header')) { return; }
     ovlDragging     = true;
     ovlDragMoved    = false;
     ovlDragStartX   = e.clientX;
     ovlDragStartTgt = ovlTarget;
-    grid.setPointerCapture(e.pointerId);
+    overlay.setPointerCapture(e.pointerId);
   });
 
-  grid.addEventListener('pointermove', e => {
+  overlay.addEventListener('pointermove', e => {
     if (!ovlDragging) { return; }
     const dx = e.clientX - ovlDragStartX;
     if (Math.abs(dx) < 10) { return; }
@@ -767,14 +771,14 @@ function buildCollectionOverlay(collection, collectionId) {
   function endOvlDrag(e) {
     if (!ovlDragging) { return; }
     ovlDragging = false;
-    grid.releasePointerCapture(e.pointerId);
+    overlay.releasePointerCapture(e.pointerId);
   }
 
-  grid.addEventListener('pointerup', endOvlDrag);
-  grid.addEventListener('pointercancel', endOvlDrag);
+  overlay.addEventListener('pointerup', endOvlDrag);
+  overlay.addEventListener('pointercancel', endOvlDrag);
 
   /* Block the card's click handler from firing right after a drag */
-  grid.addEventListener('click', e => {
+  overlay.addEventListener('click', e => {
     if (ovlDragMoved) { e.stopPropagation(); }
   }, { capture: true });
 
