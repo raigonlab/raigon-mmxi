@@ -139,7 +139,7 @@ Manual testing was conducted to ensure correct user interactions and validation 
 
   | Before (zoomed in after entering code) | After (normal scale) |
   | --- | --- |
-  | ![Accord zoom bug](documentation/bugs/accord-zoom-before.jpeg) | ![Accord zoom fixed](documentation/bugs/accord-zoom-after.jpeg) |
+  | ![Accord zoom bug](documentation/bugs/accord-zoom-before.png) | ![Accord zoom fixed](documentation/bugs/accord-zoom-after.png) |
 
 * **Vault collection overlay could not be panned by touch/swipe** — the artwork grid inside a collection overlay only responded to the scroll bar or mouse wheel; dragging a finger directly across the artwork cards did nothing on mobile. Added pointer-based drag handling directly on the grid, with drag-detection to suppress accidental card clicks right after a swipe.
 
@@ -147,7 +147,7 @@ Manual testing was conducted to ensure correct user interactions and validation 
 
   | Before (auto-linked, blue and underlined) | After (plain text) |
   | --- | --- |
-  | ![Phone number bug](documentation/bugs/phone-format-before.jpeg) | ![Phone number fixed](documentation/bugs/phone-format-after.jpeg) |
+  | ![Phone number bug](documentation/bugs/phone-format-before.png) | ![Phone number fixed](documentation/bugs/phone-format-after.png) |
 
 ---
 
