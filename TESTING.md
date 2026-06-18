@@ -135,6 +135,14 @@ Manual testing was conducted to ensure correct user interactions and validation 
 
 * **Depth-of-field blur too strong** — the gallery's "Foco dinâmico" blur effect was too pronounced on desktop and tablet. Made `FOCUS_BLUR` responsive: reduced by 25% on desktop, and reduced to roughly a quarter of that on tablet/mobile (≤768px).
 
+* **Accord access gate still triggered iOS zoom** — the 16px mobile override for `.access-gate-input` was declared earlier in the stylesheet than its own base rule (`font-size: 11px`), so the base rule won the cascade tie on every viewport and iOS Safari kept zooming in on focus, with the zoomed-in view persisting after entering the code. Fixed by moving the 16px override into its own `@media` block placed after the base rule.
+
+  | Before (zoomed in after entering code) | After (normal scale) |
+  | --- | --- |
+  | ![Accord zoom bug](documentation/bugs/accord-zoom-before.jpeg) | ![Accord zoom fixed](documentation/bugs/accord-zoom-after.jpeg) |
+
+* **Vault collection overlay could not be panned by touch/swipe** — the artwork grid inside a collection overlay only responded to the scroll bar or mouse wheel; dragging a finger directly across the artwork cards did nothing on mobile. Added pointer-based drag handling directly on the grid, with drag-detection to suppress accidental card clicks right after a swipe.
+
 ---
 
 ### Unfixed Bugs
