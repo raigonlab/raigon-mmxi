@@ -3,6 +3,11 @@
 > [!NOTE]
 > Return back to the [README.md](README.md) file.
 
+> [!IMPORTANT]
+> The *Accord* collection is invitation-only and protected by an access code gate. For testing/review purposes, use:
+>
+> **Password:** `MMXXVI`
+
 ---
 
 ## Code Validation
