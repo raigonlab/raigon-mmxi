@@ -1,6 +1,6 @@
 # [raigon](https://raigonlab.github.io/raigon-mmxi)
 
-Developer: Railson Goncalves ([raigonlab](https://www.github.com/raigonlab))
+Developer: Railson Gonçalves ([raigonlab](https://www.github.com/raigonlab))
 
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/t/raigonlab/raigon-mmxi)](https://www.github.com/raigonlab/raigon-mmxi/commits/main)
 [![GitHub last commit](https://img.shields.io/github/last-commit/raigonlab/raigon-mmxi)](https://www.github.com/raigonlab/raigon-mmxi/commits/main)
