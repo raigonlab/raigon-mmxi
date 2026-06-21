@@ -1186,7 +1186,12 @@ nav {
 .arquive-card--bio {
   position: relative;
   display: flex;
-  height: 251px;
+  /* min-height, not height — a fixed height clipped (via overflow)
+     any extra line the bio text wrapped onto at widths between the
+     breakpoints below, hiding the "More" button. min-height lets the
+     card grow with its content at any viewport width while keeping
+     the same default size when the text fits in three lines. */
+  min-height: 251px;
   padding: 0;
   overflow: hidden;
   transition: height 0.45s ease;
@@ -2080,12 +2085,6 @@ nav {
 
   .arquive-wrap {
     padding: 100px 40px 60px;
-  }
-
-  /* Bio text wraps onto more lines at narrow widths — let the card
-     grow to fit instead of cropping the photo down to 314px. */
-  .arquive-card--bio {
-    height: auto;
   }
 
   .home-scene {
