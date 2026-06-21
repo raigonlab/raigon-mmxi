@@ -463,9 +463,13 @@ function closeModal() {
   if (location.hash.includes('/modal')) { location.hash = returnHash; }
 }
 
-/* Keyboard navigation: arrows to browse, Escape to close */
+/* Keyboard navigation: arrows to browse, Escape to close.
+   Arrow keys are left alone while typing in the inquire form so they
+   move the text cursor instead of switching artworks. */
 function onModalKey(e) {
   if (!artworkModal.classList.contains('open')) { return; }
+  const inFormField = e.target.closest('input, textarea');
+  if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && inFormField) { return; }
   if (e.key === 'ArrowLeft')  { showModal((currentIdx - 1 + modalWorks.length) % modalWorks.length); }
   if (e.key === 'ArrowRight') { showModal((currentIdx + 1) % modalWorks.length); }
   if (e.key === 'Escape')     { closeModal(); }
