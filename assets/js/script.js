@@ -572,7 +572,7 @@ function buildOverlayHeader(collection) {
 /* Works are tripled for seamless infinite scroll.
    Stagger class uses the global workIdx so the zig-zag repeats
    consistently across all three copies. */
-function buildOverlayGrid(collection) {
+function buildOverlayGrid(collection, dragState) {
   const grid = document.createElement('div');
   grid.className = 'collection-overlay-grid';
 
@@ -586,7 +586,9 @@ function buildOverlayGrid(collection) {
     if (workIdx % 2 === 1) { card.classList.add('collection-overlay-card--stagger'); }
     if (work.sold)          { card.classList.add('collection-overlay-card--sold'); }
 
-    card.addEventListener('click', () => openCollectionWork(collection.works, origIdx));
+    card.addEventListener('click', () => {
+      if (!dragState.moved) { openCollectionWork(collection.works, origIdx); }
+    });
 
     const img = document.createElement('img');
     img.className = 'collection-overlay-card-img';
@@ -636,13 +638,22 @@ function buildCollectionOverlay(collection, collectionId) {
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-label', collection.title);
 
+  const dragState = { moved: false };
+
   const { header, closeBtn }                          = buildOverlayHeader(collection);
-  const { grid, allOverlayCards }                     = buildOverlayGrid(collection);
+  const { grid, allOverlayCards }                     = buildOverlayGrid(collection, dragState);
   const { bar: overlayScrollBar, thumb: overlayThumb } = buildOverlayScrollBar();
 
   overlay.appendChild(header);
   overlay.appendChild(grid);
   overlay.appendChild(overlayScrollBar);
+
+  /* Same drag hint as the home gallery, so first-time visitors know
+     the collection can be panned, not just browsed via the scroll bar. */
+  const overlayHint = document.createElement('div');
+  overlayHint.className   = 'scroll-hint';
+  overlayHint.textContent = '← drag to explore →';
+  overlay.appendChild(overlayHint);
 
   /* Play/pause */
   let autoScrollPaused = false;
@@ -764,38 +775,37 @@ function buildCollectionOverlay(collection, collectionId) {
   let ovlDragging     = false;
   let ovlDragStartX   = 0;
   let ovlDragStartTgt = 0;
-  let ovlDragMoved    = false;
 
   overlay.addEventListener('pointerdown', e => {
     if (e.target.closest('.scroll-bar, .scroll-playpause, .fs-btn, .collection-overlay-close, .collection-overlay-header')) { return; }
-    ovlDragging     = true;
-    ovlDragMoved    = false;
-    ovlDragStartX   = e.clientX;
-    ovlDragStartTgt = ovlTarget;
-    overlay.setPointerCapture(e.pointerId);
+    ovlDragging      = true;
+    dragState.moved  = false;
+    ovlDragStartX    = e.clientX;
+    ovlDragStartTgt  = ovlTarget;
   });
 
-  overlay.addEventListener('pointermove', e => {
+  /* Listening on window (not the overlay, and no setPointerCapture) —
+     same approach as the home gallery's main drag. Capturing the
+     pointer to a large element can redirect the synthesized click
+     event away from the card the user actually pressed, which is
+     what made clicks silently fail on desktop. */
+  window.addEventListener('pointermove', e => {
     if (!ovlDragging) { return; }
     const dx = e.clientX - ovlDragStartX;
-    if (Math.abs(dx) < 10) { return; }
-    ovlDragMoved = true;
-    ovlTarget    = ovlDragStartTgt + dx;
+    /* Same 18px threshold as the home gallery's drag handler — large
+       enough to absorb the natural finger jitter of a tap, so a plain
+       click on a card isn't misread as a drag and silently swallowed. */
+    if (Math.abs(dx) < 18) { return; }
+    dragState.moved = true;
+    ovlTarget       = ovlDragStartTgt + dx;
   });
 
-  function endOvlDrag(e) {
-    if (!ovlDragging) { return; }
+  function endOvlDrag() {
     ovlDragging = false;
-    overlay.releasePointerCapture(e.pointerId);
   }
 
-  overlay.addEventListener('pointerup', endOvlDrag);
-  overlay.addEventListener('pointercancel', endOvlDrag);
-
-  /* Block the card's click handler from firing right after a drag */
-  overlay.addEventListener('click', e => {
-    if (ovlDragMoved) { e.stopPropagation(); }
-  }, { capture: true });
+  window.addEventListener('pointerup', endOvlDrag);
+  window.addEventListener('pointercancel', endOvlDrag);
 
   /* Mouse wheel scrolls the carousel horizontally */
   overlay.addEventListener('wheel', e => {
