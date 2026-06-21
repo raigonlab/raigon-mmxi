@@ -100,11 +100,22 @@ window.addEventListener('hashchange', () => {
     }
   }
 
-  if (VALID_PAGES.includes(page)) { switchSection(page); }
+  if (VALID_PAGES.includes(page)) { switchSection(page); return; }
+
+  /* Hash doesn't match any known route or pattern above — show the
+     custom 404 page instead of silently staying on the current view. */
+  location.replace('404.html');
 });
 
 const initialPage = location.hash.slice(1);
-switchSection(VALID_PAGES.includes(initialPage) ? initialPage : 'home');
+if (initialPage && !VALID_PAGES.includes(initialPage) &&
+    !initialPage.startsWith('home/modal/') &&
+    !initialPage.startsWith('vault/collection/modal/') &&
+    initialPage !== 'vault/collection') {
+  location.replace('404.html');
+} else {
+  switchSection(VALID_PAGES.includes(initialPage) ? initialPage : 'home');
+}
 
 /* Shared play/pause icons — reused by the home gallery's timeline bar
    and the collection overlay's autoplay control. */
