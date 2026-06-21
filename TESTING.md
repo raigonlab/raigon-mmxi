@@ -133,7 +133,7 @@ Manual testing was conducted to ensure correct user interactions and validation 
 
 * **Artwork modal text panel not aligned with image on tablet** — on iPad, the info/inquire text panels stretched edge-to-edge while the artwork image was inset, making the layout feel unbalanced. Fixed by constraining `.modal-info-panel` and `.modal-inquire-panel` to the same width as the image on mobile breakpoints.
 
-* **Depth-of-field blur too strong** — the gallery's "Foco dinâmico" blur effect was too pronounced on desktop and tablet. Made `FOCUS_BLUR` responsive: reduced by 25% on desktop, and reduced to roughly a quarter of that on tablet/mobile (≤768px).
+* **Depth-of-field blur too strong** — the gallery's dynamic focus blur effect was too pronounced on desktop and tablet. Made `FOCUS_BLUR` responsive: reduced by 25% on desktop, and reduced to roughly a quarter of that on tablet/mobile (≤768px).
 
 * **Accord access gate still triggered iOS zoom** — the 16px mobile override for `.access-gate-input` was declared earlier in the stylesheet than its own base rule (`font-size: 11px`), so the base rule won the cascade tie on every viewport and iOS Safari kept zooming in on focus, with the zoomed-in view persisting after entering the code. Fixed by moving the 16px override into its own `@media` block placed after the base rule.
 
